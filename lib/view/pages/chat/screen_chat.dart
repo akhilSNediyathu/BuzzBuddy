@@ -10,32 +10,39 @@ class ScreenChat extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+
         automaticallyImplyLeading: false,
         backgroundColor: kPrimaryColor,
         centerTitle: true,
-        title: const Text('Chat Hub',style:appBarTitleStyle),
+        title: const Text('Chat Hub', style: appBarTitleStyle),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.add))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(itemBuilder: (context,index)=>Card(
-          child: ListTile(
-            leading: Container(
-                    
-                    height: media.height*0.07,width:media.height*0.07,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage(profileImages[index]),fit: BoxFit.cover),
-                      color: kwhiteColor,
-                      borderRadius: kradius100
-                    ),
+        child: ListView.builder(
+          itemCount: profileImages.length,
+          itemBuilder: (context, index) => Card(
+            child: ListTile(
+              leading: Container(
+                height: media.height * 0.07,
+                width: media.height * 0.07,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(profileImages[index]),
+                    fit: BoxFit.cover,
                   ),
-                  title: Text(account[index]),
-                  
-          
+                  color: kwhiteColor,
+                  borderRadius: kradius100,
+                ),
+              ),
+              title: Text(account[index]),
+            ),
           ),
         ),
-        itemCount: profileImages.length,
-        ),
       ),
+      
     );
   }
 }

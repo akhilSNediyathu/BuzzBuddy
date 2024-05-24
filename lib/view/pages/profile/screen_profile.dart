@@ -1,6 +1,8 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/dummydata.dart';
 import 'package:buzz_buddy/view/pages/profile/edit_profile/screen_edit_profiile.dart';
+import 'package:buzz_buddy/view/pages/profile/followers/screen_followers.dart';
+import 'package:buzz_buddy/view/pages/profile/following/screen_following.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/saved_and_posts_grid.dart';
@@ -73,7 +75,7 @@ class ScreenProfile extends StatelessWidget {
                       padding: const EdgeInsets.only(right: 20),
                       child: customMaterialButton(
                         onPressed: () {
-                         Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>ScreenEditProfiile()));
+                         Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>const ScreenEditProfiile()));
                         },
                         text: 'Edit Profile',
                         color: const Color.fromARGB(255, 234, 232, 232),
@@ -103,16 +105,25 @@ class ScreenProfile extends StatelessWidget {
                         text1: '200',
                         text2: 'Post',
                         textStyle: profilecolumnStyle,
+                        onTap: (){
+
+                        }
                       ),
                       customTextColumn(
                         text1: '111k',
                         text2: 'Followers',
                         textStyle: profilecolumnStyle,
+                        onTap: (){
+Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>const ScreenFollowers()));
+                        }
                       ),
                       customTextColumn(
                         text1: '50',
                         text2: 'Following',
                         textStyle: profilecolumnStyle,
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>const ScreenFollowing()));
+                        }
                       ),
                     ],
                   ),
