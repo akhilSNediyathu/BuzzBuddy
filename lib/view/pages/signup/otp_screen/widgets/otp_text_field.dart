@@ -20,8 +20,10 @@ Widget textBoxWidget(
       onChanged: (value) {
         if (value.length == 1) {
           FocusScope.of(context).nextFocus();
+        } else if (value.isEmpty) {
+          FocusScope.of(context).previousFocus();
         }
       },
-),
-);
+    ),
+  );
 }

@@ -39,3 +39,8 @@ const imagePicker = 'assets/images/imagePicker.jpg';
 
 const appBarTitleStyle =  TextStyle(fontSize: 18,fontWeight: FontWeight.w500,);
 const profilecolumnStyle =  TextStyle(fontSize: 18,fontWeight: FontWeight.w800,);
+const coloredBold24 =TextStyle( fontSize: 24, fontWeight: FontWeight.bold,color: kPrimaryColor );
+const greyMeduim =  TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                );

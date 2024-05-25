@@ -91,7 +91,7 @@ class ScreenProfile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Paul Walker', style: appBarTitleStyle),
+                      Text('Daenerys Targaryen', style: appBarTitleStyle),
                       Text('Personal blog')
                     ],
                   ),

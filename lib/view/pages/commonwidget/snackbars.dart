@@ -13,7 +13,7 @@ void customSnackbar(context, message, color) {
           color: Colors.white,
           fontWeight: FontWeight.w600,
         ),
-        textAlign: TextAlign.center,
+        // textAlign: TextAlign.center,
       ),
       backgroundColor: color,
       duration: const Duration(milliseconds: 1200),
