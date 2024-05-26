@@ -44,3 +44,23 @@ const greyMeduim =  TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
                 );
+                //auth key sharedpreference
+const authKey = 'UserLoggedIn';
+
+//token key sharedpreference
+const tokenKey = 'userToken';
+
+//userid key sharedpreference
+const userIdKey = 'userId';
+
+//userRole key sharedpreference
+const userRolekey = 'userRole';
+
+//userEmail key sharedpreference
+const userEmailkey = 'userEmail';
+
+//userName key sharedpreference
+const userNamekey = 'userName';
+
+//userProfilepic key sharedpreference
+const userProfilePickey = 'userProfilePic';

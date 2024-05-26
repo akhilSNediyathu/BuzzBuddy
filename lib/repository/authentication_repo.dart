@@ -1,7 +1,11 @@
+
 import 'dart:convert';
+import 'dart:core';
+import 'dart:math';
 
 import 'package:buzz_buddy/controller/utils/api_urls.dart';
 import 'package:buzz_buddy/model/user_model.dart';
+import 'package:buzz_buddy/utils/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 import 'package:http/http.dart';
@@ -21,16 +25,16 @@ class AuthenticationRepo{
 var jsonData = jsonEncode(data);
 
 try {
-  print('_________');
+  debugPrint('_________');
   final response = await client.post(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.signUp),body: jsonData,headers: {
           "Content-Type": "application/json", // Set the content type to JSON
         },);
-        print(response);
+        debugPrint(response.toString());
     return response;
   
 } catch (e) {
-  print('+++++++++');
-  print(e);
+  debugPrint('+++++++++');
+  debugPrint(e.toString());
   return null;
   
 }
@@ -41,12 +45,12 @@ try {
     
    }
 
- Future <Response?> verifyOtp(String email, String otp)async{
+static Future <Response?> verifyOtp(String email, String otp)async{
     var data = {'email': email, 'otp': otp};
-    client = http.Client();
+   
  try {
       var response = await client.post(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.verifyOtp),body: jsonEncode(data),headers:{
-          "Content-Type": "application/json", // Set the content type to JSON
+          "Content-Type": "application/json", 
         }, );
         debugPrint(response.body);
         return response;
@@ -55,6 +59,30 @@ try {
    return null;
  }
 
+  }
+  static Future userLogin(String email , String password)async{
+    try {
+      var user = { 'email': email,'password':password};
+      var response = await client.post(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.login),body:jsonEncode(user),headers: {"Content-Type": 'application/json'});
+       debugPrint(response.statusCode.toString());
+      debugPrint(response.body);
+      final responseBody = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        await setUserLoggedin(
+          token: responseBody['user']['token'],
+          userrole: responseBody['user']['role'],
+          userid: responseBody['user']['_id'],
+          userEmail: responseBody['user']['email'],
+          userName: responseBody['user']['userName'],
+          userprofile: responseBody['user']['profilePic'],
+        );
+        return responseBody;
+      } else {
+        return responseBody;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
 }

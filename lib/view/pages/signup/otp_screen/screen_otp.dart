@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:buzz_buddy/repository/authentication_repo.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
@@ -14,12 +16,13 @@ class ScreenOtp extends StatefulWidget {
   const ScreenOtp({super.key, required this.email});
 
   @override
-  _ScreenOtpState createState() => _ScreenOtpState();
+   State <ScreenOtp> createState() => _ScreenOtpState();
 }
 
 class _ScreenOtpState extends State<ScreenOtp> {
   final List<TextEditingController> _controllers = List.generate(4, (index) => TextEditingController());
   late Timer _timer;
+  Timer? _debounceTimer;
   int _start = 60;
   bool _isResendVisible = false;
 
@@ -32,6 +35,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
   @override
   void dispose() {
     _timer.cancel();
+    _debounceTimer?.cancel();
     for (var controller in _controllers) {
       controller.dispose();
     }
@@ -55,6 +59,22 @@ class _ScreenOtpState extends State<ScreenOtp> {
     });
   }
 
+  void debounceResendOtp() {
+    if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
+    _debounceTimer = Timer(const Duration(seconds: 1), () {
+      // otp resend function 
+      startTimer(); // Restart the timer
+    });
+  }
+  bool validateOtp() {
+    for (var controller in _controllers) {
+      if (controller.text.isEmpty || controller.text.length != 1 || !RegExp(r'^[0-9]$').hasMatch(controller.text)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -70,7 +90,6 @@ class _ScreenOtpState extends State<ScreenOtp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
                 const Text(
                   'Enter the OTP',
                   style: coloredBold24,
@@ -82,7 +101,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(
-                  height: media.height*0.3,
+                  height: media.height * 0.3,
                   child: LottieBuilder.asset('assets/images/otp.json'),
                 ),
                 Row(
@@ -96,20 +115,27 @@ class _ScreenOtpState extends State<ScreenOtp> {
                 ),
                 kheight50,
                 customMaterialButton(
-                  onPressed: ()async {
-                    String otp = _controllers.map((controller) => controller.text).join();
-                    print('Entered OTP: $otp');
-                   var response = await AuthenticationRepo().verifyOtp(widget.email, otp);
-                   if(response!=null && response.statusCode==200){
-                    Navigator.of(context).pushAndRemoveUntil(
-  MaterialPageRoute(builder: (context) => ScreenLogin()),
-  (Route<dynamic> route) => false,
-);
-                   }
-                   else{
-                    _controllers.clear();
-                    customSnackbar(context, 'invalid otp', Colors.amber);
-                   }
+                  onPressed: () async {
+                    if (validateOtp()) {
+                      String otp = _controllers.map((controller) => controller.text).join();
+                      debugPrint('Entered OTP: $otp');
+                      var response = await AuthenticationRepo.verifyOtp(widget.email, otp);
+                      customSnackbar(context, ' otp verfication succen', Colors.green);
+                      if (response != null && response.statusCode == 200) {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          
+                          MaterialPageRoute(builder: (context) => ScreenLogin()),
+                          (Route<dynamic> route) => false,
+                        );
+                      } else {
+                        for (var controller in _controllers) {
+                          controller.clear();
+                        }
+                        customSnackbar(context, 'Invalid OTP', Colors.amber);
+                      }
+                    } else {
+                      customSnackbar(context, 'Please enter a valid 4-digit OTP', Colors.red);
+                    }
                   },
                   text: 'Verify',
                   color: kPrimaryColor,
@@ -119,10 +145,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
                 kheight20,
                 _isResendVisible
                     ? TextButton(
-                        onPressed: () {
-                          // Handle resend OTP logic here
-                          startTimer(); // Restart the timer
-                        },
+                        onPressed: debounceResendOtp,
                         child: const Text(
                           'Resend OTP',
                           style: TextStyle(color: kPrimaryColor, fontSize: 16),
