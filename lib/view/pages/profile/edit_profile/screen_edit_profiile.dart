@@ -1,7 +1,6 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/dummydata.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/classwidget/textfield.dart';
-import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +12,7 @@ class ScreenEditProfiile extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile', style: appBarTitleStyle,),
+        title: const Text('Edit Profile', style: appBarTitleStyle,),
         centerTitle: true,
         automaticallyImplyLeading: true,
         backgroundColor: kPrimaryColor,
@@ -58,7 +57,7 @@ class ScreenEditProfiile extends StatelessWidget {
                    bottom: 10,
                     child: CircleAvatar(
                       backgroundColor: grey,
-                      child: IconButton(onPressed: (){}, icon: Icon(Icons.edit))),
+                      child: IconButton(onPressed: (){}, icon: const Icon(Icons.edit))),
                   )
                               ],
                             ),
@@ -69,16 +68,16 @@ class ScreenEditProfiile extends StatelessWidget {
                    bottom: 10,
                     child: CircleAvatar(
                       backgroundColor: grey,
-                      child: IconButton(onPressed: (){}, icon: Icon(Icons.edit))),
+                      child: IconButton(onPressed: (){}, icon: const Icon(Icons.edit))),
                   ),
                   
                 ],
               ),
             ),
             kheight100,
-           CustomTextField(hintText: 'edit name'),
+           CustomTextField(hintText: 'edit name',controller: TextEditingController(),),
            kheight,
-            CustomTextField(hintText: 'bio'),
+            CustomTextField(hintText: 'bio', controller: TextEditingController(),),
             kheight50,
             customMaterialButton(onPressed: (){}, text: 'Save', color: kPrimaryColor, width: media.width, height: media.height*0.05)
 

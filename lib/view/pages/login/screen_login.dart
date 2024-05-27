@@ -1,3 +1,4 @@
+import 'package:buzz_buddy/repository/authentication_repo.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/validations.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/classwidget/textfield.dart';
@@ -34,10 +35,11 @@ class ScreenLogin extends StatelessWidget {
                 children: [
                   SizedBox(height: media.height * 0.15, child: Image.asset(logo)),
                   kheight50,
-                  const CustomTextField(hintText: 'username',validator: validateUsername,),
+                   CustomTextField(hintText: 'username',validator: validateUsername,controller:_usernameController,),
                   kheight,
-                  const CustomTextField2(hintText: 'password'
+                   CustomTextField2(hintText: 'password'
                   ,validator: validatePassword,
+                  controller: _passwordController,
                   
                   ),
                   kheight,
@@ -48,9 +50,16 @@ class ScreenLogin extends StatelessWidget {
                      ],
                    ),
                   
-                  customButton(media: media,color: kPrimaryColor, buttonText: 'LogIn', onPressed: () {
+                  customButton(media: media,color: kPrimaryColor, buttonText: 'LogIn', onPressed: () async{
                     if (_formKey.currentState!.validate()) {
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=>ScreenMainScreen()));
+                                final response =  await AuthenticationRepo.userLogin(_usernameController.text, _passwordController.text);
+                       if (response["message"] == "Login successful") {
+                          customSnackbar(context, response["message"], Colors.green);
+                         Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ScreenMainScreen()));
+                       }else{
+                        customSnackbar(context, response["message"], Colors.amber);
+                       }
                             } else {
                               customSnackbar(context, 'Fill All Fields', red);
                             }
@@ -72,9 +81,9 @@ class ScreenLogin extends StatelessWidget {
                       context: context,
                       preText: 'New User? Join Us Today! ',
                       buttonText: 'Register here',
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ScreenRegister()));
+                      onPressed: () async{
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenRegister(),));
+                     
                       }),
                   kheight50,
                 ],

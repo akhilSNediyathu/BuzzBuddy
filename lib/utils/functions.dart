@@ -31,3 +31,14 @@ Future<String?> getUserId() async {
   final userId = sharedpreference.getString(userIdKey);
   return userId;
 }
+// Clear user session
+Future<void> clearUserSession() async {
+  final sharedprefs = await SharedPreferences.getInstance();
+  await sharedprefs.remove(authKey);
+  await sharedprefs.remove(tokenKey);
+  await sharedprefs.remove(userIdKey);
+  await sharedprefs.remove(userRolekey);
+  await sharedprefs.remove(userEmailkey);
+  await sharedprefs.remove(userNamekey);
+  await sharedprefs.remove(userProfilePickey);
+}

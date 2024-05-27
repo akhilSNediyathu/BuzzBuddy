@@ -1,19 +1,22 @@
 
 import 'dart:convert';
 import 'dart:core';
-import 'dart:math';
+
 
 import 'package:buzz_buddy/controller/utils/api_urls.dart';
 import 'package:buzz_buddy/model/user_model.dart';
 import 'package:buzz_buddy/utils/functions.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:http/http.dart'as http;
 import 'package:http/http.dart';
 
 class AuthenticationRepo{
   static var client = http.Client();
    Future <Response?> sentOtp(UserModel user )async{
-    print(user.emailId);
+    if (kDebugMode) {
+      print(user.emailId);
+    }
     var data = 
       {
     "userName": user.userName,
@@ -65,6 +68,7 @@ static Future <Response?> verifyOtp(String email, String otp)async{
       var user = { 'email': email,'password':password};
       var response = await client.post(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.login),body:jsonEncode(user),headers: {"Content-Type": 'application/json'});
        debugPrint(response.statusCode.toString());
+       print(user);
       debugPrint(response.body);
       final responseBody = jsonDecode(response.body);
       if (response.statusCode == 200) {

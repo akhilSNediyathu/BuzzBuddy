@@ -2,9 +2,9 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key,required this.hintText, this.icon,this.controller,this.margin,this.keyboardType,this.obscureText=false,this.rightIcon,this.validator});
+  const CustomTextField({super.key,required this.hintText, this.icon,required this.controller,this.margin,this.keyboardType,this.obscureText=false,this.rightIcon,this.validator});
 
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final String hintText;
   final String? icon;
   final Widget? rightIcon;

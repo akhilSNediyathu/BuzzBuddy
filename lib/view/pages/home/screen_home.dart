@@ -2,7 +2,7 @@
 
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/mainwidget.dart';
-import 'package:buzz_buddy/view/pages/home/settings/screen_settings.dart';
+
 
 import 'package:flutter/material.dart';
 
@@ -62,7 +62,7 @@ final List<String> likedPerson = [
         elevation: 2,
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=>ScreenSettings()));
+            
 
           }, icon:const Icon(Icons.settings))
         ],

@@ -1,6 +1,7 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
 import 'package:buzz_buddy/view/pages/login/screen_login.dart';
+import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,7 +42,8 @@ class _ScreenSplashState extends State<ScreenSplash> {
   }
   Future<void> checkUserLogin(context) async {
     final preferences = await SharedPreferences.getInstance();
-    final userLoggedIn = preferences.get('LOGIN');
+    final userLoggedIn = preferences.get(authKey);
+    print(userLoggedIn);
     if (userLoggedIn == null || userLoggedIn == false) {
       await Future.delayed(const Duration(seconds: 3));
       Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -50,7 +52,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     } else {
       await Future.delayed(const Duration(seconds: 3));
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => ScreenHome(),
+        builder: (context) => ScreenMainScreen(),
    ));
 }
 

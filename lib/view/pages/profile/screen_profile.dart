@@ -1,8 +1,10 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/dummydata.dart';
+
 import 'package:buzz_buddy/view/pages/profile/edit_profile/screen_edit_profiile.dart';
 import 'package:buzz_buddy/view/pages/profile/followers/screen_followers.dart';
 import 'package:buzz_buddy/view/pages/profile/following/screen_following.dart';
+import 'package:buzz_buddy/view/pages/profile/settings_page/screen_settings.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/saved_and_posts_grid.dart';
@@ -25,6 +27,11 @@ class ScreenProfile extends StatelessWidget {
             'Profile',
             style: appBarTitleStyle,
           ),
+          actions: [
+            IconButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenSettings(),));
+            }, icon: const Icon(Icons.settings))
+          ],
         ),
         backgroundColor: kwhiteColor,
         body: SafeArea(
