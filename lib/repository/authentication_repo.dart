@@ -13,9 +13,9 @@ import 'package:http/http.dart';
 
 class AuthenticationRepo{
   static var client = http.Client();
-   Future <Response?> sentOtp(UserModel user )async{
+   Future <Response?>  sentOtp(UserModel user )async{
     if (kDebugMode) {
-      print(user.emailId);
+      // print(user.emailId);
     }
     var data = 
       {
@@ -28,11 +28,11 @@ class AuthenticationRepo{
 var jsonData = jsonEncode(data);
 
 try {
-  debugPrint('_________');
+  // debugPrint('_________');
   final response = await client.post(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.signUp),body: jsonData,headers: {
           "Content-Type": "application/json", // Set the content type to JSON
         },);
-        debugPrint(response.toString());
+        // debugPrint(response.toString());
     return response;
   
 } catch (e) {
