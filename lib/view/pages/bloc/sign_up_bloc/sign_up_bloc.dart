@@ -35,7 +35,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
        
       return emit(SignUpErrorState(error:responseData["message"]));
      }else{
-       return emit(SignUpErrorState(error: "somethinh went wrong"));
+       return emit(SignUpErrorState(error: "something went wrong"));
      }
 
     });
