@@ -2,7 +2,7 @@
 
 import 'dart:ui';
 
-import 'package:buzz_buddy/repository/authentication_repo.dart';
+
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/bloc/otp_verification/otp_verification_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
@@ -144,7 +144,7 @@ Navigator.of(context).pushAndRemoveUntil(
                           }
                           return customMaterialButton(
                                               onPressed: () async {
-                                                context.read();
+                                                
                                                 if (validateOtp()) {
                                                   String otp = _controllers.map((controller) => controller.text).join();
                                                   debugPrint('Entered OTP: $otp');

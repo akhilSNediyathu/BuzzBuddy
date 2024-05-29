@@ -104,7 +104,7 @@ class ScreenRegister extends StatelessWidget {
                                 BlocBuilder<SignUpBloc, SignUpState>(
                                   builder: (context, state) {
                                     if(state is SignUpLoadingSate){
-                                      return customButton(media: media, buttonText: 'Loading....', onPressed: (){}, color: kPrimaryColor);
+                                      return loadingButton(media: media, onPressed: (){}, color: kPrimaryColor);
                                     }
                                     return customButton(
                                                                     color: kPrimaryColor,
