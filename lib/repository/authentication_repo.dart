@@ -63,7 +63,7 @@ static Future <Response?> verifyOtp(String email, String otp)async{
  }
 
   }
-  static Future userLogin(String email , String password)async{
+  static Future <Response?>userLogin( String email , String password)async{
     try {
       var user = { 'email': email,'password':password};
       var response = await client.post(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.login),body:jsonEncode(user),headers: {"Content-Type": 'application/json'});
@@ -80,12 +80,13 @@ static Future <Response?> verifyOtp(String email, String otp)async{
           userName: responseBody['user']['userName'],
           userprofile: responseBody['user']['profilePic'],
         );
-        return responseBody;
+        return response;
       } else {
-        return responseBody;
+        return response;
       }
     } catch (e) {
       debugPrint(e.toString());
+      return null;
     }
   }
 

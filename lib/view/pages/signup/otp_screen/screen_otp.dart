@@ -3,8 +3,10 @@
 import 'dart:ui';
 
 
+import 'package:buzz_buddy/model/user_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/bloc/otp_verification/otp_verification_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
 import 'package:buzz_buddy/view/pages/login/screen_login.dart';
@@ -17,8 +19,9 @@ import 'package:lottie/lottie.dart';
 import 'dart:async';
 
 class ScreenOtp extends StatefulWidget {
+  final UserModel user;
   final String email;
-  const ScreenOtp({super.key, required this.email});
+  const ScreenOtp({super.key, required this.email, required this.user});
 
   @override
    State <ScreenOtp> createState() => _ScreenOtpState();
@@ -50,7 +53,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
   void startTimer() {
     _isResendVisible = false;
     _start = 60;
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       if (_start == 0) {
         setState(() {
           _isResendVisible = true;
@@ -64,10 +67,10 @@ class _ScreenOtpState extends State<ScreenOtp> {
     });
   }
 
-  void debounceResendOtp() {
+  void debounceResendOtp(SignUpBloc signUpBloc) {
     if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
     _debounceTimer = Timer(const Duration(seconds: 1), () {
-      // otp resend function 
+      signUpBloc.add(OnSignupButtonClickedEvent(userName: widget.user.userName, password: widget.user.password, phoneNumber: widget.user.phoneNumber, email: widget.user.emailId));
       startTimer(); // Restart the timer
     });
   }
@@ -82,6 +85,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
 
   @override
   Widget build(BuildContext context) {
+    final signUpBloc = context.read<SignUpBloc>();
     var media = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -171,7 +175,10 @@ Navigator.of(context).pushAndRemoveUntil(
                       kheight20,
                       _isResendVisible
                           ? TextButton(
-                              onPressed: debounceResendOtp,
+                              onPressed:(){
+                                 debounceResendOtp(signUpBloc);
+                              
+                              },
                               child: const Text(
                                 'Resend OTP',
                                 style: TextStyle(color: kPrimaryColor, fontSize: 16),

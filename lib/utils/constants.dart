@@ -43,8 +43,28 @@ const profilecolumnStyle =  TextStyle(fontSize: 18,fontWeight: FontWeight.w800,)
 const coloredBold24 =TextStyle( fontSize: 24, fontWeight: FontWeight.bold,color: kPrimaryColor );
 const greyMeduim =  TextStyle(
                   fontSize: 16,
-                  color: Colors.grey,
+                  color: grey,
                 );
+const showdialogueHeadingstyle = TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            
+          );
+const showdialogueContentStyle =  TextStyle(
+                  fontSize: 16,
+                );
+
+
+const showDialogueButtonStyle =TextStyle(
+                color:red,
+                fontSize: 16,
+              );
+const showDialogueButtonStyle2 = TextStyle(
+                color: green,
+                fontSize: 16,
+              );
+
+
                 //auth key sharedpreference
 const authKey = 'UserLoggedIn';
 

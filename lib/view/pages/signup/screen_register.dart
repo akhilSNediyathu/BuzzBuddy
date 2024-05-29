@@ -35,7 +35,7 @@ class ScreenRegister extends StatelessWidget {
               customSnackbar(context, 'success', green);
                Navigator.of(context).pushReplacement(
                                             MaterialPageRoute(
-                                                builder: (ctx) => ScreenOtp(email: _emailController.text,)));
+                                                builder: (ctx) => ScreenOtp(email: _emailController.text,user: UserModel(userName: _usernameController.text, password: _passwordController.text, phoneNumber: _phoneController.text, emailId: _emailController.text),)));
             
              }else if(state is SignUpErrorState){
               customSnackbar(context, state.error, red);
