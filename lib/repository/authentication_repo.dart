@@ -88,6 +88,30 @@ static Future <Response?> verifyOtp(String email, String otp)async{
       debugPrint(e.toString());
       return null;
     }
+
+    
+  }
+  static Future<Response?> resetPassSendOtp(String email)async{
+     try {
+        Response? response =await client.get(Uri.parse('${ApiEndpoints.baseUrl+ApiEndpoints.forgotPassword}$email'));
+   // print('${ApiEndpoints.baseUrl+ApiEndpoints.forgotPassword}$email');
+   print(response.statusCode);
+
+     return response;
+   
+   
+     } catch (e) {
+       return null;
+     }
+
+
+  }
+  static Future verifyOtpPasswordReset (String email, String otp)async{
+    var response = await client.get(Uri.parse('${ApiEndpoints.baseUrl+ApiEndpoints.verifyOtpReset}$email&otp=$otp'));
+    print(response.statusCode);
+     print('${ApiEndpoints.baseUrl+ApiEndpoints.verifyOtpReset}$email&otp=$otp');  
+    
+
   }
 
 }

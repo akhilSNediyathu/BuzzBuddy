@@ -131,56 +131,56 @@ class _CustomTextField2State extends State<CustomTextField2> {
 
 bool obsecure = true;
 
-class TextFormFieldPasswordRegister extends StatefulWidget {
-  final TextEditingController controller;
-  final String hintText;
-  final String? Function(String?)? validator;
+// class TextFormFieldPasswordRegister extends StatefulWidget {
+//   final TextEditingController controller;
+//   final String hintText;
+//   final String? Function(String?)? validator;
 
-  const TextFormFieldPasswordRegister({
-    super.key,
-    required this.controller,
-    required this.hintText,
-    this.validator,
-  });
+//   const TextFormFieldPasswordRegister({
+//     super.key,
+//     required this.controller,
+//     required this.hintText,
+//     this.validator,
+//   });
 
-  @override
-  State<TextFormFieldPasswordRegister> createState() =>
-      _TextFormFieldPasswordRegisterState();
-}
+//   @override
+//   State<TextFormFieldPasswordRegister> createState() =>
+//       _TextFormFieldPasswordRegisterState();
+// }
 
-class _TextFormFieldPasswordRegisterState
-    extends State<TextFormFieldPasswordRegister> {
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      cursorWidth: 2,
-      controller: widget.controller,
-      validator: widget.validator,
-      cursorColor: Colors.black,
-      style: const TextStyle(fontWeight: FontWeight.w600),
-      decoration: InputDecoration(
-          fillColor: Colors.amber,
-          filled: true,
-          hintText: widget.hintText,
-          border: const OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.black45)),
-          focusedBorder:
-              const OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
-          enabledBorder:
-              const OutlineInputBorder(borderSide: BorderSide(color: Colors.green)),
-          suffixIcon: IconButton(
-              onPressed: () {
-                setState(() {
-                  obsecure = !obsecure;
-                });
-              },
-              icon: obsecure == true
-                  ? const Icon(
-                      Icons.visibility_off,
-                      color: Colors.grey,
-                    )
-                  : const Icon(Icons.visibility, color: Colors.grey))),
-      obscureText: obsecure,
-    );
-  }
-}
+// class _TextFormFieldPasswordRegisterState
+//     extends State<TextFormFieldPasswordRegister> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextFormField(
+//       cursorWidth: 2,
+//       controller: widget.controller,
+//       validator: widget.validator,
+//       cursorColor: Colors.black,
+//       style: const TextStyle(fontWeight: FontWeight.w600),
+//       decoration: InputDecoration(
+//           fillColor: Colors.amber,
+//           filled: true,
+//           hintText: widget.hintText,
+//           border: const OutlineInputBorder(
+//               borderSide: BorderSide(color: Colors.black45)),
+//           focusedBorder:
+//               const OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
+//           enabledBorder:
+//               const OutlineInputBorder(borderSide: BorderSide(color: Colors.green)),
+//           suffixIcon: IconButton(
+//               onPressed: () {
+//                 setState(() {
+//                   obsecure = !obsecure;
+//                 });
+//               },
+//               icon: obsecure == true
+//                   ? const Icon(
+//                       Icons.visibility_off,
+//                       color: Colors.grey,
+//                     )
+//                   : const Icon(Icons.visibility, color: Colors.grey))),
+//       obscureText: obsecure,
+//     );
+//   }
+// }

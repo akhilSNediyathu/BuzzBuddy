@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247472872760",
+    "project_id": "buzzbuddy-869c8",
+    "storage_bucket": "buzzbuddy-869c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247472872760:android:bcd79055b80ea78c74b5cd",
+        "android_client_info": {
+          "package_name": "com.example.buzz_buddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE2KqROwY0r9A8WpVaZlkWGtrPo3Au-Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

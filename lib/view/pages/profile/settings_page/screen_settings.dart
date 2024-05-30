@@ -15,20 +15,22 @@ class ScreenSettings extends StatelessWidget {
         title:const Text( 'settings'),
       ),
       body: Center(child: 
-      IconButton(onPressed: (){
-       showConfirmationDialog(context: context, title: 'Log out!', content: 'Are you sure..?', confirmButtonText:  "confirm", cancelButtonText: "cancel", onConfirm: ()async{
-         await clearUserSession();
-      Navigator.pushAndRemoveUntil(
-  context,
-  MaterialPageRoute(builder: (context) {
-    return ScreenLogin();
-  }),
-  (Route<dynamic> route) => false,  // This will remove all previous routes
-);
-
-       });
-
-      }, icon: const Icon(Icons.logout)),),
+      IconButton(onPressed: ()async{
+       showConfirmationDialog(context: context, title: 'Log out!', content: 'Are you sure..?', confirmButtonText:  "confirm", cancelButtonText: "cancel",
+                onConfirm: () async {
+                await clearUserSession();
+                if (context.mounted) { // Ensure context is still valid
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return ScreenLogin();
+                    }),
+                    (Route<dynamic> route) => false,
+                  );
+                }
+              },
+            );
+          }, icon: const Icon(Icons.logout)),),
     );
   }
 }

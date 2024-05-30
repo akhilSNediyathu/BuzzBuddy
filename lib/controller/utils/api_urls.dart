@@ -35,6 +35,13 @@ class ApiEndpoints {
   static const String fetchSavedPost = '/posts/savePosts';
   static const String removeSavedPost = '/posts/savePosts';
   static const String explorePosts = '/posts/exploreposts';
+  //need to ask(pass reset)
+
+  
+  static const String verifyOtpReset = '/users/verifyOtp?email=';
+  static const String forgotPassword = '/users/forgotPassword?email=';
+  static const String updatePassword = '/users/changepassword';
+
 
 //chat urls
   static const String createConversation = '/chats/conversation';

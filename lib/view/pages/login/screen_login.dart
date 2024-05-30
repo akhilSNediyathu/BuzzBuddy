@@ -6,6 +6,7 @@ import 'package:buzz_buddy/view/pages/commonwidget/classwidget/textfield.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/login_signup_row.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
+import 'package:buzz_buddy/view/pages/login/forgotpassword/screen_password_reset_mainpage.dart';
 import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
 import 'package:buzz_buddy/view/pages/signup/screen_register.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,9 @@ class ScreenLogin extends StatelessWidget {
                          Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                            children: [
-                             TextButton(onPressed: (){}, child: const Text('Forgot password?',style: TextStyle(color: kPrimaryColor))),
+                             TextButton(onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenPasswordResetMainpage(),));
+                             }, child: const Text('Forgot password?',style: TextStyle(color: kPrimaryColor))),
                            ],
                          ),
                         
