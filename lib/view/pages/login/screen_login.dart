@@ -1,5 +1,6 @@
 
 import 'package:buzz_buddy/utils/constants.dart';
+import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/utils/validations.dart';
 import 'package:buzz_buddy/view/pages/bloc/login_bloc/login_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/classwidget/textfield.dart';
@@ -9,8 +10,10 @@ import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
 import 'package:buzz_buddy/view/pages/login/forgotpassword/screen_password_reset_mainpage.dart';
 import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
 import 'package:buzz_buddy/view/pages/signup/screen_register.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class ScreenLogin extends StatelessWidget {
    ScreenLogin({super.key});
@@ -28,8 +31,13 @@ class ScreenLogin extends StatelessWidget {
         listener: (context, state) {
          if(state is LoginSuccesState){
           customSnackbar(context, 'welcome back', green);
-                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ScreenMainScreen()));
+                                 Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return ScreenMainScreen();
+                    }),
+                    (Route<dynamic> route) => false,
+                  );
          } else if (state is LoginErrorState){
            customSnackbar(context, state.error, red);
          }
@@ -90,9 +98,17 @@ class ScreenLogin extends StatelessWidget {
                             SizedBox(height: media.height*0.03,
                               child: Image.asset(googleLogo)),
                              
-                            Flexible(child: TextButton(onPressed: (){
-      
-                            }, child: const Text('Sign In With Google?',style: TextStyle(color: kPrimaryColor))))
+                            Flexible(child: BlocBuilder<LoginBloc, LoginState>(
+                              builder: (context, state) {
+                                if(state is GoogleAuthLoadingstate){
+                                  return const CircularProgressIndicator();
+                                }
+                                return TextButton(onPressed: ()async{
+                                         context.read<LoginBloc>().add(OnGoogleSignInButtonClickedEvent()) ;             
+                                  
+                                                        }, child: const Text('Sign In With Google?',style: TextStyle(color: kPrimaryColor)));
+                              },
+                            ))
                           ],
                         ),loginAndSignUpRow(
                             context: context,
@@ -113,4 +129,5 @@ class ScreenLogin extends StatelessWidget {
       ),
     );
   }
+
 }

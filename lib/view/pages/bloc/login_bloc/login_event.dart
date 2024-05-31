@@ -10,3 +10,7 @@ class OnLoginButtonClickEvent extends LoginEvent{
 
   
 }
+class OnGoogleSignInButtonClickedEvent extends LoginEvent{
+  
+
+}

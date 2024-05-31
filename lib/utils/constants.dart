@@ -8,6 +8,7 @@ const red = Colors.red;
 const black = Colors.black;
 const grey = Colors.grey;
 const green = Colors.green;
+const amber = Colors.amber;
 
 const kwhiteColor = Colors.white;
 

@@ -1,9 +1,12 @@
 class ApiEndpoints {
   //BaseUrl
-   static const String baseUrl = 'http://10.0.2.2:7002/api';
+   //static const String baseUrl = 'http://10.0.2.2:7002/api';
+    static const String baseUrl = 'https://m0276vzs-7002.inc1.devtunnels.ms/api';
+ 
  
 
   //user Urls
+  static const String googleLogin = '/users/google-login';
   static const String signUp = '/users/send-otp';
   static const String login = '/users/login';
   static const String verifyOtp = '/users/verify-otp';
