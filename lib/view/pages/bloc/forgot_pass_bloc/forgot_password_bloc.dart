@@ -12,12 +12,13 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     on<OnForgotPassLoginButtonClicked>((event, emit)async {
       emit(ForgotPasswordLoadingState());
       var response =await AuthenticationRepo.resetPassSendOtp(event.email);
+      print('kkkkkk');
       
      if(response!=null && response.statusCode==200){
       var responseBody = jsonDecode(response.body);
      if(responseBody["used"]){
        return emit(ForgotPasswordSuccesState());
-     }else{
+     }else {
       return emit(ForgotPasswordErrorState(error:responseBody["message"]));
      }
      }
@@ -27,5 +28,6 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
      }
 
     });
+   
   }
 }

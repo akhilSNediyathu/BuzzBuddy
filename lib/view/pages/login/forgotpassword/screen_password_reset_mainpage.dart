@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
 class ScreenPasswordResetMainpage extends StatelessWidget {
-  ScreenPasswordResetMainpage({Key? key}) : super(key: key);
+  ScreenPasswordResetMainpage({super.key});
 
   final TextEditingController _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -28,8 +28,9 @@ class ScreenPasswordResetMainpage extends StatelessWidget {
       body: BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
         listener: (context, state) {
          if(state is ForgotPasswordSuccesState){
-          print('llllllll');
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenForgotpassOtpVerificaion()));
+           print('llllllll');
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenForgotpassOtpVerificaion(email: _emailController.text,)));
+          print('kkkkl');
         
          }else if(state is ForgotPasswordErrorState){
          

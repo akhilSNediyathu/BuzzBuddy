@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget textBoxWidget(
     {required BuildContext context,
-    required TextEditingController controller}) {
+    required TextEditingController controller, VoidCallback? validator }) {
   return Container(
     height: 50,
     width: 50,
@@ -11,6 +11,8 @@ Widget textBoxWidget(
       border: Border.all(),
     ),
     child: TextField(
+
+      
       controller: controller,
       keyboardType: TextInputType.number,
       maxLength: 1,
