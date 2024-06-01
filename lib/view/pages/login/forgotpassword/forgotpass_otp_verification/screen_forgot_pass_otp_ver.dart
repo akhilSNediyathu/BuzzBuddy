@@ -40,7 +40,7 @@ class ScreenForgotpassOtpVerificaion extends StatelessWidget {
     return BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
       listener: (context, state) {
         if (state is ResetPasswordSuccesState) {
-          customSnackbar(context, 'succes', green);
+          customSnackbar(context, 't', green);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) {

@@ -2,7 +2,16 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key,required this.hintText, this.icon,required this.controller,this.margin,this.keyboardType,this.obscureText=false,this.rightIcon,this.validator});
+  const CustomTextField(
+      {super.key,
+      required this.hintText,
+      this.icon,
+      required this.controller,
+      this.margin,
+      this.keyboardType,
+      this.obscureText = false,
+      this.rightIcon,
+      this.validator});
 
   final TextEditingController controller;
   final String hintText;
@@ -12,45 +21,34 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final FormFieldValidator<String>? validator;
-  
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      validator: validator,
-      keyboardType: keyboardType,
-                    decoration: InputDecoration(
-                      labelText: hintText,
-                      labelStyle: TextStyle(fontWeight: FontWeight.w500),
-                      
-                      
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(color: textFieldBorderColor, width: 2.0), 
-                        borderRadius: kradius20
-                     ),
-                     focusedBorder: OutlineInputBorder(
-                     borderSide: const BorderSide(color: kPrimaryColor, width: 2.0), 
-                     borderRadius: kradius20
-                       ),
-                     errorBorder: OutlineInputBorder(
-                 borderSide: const BorderSide(color: Colors.red, width: 2.0), 
-                 borderRadius: kradius20
-                     ),
-                     focusedErrorBorder: OutlineInputBorder(
-                   borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
-                   borderRadius: kradius20
-                    ),
-                        
-                        
-                      )
-                    );
+        controller: controller,
+        validator: validator,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          labelText: hintText,
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          border: OutlineInputBorder(
+              borderSide:
+                  const BorderSide(color: textFieldBorderColor, width: 2.0),
+              borderRadius: kradius20),
+          focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: kPrimaryColor, width: 2.0),
+              borderRadius: kradius20),
+          errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.red, width: 2.0),
+              borderRadius: kradius20),
+          focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
+              borderRadius: kradius20),
+        ));
   }
 }
 
-
-
 class CustomTextField2 extends StatefulWidget {
- 
   const CustomTextField2({
     super.key,
     required this.hintText,
@@ -68,15 +66,15 @@ class CustomTextField2 extends StatefulWidget {
   final EdgeInsets? margin;
   final TextInputType? keyboardType;
   // final bool obscureText;
-   final FormFieldValidator<String>? validator;
+  final FormFieldValidator<String>? validator;
 
   @override
   State<CustomTextField2> createState() => _CustomTextField2State();
 }
+
 bool isObsecure = true;
 
 class _CustomTextField2State extends State<CustomTextField2> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -87,16 +85,16 @@ class _CustomTextField2State extends State<CustomTextField2> {
           return TextFormField(
             controller: widget.controller,
             keyboardType: widget.keyboardType,
-            obscureText:isObsecure ,
-            validator:widget. validator,
+            obscureText: isObsecure,
+            validator: widget.validator,
             decoration: InputDecoration(
               labelText: widget.hintText,
               labelStyle: TextStyle(fontWeight: FontWeight.w500),
               prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
               suffixIcon: IconButton(
                 icon: Icon(
-                  isObsecure ? Icons.visibility_off : Icons.visibility, color: Colors.grey,
-
+                  isObsecure ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.grey,
                 ),
                 onPressed: () {
                   setState(() {
@@ -105,7 +103,8 @@ class _CustomTextField2State extends State<CustomTextField2> {
                 },
               ),
               border: OutlineInputBorder(
-                borderSide: const BorderSide(color: textFieldBorderColor, width: 2.0),
+                borderSide:
+                    const BorderSide(color: textFieldBorderColor, width: 2.0),
                 borderRadius: kradius20,
               ),
               focusedBorder: OutlineInputBorder(
@@ -117,7 +116,8 @@ class _CustomTextField2State extends State<CustomTextField2> {
                 borderRadius: kradius20,
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.redAccent, width: 2.0),
+                borderSide:
+                    const BorderSide(color: Colors.redAccent, width: 2.0),
                 borderRadius: kradius20,
               ),
             ),
@@ -129,7 +129,7 @@ class _CustomTextField2State extends State<CustomTextField2> {
 }
 
 
-bool obsecure = true;
+// bool obsecure = true;
 
 // class TextFormFieldPasswordRegister extends StatefulWidget {
 //   final TextEditingController controller;
