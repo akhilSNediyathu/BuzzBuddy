@@ -16,7 +16,7 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
       
      if(response!=null && response.statusCode==200){
       var responseBody = jsonDecode(response.body);
-     if(responseBody["used"]){
+     if(responseBody["status"]==200){
        return emit(ForgotPasswordSuccesState());
      }else {
       return emit(ForgotPasswordErrorState(error:responseBody["message"]));
@@ -28,6 +28,37 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
      }
 
     });
+    on<OnVerifyButtonClickedEvent>((event, emit)async {
+      emit(OtpverifiedLoadingState());
+      var response = await AuthenticationRepo.verifyOtpPasswordReset(event.email,event.otp);
+      if(response!=null && response.statusCode==200){
+      var responseBody = jsonDecode(response.body);
+     if(responseBody["status"]){
+       return emit(OtpverifiedSuccesState());
+     }else{
+         print(responseBody);
+      return emit(OtpverifiedErrorState(error:'invalid OTP'));
+     }
+     }
+     
+     else{
+      return emit(OtpverifiedErrorState(error: 'something went wrong'));
+     }
+      
+    },);
+      on<OnResetPasswordButtonClickedEvent>((event, emit) async{
+       emit(ResetPasswordSuccesState());
+       var response = await AuthenticationRepo.updatePassword(event.email, event.password);
+       if(response!=null && response.statusCode==200){
+              return emit(ResetPasswordSuccesState());
+       }else if(response!=null){
+          var finalResponse = jsonDecode(response.body);
+          return emit(ResetPasswordErrorState(error:finalResponse["message"]));
+
+       }else{
+        return emit(ResetPasswordErrorState(error: 'Something went wrong'));
+       }
+    },);
    
   }
 }

@@ -1,7 +1,7 @@
 
 
 import 'package:buzz_buddy/firebase_options.dart';
-import 'package:buzz_buddy/view/pages/bloc/bloc/reset_password_bloc.dart';
+
 import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/login_bloc/login_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/otp_verification/otp_verification_bloc.dart';
@@ -39,9 +39,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
           create: (context) => ForgotPasswordBloc(),
         ),
-        BlocProvider(
-          create: (context) => ResetPasswordBloc(),
-        ),
+        
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

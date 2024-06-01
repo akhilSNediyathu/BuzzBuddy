@@ -1,4 +1,3 @@
-
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/validations.dart';
 import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc.dart';
@@ -21,78 +20,77 @@ class ScreenPasswordResetMainpage extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-       
-       
         elevation: 0,
       ),
       body: BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
         listener: (context, state) {
-         if(state is ForgotPasswordSuccesState){
-           print('llllllll');
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenForgotpassOtpVerificaion(email: _emailController.text,)));
-          print('kkkkl');
-        
-         }else if(state is ForgotPasswordErrorState){
-         
-          customSnackbar(context, state.error, amber);
-         }
+          if (state is ForgotPasswordSuccesState) {
+            // print('llllllll');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ScreenForgotpassOtpVerificaion(
+                          email: _emailController.text,
+                        )));
+            //print('kkkkl');
+          } else if (state is ForgotPasswordErrorState) {
+            customSnackbar(context, state.error, amber);
+          }
         },
         builder: (context, state) {
           return SingleChildScrollView(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Forgot Password?',
-                    style: coloredBold24
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text('Forgot Password?', style: coloredBold24),
+                const SizedBox(height: 20),
+                const Text(
+                  "Don't worry. You can reset it by entering your registered email ID.",
+                  style: greyMeduim,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 30),
+                Lottie.asset(
+                  'assets/images/change password.json',
+                  height: media.height * 0.3,
+                ),
+                const SizedBox(height: 30),
+                Form(
+                  key: _formKey,
+                  child: CustomTextField(
+                    hintText: 'Enter registered email',
+                    controller: _emailController,
+                    validator: validateEmail,
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Don't worry. You can reset it by entering your registered email ID.",
-                    style: greyMeduim,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 30),
-                  Lottie.asset(
-                    'assets/images/change password.json',
-                    height: media.height * 0.3,
-                  ),
-                  const SizedBox(height: 30),
-                  Form(
-                    key: _formKey,
-                    child: CustomTextField(
-                      hintText: 'Enter registered email',
-                      controller: _emailController,
-                      validator: validateEmail,
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
-                    builder: (context, state) {
-                      if(state is ForgotPasswordLoadingState){
-                        return loadingButton(media: media, onPressed: (){}, color: kPrimaryColor);
-                      }
-                      return customButton(
-                                      onPressed: () {
-                                       if (_formKey.currentState?.validate() == true) {
+                ),
+                const SizedBox(height: 30),
+                BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+                  builder: (context, state) {
+                    if (state is ForgotPasswordLoadingState) {
+                      return loadingButton(
+                          media: media, onPressed: () {}, color: kPrimaryColor);
+                    }
+                    return customButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() == true) {
                           context.read<ForgotPasswordBloc>().add(
                                 OnForgotPassLoginButtonClicked(
                                   email: _emailController.text,
                                 ),
                               );
                         }
-                                      },
-                                      buttonText: 'Get OTP',
-                                      color: kPrimaryColor,
-                                      media: media,
-                                    );
-                    },
-                  ),
-                ],
-              ),
-            );
+                      },
+                      buttonText: 'Get OTP',
+                      color: kPrimaryColor,
+                      media: media,
+                    );
+                  },
+                ),
+              ],
+            ),
+          );
         },
       ),
     );
