@@ -1,8 +1,7 @@
 class ApiEndpoints {
   //BaseUrl
-   static const String baseUrl = 'http://10.0.2.2:7002/api';
-   // static const String baseUrl = 'https://m0276vzs-7002.inc1.devtunnels.ms/api';
-
+  //static const String baseUrl = 'http://10.0.2.2:7002/api';
+  static const String baseUrl = 'https://m0276vzs-7002.inc1.devtunnels.ms/api';
 
   //user Urls
   static const String googleLogin = '/users/google-login';
@@ -39,11 +38,9 @@ class ApiEndpoints {
   static const String explorePosts = '/posts/exploreposts';
   //need to ask(pass reset)
 
-  
   static const String verifyOtpReset = '/users/verifyOtp?email=';
   static const String forgotPassword = '/users/forgotPassword?email=';
   static const String updatePassword = '/users/changepassword';
-
 
 //chat urls
   static const String createConversation = '/chats/conversation';
