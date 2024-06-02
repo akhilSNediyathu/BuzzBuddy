@@ -7,12 +7,12 @@ class PostTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
 
   const PostTextFormField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.hintText,
     required this.keyboard,
     this.validator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

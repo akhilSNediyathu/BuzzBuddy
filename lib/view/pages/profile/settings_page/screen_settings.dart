@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+
 
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
@@ -37,7 +37,6 @@ class ScreenSettings extends StatelessWidget {
                 onConfirm: () async {
                   await clearUserSession();
                   if (context.mounted) {
-                    // Ensure context is still valid
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) {

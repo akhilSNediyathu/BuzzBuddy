@@ -16,7 +16,7 @@ class ScreenChat extends StatelessWidget {
         centerTitle: true,
         title: const Text('Chat Hub', style: appBarTitleStyle),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.add))
+          IconButton(onPressed: (){}, icon: const Icon(Icons.add))
         ],
       ),
       body: Padding(

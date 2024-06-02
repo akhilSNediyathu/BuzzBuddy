@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/repository/authentication_repo.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 part 'forgot_password_event.dart';
 part 'forgot_password_state.dart';
@@ -12,7 +12,9 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     on<OnForgotPassLoginButtonClicked>((event, emit)async {
       emit(ForgotPasswordLoadingState());
       var response =await AuthenticationRepo.resetPassSendOtp(event.email);
-      print('kkkkkk');
+      if (kDebugMode) {
+        print('kkkkkk');
+      }
       
      if(response!=null && response.statusCode==200){
       var responseBody = jsonDecode(response.body);
@@ -36,7 +38,9 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
      if(responseBody["status"]){
        return emit(OtpverifiedSuccesState());
      }else{
-         print(responseBody);
+         if (kDebugMode) {
+           print(responseBody);
+         }
       return emit(OtpverifiedErrorState(error:'invalid OTP'));
      }
      }

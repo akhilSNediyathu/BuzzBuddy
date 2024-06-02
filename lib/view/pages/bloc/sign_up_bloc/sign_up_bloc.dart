@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/model/user_model.dart';
 import 'package:buzz_buddy/repository/authentication_repo.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'package:meta/meta.dart';
+
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
@@ -14,7 +15,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
 
 
     on<OnSignupButtonClickedEvent>((event, emit)async {
-      print("loading...............");
+      if (kDebugMode) {
+        print("loading...............");
+      }
       emit(SignUpLoadingSate());
 
       UserModel finalDatas = UserModel(

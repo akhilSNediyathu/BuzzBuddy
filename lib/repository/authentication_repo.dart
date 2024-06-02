@@ -68,7 +68,9 @@ static Future <Response?> verifyOtp(String email, String otp)async{
       var user = { 'email': email,'password':password};
       var response = await client.post(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.login),body:jsonEncode(user),headers: {"Content-Type": 'application/json'});
        debugPrint(response.statusCode.toString());
-       print(user);
+       if (kDebugMode) {
+         print(user);
+       }
       debugPrint(response.body);
       final responseBody = jsonDecode(response.body);
       if (response.statusCode == 200) {
@@ -95,7 +97,9 @@ static Future <Response?> verifyOtp(String email, String otp)async{
      try {
         Response? response =await client.get(Uri.parse('${ApiEndpoints.baseUrl+ApiEndpoints.forgotPassword}$email'));
    // print('${ApiEndpoints.baseUrl+ApiEndpoints.forgotPassword}$email');
-   print(response.body);
+   if (kDebugMode) {
+     print(response.body);
+   }
 
      return response;
    
@@ -121,7 +125,9 @@ static Future <Response?> verifyOtp(String email, String otp)async{
     try {
       var user = {'email':email,'password':password};
       var response = await client.patch(Uri.parse(ApiEndpoints.baseUrl+ApiEndpoints.updatePassword),body:jsonEncode(user),headers: {"Content-Type": 'application/json'});
-      print(response.body);
+      if (kDebugMode) {
+        print(response.body);
+      }
       return response;
     } catch (e) {
       return null;

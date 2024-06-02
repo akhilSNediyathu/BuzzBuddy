@@ -12,7 +12,7 @@ class CustomListTile extends StatelessWidget {
   final VoidCallback? onUnfollow;
 
   const CustomListTile({
-    Key? key,
+    super.key,
     required this.profileImageUrl,
     required this.titleText,
     required this.imageSize,
@@ -21,7 +21,7 @@ class CustomListTile extends StatelessWidget {
    
     this.onTap,
     this.onUnfollow
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

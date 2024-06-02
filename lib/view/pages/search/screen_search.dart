@@ -27,7 +27,7 @@ class ScreenSearch extends StatelessWidget {
             horizontal: 8.0,
           ),
           child: MasonryGridView.builder(
-            gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2),
             itemBuilder: (context, index) {
               return Padding(

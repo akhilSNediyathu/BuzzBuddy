@@ -1,11 +1,17 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/validations.dart';
 import 'package:buzz_buddy/view/pages/add_post/widgets/add_post_text_fields.dart';
+
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
 import 'package:flutter/material.dart';
 
+import 'package:photo_manager/photo_manager.dart';
+
 class ScreenAddPost extends StatelessWidget {
    ScreenAddPost({super.key});
+  final   List<AssetEntity> selectedAssetList = [];
+  
+ // final _formkey = GlobalKey<FormState>();
   final textcontroller = TextEditingController();
 
   @override
@@ -15,7 +21,7 @@ class ScreenAddPost extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         centerTitle: true,
-        title: Text('Start Post', style: appBarTitleStyle),
+        title:const Text('Start Post', style: appBarTitleStyle),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -43,4 +49,17 @@ class ScreenAddPost extends StatelessWidget {
       )
     );
   }
+  //   Future<void> pickAssets(
+  //     {required int maxcount, required RequestType requestType,required BuildContext context}) async {
+  //   final result = await Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => MediaPicker(maxcount, requestType),
+  //     ),
+  //   );
+  //   if (result != null) {
+  //     context.read<AddPostBloc>().add(AddPostPickImageEvent(imageList: result));
+  //   }
+  // }
 }
+

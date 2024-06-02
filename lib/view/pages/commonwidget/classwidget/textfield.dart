@@ -30,7 +30,7 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: hintText,
-          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelStyle: const TextStyle(fontWeight: FontWeight.w500),
           border: OutlineInputBorder(
               borderSide:
                   const BorderSide(color: textFieldBorderColor, width: 2.0),
@@ -78,7 +78,7 @@ class _CustomTextField2State extends State<CustomTextField2> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: widget.margin ?? EdgeInsets.all(0),
+      padding: widget.margin ?? const EdgeInsets.all(0),
       child: StatefulBuilder(
         builder: (context, setState) {
           // bool isObscure = isObsecure;
@@ -89,7 +89,7 @@ class _CustomTextField2State extends State<CustomTextField2> {
             validator: widget.validator,
             decoration: InputDecoration(
               labelText: widget.hintText,
-              labelStyle: TextStyle(fontWeight: FontWeight.w500),
+              labelStyle: const TextStyle(fontWeight: FontWeight.w500),
               prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
               suffixIcon: IconButton(
                 icon: Icon(
