@@ -1,17 +1,19 @@
 import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:buzz_buddy/controller/utils/api_urls.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:photo_manager/photo_manager.dart';
+
 class PostRepo{
   static var client = http.Client();
   //Add post 
-  static Future<Response?> addPost (String description, AssetEntity image)async{
+  static Future<Response?> addPost (String description, String image)async{
     try {
-      final imageUrl = await PostRepo.uploadImage(await image.file);
+      final imageUrl = await PostRepo.uploadImage( image);
           final userid = await getUserId();
       final token = await getUsertoken();
        final post = {
@@ -32,24 +34,31 @@ class PostRepo{
       return null;
     }
   }
+  
   // upload to cloudinary
   static Future uploadImage(imagePath) async {
+    String filePath = imagePath;
+    File file = File(filePath);
    try {
       final url = Uri.parse('https://api.cloudinary.com/v1_1/dkuqbewgb/image/upload'); 
      // final file = await imagePath.file ?? imagePath;
     final request = http.MultipartRequest('POST', url)
       ..fields['upload_preset'] = 'yrxdjmch'
-      ..files.add(await http.MultipartFile.fromPath('file', imagePath!.path));
+      ..files.add(await http.MultipartFile.fromPath('file', file.path));
     final response = await request.send();
    debugPrint(response.statusCode.toString());
     if (response.statusCode == 200) {
       final responseData = await response.stream.toBytes();
       final responseString = String.fromCharCodes(responseData);
       final jsonMap = jsonDecode(responseString);
+      log(jsonMap['url']);
       return jsonMap['url'];
+      
+    }else{
+      
     }
    } catch (e) {
-     debugPrint(e.toString());
+     log(e.toString());
    }
 
   }
@@ -66,6 +75,23 @@ class PostRepo{
       return response;
     } catch (e) {
       debugPrint(e.toString());
+    }
+  }
+
+//get post
+  static Future<Response?> fetchPosts() async {
+    try {
+      final token = await getUsertoken();
+      debugPrint('Token is $token');
+      var response = await client.get(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.getallPost}'),
+          headers: {'Authorization': 'Bearer $token'});
+      debugPrint(response.statusCode.toString());
+      debugPrint(response.body);
+      return response;
+    } catch (e) {
+      log(e.toString());
+      return null;
     }
   }
 }

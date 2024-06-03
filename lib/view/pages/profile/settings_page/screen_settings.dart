@@ -4,11 +4,14 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
 import 'package:buzz_buddy/view/pages/login/screen_login.dart';
+import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/custom_settings_list_tile.dart';
 import 'package:flutter/material.dart';
 
+
 class ScreenSettings extends StatelessWidget {
-  const ScreenSettings({super.key});
+ const  ScreenSettings({super.key});
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,8 @@ class ScreenSettings extends StatelessWidget {
                 cancelButtonText: "cancel",
                 onConfirm: () async {
                   await clearUserSession();
+                  await googleSignOut();
+                   currentPage.value =0;
                   if (context.mounted) {
                     Navigator.pushAndRemoveUntil(
                       context,
@@ -44,6 +49,7 @@ class ScreenSettings extends StatelessWidget {
                       }),
                       (Route<dynamic> route) => false,
                     );
+                   
                   }
                 },
               );

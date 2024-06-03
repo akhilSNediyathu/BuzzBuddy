@@ -29,7 +29,7 @@ class ScreenProfile extends StatelessWidget {
           ),
           actions: [
             IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const ScreenSettings(),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  ScreenSettings(),));
             }, icon: const Icon(Icons.settings))
           ],
         ),

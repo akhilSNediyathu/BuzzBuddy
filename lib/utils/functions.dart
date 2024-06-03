@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -67,4 +69,9 @@ Future<void> clearUserSession() async {
   }
    
   }
-  //get Usertoken
+ //fire base logout
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+ Future<void> googleSignOut() async {
+  await _googleSignIn.signOut();
+  log("User signed out");
+}

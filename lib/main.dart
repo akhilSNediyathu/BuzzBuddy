@@ -1,6 +1,7 @@
 
 
 import 'package:buzz_buddy/firebase_options.dart';
+import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
 
 import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/login_bloc/login_bloc.dart';
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
           create: (context) => ForgotPasswordBloc(),
         ),
+         BlocProvider(
+          create: (context) => AddPostBloc(),
+        ),
         
       ],
       child: MaterialApp(
@@ -46,6 +50,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
+    //     themeMode: ThemeMode.dark,
         home: const ScreenSplash(),
       ),
     );
