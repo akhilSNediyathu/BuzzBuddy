@@ -13,14 +13,23 @@ class ScreenFollowing extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         automaticallyImplyLeading: true,
-        title: const Text('Following ',style: appBarTitleStyle,),
+        title: const Text(
+          'Following ',
+          style: appBarTitleStyle,
+        ),
         centerTitle: true,
-
-
       ),
-      body: ListView.builder(itemBuilder: (context,index)=>Card(
-        child: CustomListTile(profileImageUrl: profileImages[index], titleText: account[index],onUnfollow: (){}, imageSize: media.height*0.05, backgroundColor: kwhiteColor, borderRadius: BorderRadius.circular(100)) ,
-      ),itemCount:account.length ,
+      body: ListView.builder(
+        itemBuilder: (context, index) => Card(
+          child: CustomListTile(
+              profileImageUrl: profileImages[index],
+              titleText: account[index],
+              onUnfollow: () {},
+              imageSize: media.height * 0.05,
+              backgroundColor: kwhiteColor,
+              borderRadius: BorderRadius.circular(100)),
+        ),
+        itemCount: account.length,
       ),
     );
   }

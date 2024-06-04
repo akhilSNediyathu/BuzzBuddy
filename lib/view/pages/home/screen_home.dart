@@ -1,14 +1,11 @@
-
-
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/mainwidget.dart';
-
 
 import 'package:flutter/material.dart';
 
 class ScreenHome extends StatelessWidget {
-   ScreenHome({super.key});
-final List<String> profileImages = [
+  ScreenHome({super.key});
+  final List<String> profileImages = [
     'https://pyxis.nymag.com/v1/imgs/af9/4b3/d79e0525b97fd56eea6dd98f2743be69a1-17-daenerys.rhorizontal.w710.jpg',
     'https://images.thequint.com/thequint%2F2018-04%2F91702cf7-aea4-4506-b347-d74bdc8ea38b%2F1894926e_68a9_4078_b24f_ab4e12fbbbb0.jpeg?rect=0%2C0%2C1024%2C576',
     'https://static.hbo.com/content/dam/hbodata/series/game-of-thrones/character/s5/robert-stark-1920.jpg',
@@ -16,14 +13,14 @@ final List<String> profileImages = [
     'https://static.wikia.nocookie.net/gameofthrones/images/d/d9/Tyrion_Lannister.jpg/revision/latest/scale-to-width-down/1024?cb=20110411054140'
   ];
 
- final List<String> mainImages = [
+  final List<String> mainImages = [
     'https://hips.hearstapps.com/hmg-prod/images/the-witcher-n-s3-e4-00-28-49-08-64c2d4097437c.jpg?crop=0.502xw:1.00xh;0.266xw,0&resize=1200:*',
     'https://images.bauerhosting.com/legacy/empire-images/features/5cde8a00133d503e3a49e503/GOT-MAIN.jpg?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80',
     'https://c4.wallpaperflare.com/wallpaper/782/297/164/game-of-thrones-4k-best-desktop-download-wallpaper-preview.jpg',
     'https://wallpapers.com/images/hd/peter-dinklage-tyrion-lannister-0xqszly1l5t0241r.jpg',
     'https://www.mensjournal.com/.image/t_share/MjA0ODc4NDc1NzI5ODM5NDUw/9.png'
   ];
-final List<String> likedPerson = [
+  final List<String> likedPerson = [
     'Roman Pierce',
     'Tej Parkor',
     'Ramsey Allison',
@@ -54,31 +51,30 @@ final List<String> likedPerson = [
 
   @override
   Widget build(BuildContext context) {
-     var media = MediaQuery.of(context).size;
+    var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kwhiteColor,
         title: Image.asset(appBarLogo),
         elevation: 2,
         actions: [
-          IconButton(onPressed: (){
-            
-
-          }, icon:const Icon(Icons.settings))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
         ],
-        
-       
       ),
       backgroundColor: kwhiteColor,
-      body: ListView.builder(itemBuilder: (context,index){
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: HomeWidgetMain(media: media, profileImage: profileImages[index],mainImage: mainImages[index],),
-        );
-        
-      },
-      itemCount: mainImages.length,),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: HomeWidgetMain(
+              media: media,
+              profileImage: profileImages[index],
+              mainImage: mainImages[index],
+            ),
+          );
+        },
+        itemCount: mainImages.length,
+      ),
     );
   }
 }
-

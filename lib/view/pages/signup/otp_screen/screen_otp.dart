@@ -1,6 +1,3 @@
-
-
-
 import 'package:buzz_buddy/model/user_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/bloc/otp_verification/otp_verification_bloc.dart';

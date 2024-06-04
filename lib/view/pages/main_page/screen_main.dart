@@ -1,4 +1,3 @@
-
 import 'package:buzz_buddy/view/pages/add_post/screen_add_post.dart';
 import 'package:buzz_buddy/view/pages/chat/screen_chat.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/bottomnav.dart';
@@ -13,9 +12,9 @@ final ValueNotifier<int> currentPage = ValueNotifier(0);
 class ScreenMainScreen extends StatelessWidget {
   ScreenMainScreen({super.key});
 
-  final List<Widget> pages =  [
+  final List<Widget> pages = [
     ScreenHome(),
-     ScreenSearch(),
+    ScreenSearch(),
     ScreenAddPost(),
     const ScreenChat(),
     const ScreenProfile(),
@@ -38,7 +37,4 @@ class ScreenMainScreen extends StatelessWidget {
       ),
     );
   }
-
-  
 }
-

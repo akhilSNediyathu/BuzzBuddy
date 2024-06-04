@@ -12,7 +12,10 @@ class ScreenEditProfiile extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile', style: appBarTitleStyle,),
+        title: const Text(
+          'Edit Profile',
+          style: appBarTitleStyle,
+        ),
         centerTitle: true,
         automaticallyImplyLeading: true,
         backgroundColor: kPrimaryColor,
@@ -24,63 +27,73 @@ class ScreenEditProfiile extends StatelessWidget {
             children: [
               Container(
                 width: media.width,
-                height: media.height*0.25,
-              decoration: BoxDecoration(
-                image: DecorationImage(image:  NetworkImage(mainImages[0]),fit: BoxFit.cover)
-              ),
-              child: Stack(
-                clipBehavior: Clip.none,
-                
-                children: [
-                  Positioned(
-                    
-                    bottom: -85,
-                    left: 10,
-                    child: Container(
-                            height: 180,
-                            width: 180,
-                            decoration: BoxDecoration(
-                              color: kwhiteColor,
-                              border: Border.all(width: 5, color: kwhiteColor),
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  profileImages[0],
-                                ),
-                                fit: BoxFit.cover,
-                              ),
-                              borderRadius: BorderRadius.circular(100),
+                height: media.height * 0.25,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(mainImages[0]), fit: BoxFit.cover)),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned(
+                      bottom: -85,
+                      left: 10,
+                      child: Container(
+                        height: 180,
+                        width: 180,
+                        decoration: BoxDecoration(
+                          color: kwhiteColor,
+                          border: Border.all(width: 5, color: kwhiteColor),
+                          image: DecorationImage(
+                            image: NetworkImage(
+                              profileImages[0],
                             ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                   right: 20,
-                   bottom: 10,
-                    child: CircleAvatar(
-                      backgroundColor: grey,
-                      child: IconButton(onPressed: (){}, icon: const Icon(Icons.edit))),
-                  )
-                              ],
-                            ),
+                            fit: BoxFit.cover,
                           ),
-                  ),
-                  Positioned(
-                   right: 10,
-                   bottom: 10,
-                    child: CircleAvatar(
-                      backgroundColor: grey,
-                      child: IconButton(onPressed: (){}, icon: const Icon(Icons.edit))),
-                  ),
-                  
-                ],
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              right: 20,
+                              bottom: 10,
+                              child: CircleAvatar(
+                                  backgroundColor: grey,
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(Icons.edit))),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 10,
+                      bottom: 10,
+                      child: CircleAvatar(
+                          backgroundColor: grey,
+                          child: IconButton(
+                              onPressed: () {}, icon: const Icon(Icons.edit))),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            kheight100,
-           CustomTextField(hintText: 'edit name',controller: TextEditingController(),),
-           kheight,
-            CustomTextField(hintText: 'bio', controller: TextEditingController(),),
-            kheight50,
-            customMaterialButton(onPressed: (){}, text: 'Save', color: kPrimaryColor, width: media.width, height: media.height*0.05)
-
+              kheight100,
+              CustomTextField(
+                hintText: 'edit name',
+                controller: TextEditingController(),
+              ),
+              kheight,
+              CustomTextField(
+                hintText: 'bio',
+                controller: TextEditingController(),
+              ),
+              kheight50,
+              customMaterialButton(
+                  onPressed: () {},
+                  text: 'Save',
+                  color: kPrimaryColor,
+                  width: media.width,
+                  height: media.height * 0.05)
             ],
           ),
         ),

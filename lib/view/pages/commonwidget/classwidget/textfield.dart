@@ -128,7 +128,6 @@ class _CustomTextField2State extends State<CustomTextField2> {
   }
 }
 
-
 // bool obsecure = true;
 
 // class TextFormFieldPasswordRegister extends StatefulWidget {

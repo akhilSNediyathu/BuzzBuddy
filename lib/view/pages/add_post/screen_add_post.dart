@@ -69,7 +69,8 @@ class ScreenAddPost extends StatelessWidget {
                             height: media.height * 0.4,
                             child: pickImage.value == ''
                                 ? Image.asset(imagePicker)
-                                : Image.file(File(pickImage.value), fit: BoxFit.cover),
+                                : Image.file(File(pickImage.value),
+                                    fit: BoxFit.cover),
                           ),
                         );
                       },
@@ -94,15 +95,17 @@ class ScreenAddPost extends StatelessWidget {
                         return customMaterialButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              if (pickImage.value != '' && textController.text.isNotEmpty) {
+                              if (pickImage.value != '' &&
+                                  textController.text.isNotEmpty) {
                                 context.read<AddPostBloc>().add(
-                                  OnPostButtonClickedEvent(
-                                    imagePath: pickImage.value,
-                                    description: textController.text,
-                                  ),
-                                );
-                              } else{
-                                customSnackbar(context, 'select an image', amber);
+                                      OnPostButtonClickedEvent(
+                                        imagePath: pickImage.value,
+                                        description: textController.text,
+                                      ),
+                                    );
+                              } else {
+                                customSnackbar(
+                                    context, 'select an image', amber);
                               }
                             }
                           },

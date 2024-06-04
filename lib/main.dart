@@ -1,7 +1,6 @@
-
-
 import 'package:buzz_buddy/firebase_options.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 
 import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/login_bloc/login_bloc.dart';
@@ -11,13 +10,13 @@ import 'package:buzz_buddy/view/pages/splash_screen/screen_splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; 
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   runApp(const MyApp());
 }
 
@@ -37,20 +36,22 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => OtpVerificationBloc(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (context) => ForgotPasswordBloc(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => AddPostBloc(),
         ),
-        
+        BlocProvider(
+          create: (context) => FetchMyPostBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
         ),
-    //     themeMode: ThemeMode.dark,
+        //     themeMode: ThemeMode.dark,
         home: const ScreenSplash(),
       ),
     );

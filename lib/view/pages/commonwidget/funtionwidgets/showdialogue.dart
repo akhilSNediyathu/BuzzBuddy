@@ -20,10 +20,7 @@ Future<void> showConfirmationDialog({
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        title: Text(
-          title,
-          style: showdialogueHeadingstyle
-        ),
+        title: Text(title, style: showdialogueHeadingstyle),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
@@ -49,14 +46,11 @@ Future<void> showConfirmationDialog({
           ),
           TextButton(
             onPressed: () async {
-               Navigator.of(context).pop();
+              Navigator.of(context).pop();
               await onConfirm();
               // Dismiss the dialog
             },
-            child: Text(
-              confirmButtonText,
-              style: showDialogueButtonStyle2
-            ),
+            child: Text(confirmButtonText, style: showDialogueButtonStyle2),
           ),
         ],
       );

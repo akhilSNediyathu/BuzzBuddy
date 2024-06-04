@@ -22,6 +22,7 @@ String? validatePassword(String? password) {
   }
   return null;
 }
+
 //phonenumber
 String? validateMobileNumber(String? number) {
   if (number == null || number.isEmpty) {
@@ -36,6 +37,7 @@ String? validateMobileNumber(String? number) {
 
   return null;
 }
+
 // Username validator
 String? validateUsername(String? username) {
   if (username == null || username.isEmpty) {
@@ -46,6 +48,7 @@ String? validateUsername(String? username) {
   }
   return null;
 }
+
 // Confirm password validator
 String? validateConfirmPassword(String? password, String? confirmPassword) {
   if (confirmPassword == null || confirmPassword.isEmpty) {

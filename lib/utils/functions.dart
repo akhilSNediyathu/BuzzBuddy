@@ -36,6 +36,7 @@ Future<String?> getUserId() async {
   final userId = sharedpreference.getString(userIdKey);
   return userId;
 }
+
 // Clear user session
 Future<void> clearUserSession() async {
   final sharedprefs = await SharedPreferences.getInstance();
@@ -47,8 +48,9 @@ Future<void> clearUserSession() async {
   await sharedprefs.remove(userNamekey);
   await sharedprefs.remove(userProfilePickey);
 }
+
 //google login
- Future <UserCredential?> siginWithGoogle() async {
+Future<UserCredential?> siginWithGoogle() async {
   try {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -56,22 +58,22 @@ Future<void> clearUserSession() async {
         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
-         if (kDebugMode) {
+    if (kDebugMode) {
       // print(userCredential.user?.email);
     }
-        return userCredential;
-   
+    log(userCredential.toString());
+    return userCredential;
   } catch (e) {
     if (kDebugMode) {
       print(e);
     }
     return null;
   }
-   
-  }
- //fire base logout
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
- Future<void> googleSignOut() async {
+}
+
+//fire base logout
+final GoogleSignIn _googleSignIn = GoogleSignIn();
+Future<void> googleSignOut() async {
   await _googleSignIn.signOut();
   log("User signed out");
 }

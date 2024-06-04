@@ -10,14 +10,11 @@ class ScreenChat extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-
         automaticallyImplyLeading: false,
         backgroundColor: kPrimaryColor,
         centerTitle: true,
         title: const Text('Chat Hub', style: appBarTitleStyle),
-        actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.add))
-        ],
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -42,7 +39,6 @@ class ScreenChat extends StatelessWidget {
           ),
         ),
       ),
-      
     );
   }
 }
