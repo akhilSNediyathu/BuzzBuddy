@@ -61,7 +61,7 @@ class PostRepo {
   }
 
   //Delete Post
-  static Future deletePost(String postId) async {
+  static Future<Response?> deletePost(String postId) async {
     try {
       final token = await getUsertoken();
       var response = await client.delete(
@@ -73,6 +73,7 @@ class PostRepo {
       return response;
     } catch (e) {
       debugPrint(e.toString());
+      return null;
     }
   }
 

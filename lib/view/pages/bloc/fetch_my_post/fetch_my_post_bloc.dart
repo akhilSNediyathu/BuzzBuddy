@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
+import 'package:buzz_buddy/repository/post_repo.dart';
 import 'package:buzz_buddy/repository/user_repo.dart';
 import 'package:meta/meta.dart';
 
@@ -31,6 +32,22 @@ class FetchMyPostBloc extends Bloc<FetchMyPostEvent, FetchMyPostState> {
         return emit(FetchMyPostErrorState(error: "something went wrong"));
       }
     });
+    on<OnMyPostDeleteButtonPressedEvent>((event, emit) async{
+      emit(OnDeleteButtonClickedLoadingState());
+      var response = await PostRepo.deletePost(event.postId);
+      if(response!=null&&response.statusCode==200){
+        return emit(OnDeleteButtonClickedSuccesState());
+      }else if(response!=null){
+        final responseBody= jsonDecode(response.body);
+        return emit(OnDeleteButtonClickedErrrorState(error: responseBody['message']));
+        
+      }else{
+        return emit(OnDeleteButtonClickedErrrorState(error: 'Something went wrong'));
+
+      }
+
+      
+    },);
   }
   List<MyPostModel> parsePostsFromJson(String jsonString) {
   final List parsedData = jsonDecode(jsonString) as List;

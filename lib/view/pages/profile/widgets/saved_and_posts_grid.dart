@@ -11,8 +11,10 @@ class MyPostsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      //  physics: NeverScrollableScrollPhysics(),
+     // shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
@@ -23,14 +25,13 @@ class MyPostsGrid extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ScreenMyPost(),
+                  builder: (context) => ScreenMyPost(post: post,),
                 ));
           },
           child: Container(
-            color: Colors.blueGrey, //  demo
-            child: Center(
-             
-              child: Image.network(post[index].image.toString(),fit: BoxFit.cover,),
+          
+            decoration: BoxDecoration(
+              image: DecorationImage(image: NetworkImage(post[index].image.toString()),fit: BoxFit.cover)
             ),
           ),
         );
@@ -46,7 +47,7 @@ class SavedPostsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),

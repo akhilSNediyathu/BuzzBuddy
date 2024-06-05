@@ -5,6 +5,7 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/validations.dart';
 import 'package:buzz_buddy/view/pages/add_post/widgets/add_post_text_fields.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
@@ -93,7 +94,7 @@ class ScreenAddPost extends StatelessWidget {
                           );
                         }
                         return customMaterialButton(
-                          onPressed: () {
+                          onPressed: () async{
                             if (_formKey.currentState!.validate()) {
                               if (pickImage.value != '' &&
                                   textController.text.isNotEmpty) {
@@ -103,6 +104,7 @@ class ScreenAddPost extends StatelessWidget {
                                         description: textController.text,
                                       ),
                                     );
+                                 context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
                               } else {
                                 customSnackbar(
                                     context, 'select an image', amber);
