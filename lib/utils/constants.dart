@@ -9,7 +9,8 @@ const black = Colors.black;
 const grey = Colors.grey;
 const green = Colors.green;
 const amber = Colors.amber;
-
+final grey300 = Colors.grey[300];
+final grey100 = Colors.grey[100];
 const kwhiteColor = Colors.white;
 
 const kwidth = SizedBox(
