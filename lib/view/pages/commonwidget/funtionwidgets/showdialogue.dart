@@ -46,9 +46,9 @@ Future<void> showConfirmationDialog({
           ),
           TextButton(
             onPressed: () async {
-              
-              await onConfirm();
               Navigator.of(context).pop();
+              await onConfirm();
+              
               // Dismiss the dialog
             },
             child: Text(confirmButtonText, style: showDialogueButtonStyle2),
