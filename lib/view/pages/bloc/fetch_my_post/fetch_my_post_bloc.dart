@@ -36,6 +36,7 @@ class FetchMyPostBloc extends Bloc<FetchMyPostEvent, FetchMyPostState> {
       emit(OnDeleteButtonClickedLoadingState());
       var response = await PostRepo.deletePost(event.postId);
       if(response!=null&&response.statusCode==200){
+        add(FetchAllMyPostsEvent());
         return emit(OnDeleteButtonClickedSuccesState());
       }else if(response!=null){
         final responseBody= jsonDecode(response.body);
