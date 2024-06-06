@@ -39,7 +39,7 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
         builder: (context, state) {
           if (state is FetchMyPostLoadingState) {
             return ListView.builder(
-              itemCount: 6, // Number of shimmer items
+              itemCount: 6, 
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
                   baseColor: grey300!,
