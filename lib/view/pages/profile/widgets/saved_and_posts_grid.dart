@@ -1,18 +1,26 @@
 import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
+import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/dummydata.dart';
 import 'package:buzz_buddy/view/pages/profile/my_post/screen_my_post.dart';
 import 'package:buzz_buddy/view/pages/profile/saved_post/screen_saved_post.dart';
 import 'package:flutter/material.dart';
 
 class MyPostsGrid extends StatelessWidget {
-  
-  const MyPostsGrid({super.key,required this.post});
- final List<MyPostModel> post;
+  final List<MyPostModel> post;
+
+  const MyPostsGrid({super.key, required this.post});
+
   @override
   Widget build(BuildContext context) {
+    if (post.isEmpty) {
+      return const Center(
+        child: Text(
+          'No posts available',
+          style: greyMeduim,
+        ),
+      );
+    }
     return GridView.builder(
-      //  physics: NeverScrollableScrollPhysics(),
-     // shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         crossAxisSpacing: 10,
@@ -23,15 +31,18 @@ class MyPostsGrid extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ScreenMyPost(post: post,),
-                ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => ScreenMyPost(post: post),
+              ),
+            );
           },
           child: Container(
-          
             decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage(post[index].image.toString()),fit: BoxFit.cover)
+              image: DecorationImage(
+                image: NetworkImage(post[index].image.toString()),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         );
@@ -39,7 +50,6 @@ class MyPostsGrid extends StatelessWidget {
     );
   }
 }
-
 class SavedPostsGrid extends StatelessWidget {
   const SavedPostsGrid({super.key});
 

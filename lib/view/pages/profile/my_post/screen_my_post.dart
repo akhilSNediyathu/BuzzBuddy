@@ -1,19 +1,30 @@
 import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/post_listing_page_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ScreenMyPost extends StatelessWidget {
-   final List<MyPostModel> post;
-  const ScreenMyPost({super.key,required this.post});
+class ScreenMyPost extends StatefulWidget {
+  final List<MyPostModel> post;
 
+  const ScreenMyPost({super.key, required this.post});
+
+  @override
+  State<ScreenMyPost> createState() => _ScreenMyPostState();
+}
+
+class _ScreenMyPostState extends State<ScreenMyPost> {
+  @override
+  void initState() {
+    context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -23,32 +34,58 @@ class ScreenMyPost extends StatelessWidget {
       ),
       body: BlocBuilder<FetchMyPostBloc, FetchMyPostState>(
         builder: (context, state) {
-          if(state is FetchMyPostLoadingState){
+          if (state is FetchMyPostLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }else if(state is FetchMyPostSuccesState){
-             return ListView.builder(
+          } else if (state is FetchMyPostSuccesState) {
+            return ListView.builder(
               itemBuilder: (context, index) {
-                // print(post[index].date);
-                //  print(post[index].createdAt);
-                return PostListingPageTile(media: media, mainImage: state.posts[index].image.toString(), profileImage: state.posts[index].userId?.profilePic??'', post: state.posts, onTapSettings: (){}, userName: state.posts[index].userId!.userName.toString(), postTime:formatDate( state.posts[index].createdAt.toString()), description:state.posts[index].description.toString() , likeCount: state.posts[index].likes!.length.toString(), commentCount: '2', likeButtonPressed: (){}, commentButtonPressed: (){},index:index);
-                    
-                    
+                final postItem = state.posts[index];
+                return PostListingPageTile(
+                  media: media,
+                  mainImage: postItem.image.toString(),
+                  profileImage: postItem.userId?.profilePic ?? '',
+                  post: state.posts,
+                  onTapSettings: () {},
+                  userName: postItem.userId?.userName.toString() ?? '',
+                  postTime: formatDate(postItem.createdAt.toString()),
+                  description: postItem.description.toString(),
+                  likeCount: postItem.likes!.length.toString(),
+                  commentCount: '2', // need to add
+                  likeButtonPressed: () {},
+                  commentButtonPressed: () {},
+                  index: index,
+                );
               },
               itemCount: state.posts.length,
             );
+          } else if (state is FetchMyPostErrorState) {
+            return Center(
+              child: Text('Error: ${state.error}'),
+            );
           }
           return ListView.builder(
-              itemBuilder: (context, index) {
-                // print(post[index].date);
-                //  print(post[index].createdAt);
-                return PostListingPageTile(media: media, mainImage: post[index].image.toString(), profileImage: post[index].userId?.profilePic??'', post: post, onTapSettings: (){}, userName: post[index].userId!.userName.toString(), postTime:formatDate( post[index].createdAt.toString()), description:post[index].description.toString() , likeCount: post[index].likes!.length.toString(), commentCount: '2', likeButtonPressed: (){}, commentButtonPressed: (){},index:index);
-                    
-                    
-              },
-              itemCount: post.length,
-            );
+            itemBuilder: (context, index) {
+              final postItem = widget.post[index];
+              return PostListingPageTile(
+                media: media,
+                mainImage: postItem.image.toString(),
+                profileImage: postItem.userId?.profilePic ?? '',
+                post: widget.post,
+                onTapSettings: () {},
+                userName: postItem.userId?.userName.toString() ?? '',
+                postTime: formatDate(postItem.createdAt.toString()),
+                description: postItem.description.toString(),
+                likeCount: postItem.likes!.length.toString(),
+                commentCount: '2', // Update this if you have actual comment count
+                likeButtonPressed: () {},
+                commentButtonPressed: () {},
+                index: index,
+              );
+            },
+            itemCount: widget.post.length,
+          );
         },
       ),
     );

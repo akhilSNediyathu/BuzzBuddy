@@ -37,6 +37,7 @@ class ScreenAddPost extends StatelessWidget {
         listener: (context, state) {
           if (state is AddPostSuccesState) {
             customSnackbar(context, 'Post added successfully', green);
+            context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
             pickImage.value = '';
             textController.clear();
           } else if (state is AddPostErrorState) {
