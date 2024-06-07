@@ -3,7 +3,9 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/dummydata.dart';
 import 'package:buzz_buddy/view/pages/profile/my_post/screen_my_post.dart';
 import 'package:buzz_buddy/view/pages/profile/saved_post/screen_saved_post.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class MyPostsGrid extends StatelessWidget {
   final List<MyPostModel> post;
@@ -33,17 +35,13 @@ class MyPostsGrid extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ScreenMyPost(post: post),
+                builder: (context) => ScreenMyPost(index: index, post: post),
               ),
             );
           },
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(post[index].image.toString()),
-                fit: BoxFit.cover,
-              ),
-            ),
+          child: CachedNetworkImage(imageUrl: post[index].image.toString(),fit: BoxFit.cover, placeholder: (context, url) {
+            return LoadingAnimationWidget.fourRotatingDots(color: grey, size: 30);
+          },
           ),
         );
       },

@@ -1,4 +1,5 @@
 import 'package:buzz_buddy/firebase_options.dart';
+import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 
@@ -48,10 +49,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        //     themeMode: ThemeMode.dark,
+        theme: Themes.lightModeTheme,
+        
+             darkTheme: Themes.darkModeTheme,
+             
         home: const ScreenSplash(),
       ),
     );

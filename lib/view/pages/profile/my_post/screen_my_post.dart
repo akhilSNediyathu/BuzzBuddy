@@ -9,9 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ScreenMyPost extends StatefulWidget {
-  final List<MyPostModel> post;
+  final int index;
+  
 
-  const ScreenMyPost({super.key, required this.post});
+  const ScreenMyPost({super.key,  required this.index, required List<MyPostModel> post});
 
   @override
   State<ScreenMyPost> createState() => _ScreenMyPostState();
@@ -33,12 +34,13 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
         centerTitle: true,
         title: const Text('My Posts'),
         automaticallyImplyLeading: true,
-        backgroundColor: kPrimaryColor,
+        // backgroundColor: kPrimaryColor,
       ),
       body: BlocBuilder<FetchMyPostBloc, FetchMyPostState>(
         builder: (context, state) {
           if (state is FetchMyPostLoadingState) {
             return ListView.builder(
+              
               itemCount: 6, 
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
@@ -53,6 +55,7 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
               return const Center(child: Text('No posts available.'));
             }
             return ListView.builder(
+              controller: ScrollController(initialScrollOffset: widget.index*700),
               itemBuilder: (context, index) {
                 final postItem = state.posts[index];
                 return PostListingPageTile(
@@ -60,7 +63,7 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
                   mainImage: postItem.image.toString(),
                   profileImage: postItem.userId?.profilePic ?? '',
                   post: state.posts,
-                  onTapSettings: () {},
+                 
                   userName: postItem.userId?.userName.toString() ?? '',
                   postTime: formatDate(postItem.createdAt.toString()),
                   description: postItem.description.toString(),

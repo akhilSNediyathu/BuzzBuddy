@@ -11,7 +11,7 @@ class ScreenFollowers extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        // backgroundColor: kPrimaryColor,
         automaticallyImplyLeading: true,
         title: const Text(
           'Followers ',

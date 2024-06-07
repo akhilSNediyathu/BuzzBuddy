@@ -33,7 +33,7 @@ class ScreenMainScreen extends StatelessWidget {
       ),
       bottomNavigationBar: ValueListenableBuilder<int>(
         valueListenable: currentPage,
-        builder: (context, value, child) => bottomNav(),
+        builder: (context, value, child) => bottomNav(context),
       ),
     );
   }

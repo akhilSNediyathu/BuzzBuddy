@@ -3,7 +3,7 @@ import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
 
-MotionTabBar bottomNav() {
+MotionTabBar bottomNav(BuildContext contex) {
   return MotionTabBar(
     initialSelectedTab: 'Home',
     useSafeArea: true,
@@ -15,17 +15,17 @@ MotionTabBar bottomNav() {
       Icons.chat,
       Icons.person
     ],
-    textStyle: const TextStyle(
-      color: Colors.black,
+    textStyle:  TextStyle(
+      color: Theme.of(contex).brightness==Brightness.light?black:kwhiteColor,
     ),
     tabSize: 55,
     tabBarHeight: 60,
-    tabIconColor: Colors.black,
+  tabIconColor: Theme.of(contex).brightness==Brightness.light?black:kwhiteColor,
     tabIconSize: 28.0,
     tabIconSelectedSize: 26.0,
-    tabSelectedColor: kwhiteColor,
+    tabSelectedColor: Theme.of(contex).brightness==Brightness.light?kwhiteColor:black,
     tabIconSelectedColor: kPrimaryColor,
-    tabBarColor: kwhiteColor,
+    tabBarColor: Theme.of(contex).brightness==Brightness.light?kwhiteColor:black,
     onTabItemSelected: (int index) {
       currentPage.value = index;
     },

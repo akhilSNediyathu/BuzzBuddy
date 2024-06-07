@@ -29,7 +29,7 @@ class ScreenAddPost extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        // backgroundColor: kPrimaryColor,
         centerTitle: true,
         title: const Text('Start Post', style: appBarTitleStyle),
       ),

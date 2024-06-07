@@ -49,7 +49,7 @@ class _ScreenOtpState extends State<ScreenOtp> {
   void startTimer() {
     _isResendVisible = false;
     _start = 60;
-    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_start == 0) {
         setState(() {
           _isResendVisible = true;

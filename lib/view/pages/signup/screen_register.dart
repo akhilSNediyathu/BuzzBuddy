@@ -28,7 +28,7 @@ class ScreenRegister extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-          backgroundColor: kwhiteColor,
+          // backgroundColor: kwhiteColor,
           body: BlocConsumer<SignUpBloc, SignUpState>(
             listener: (context, state) {
               if (state is SignUpSuccesState) {
@@ -62,7 +62,7 @@ class ScreenRegister extends StatelessWidget {
                               height: media.height * 0.15,
                               child: Image.asset(logo)),
                           kheight,
-                          Image.asset(welcomeText),
+                          Image.asset(welcomeText,width: media.width*0.5,),
                           kheight50,
                           CustomTextField(
                             controller: _usernameController,

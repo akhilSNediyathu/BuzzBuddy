@@ -23,7 +23,7 @@ class ScreenLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kwhiteColor,
+      // backgroundColor: kwhiteColor,
       body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccesState) {

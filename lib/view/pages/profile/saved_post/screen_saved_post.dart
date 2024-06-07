@@ -22,7 +22,7 @@ class ScreenSavedPost extends StatelessWidget {
             post: [],
               media: media,
               mainImage: mainImages[index],
-              profileImage: profileImages[index], onTapSettings: () {}, userName: 'test', postTime: '', description: '', likeCount: '', commentCount: '', likeButtonPressed: () {  }, commentButtonPressed: () {  },index: 1,);
+              profileImage: profileImages[index], userName: 'test', postTime: '', description: '', likeCount: '', commentCount: '', likeButtonPressed: () {  }, commentButtonPressed: () {  },index: 1,);
         },
         itemCount: 5,
       ),

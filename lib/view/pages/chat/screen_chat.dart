@@ -11,7 +11,7 @@ class ScreenChat extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: kPrimaryColor,
+        // backgroundColor: kPrimaryColor,
         centerTitle: true,
         title: const Text('Chat Hub', style: appBarTitleStyle),
         actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],

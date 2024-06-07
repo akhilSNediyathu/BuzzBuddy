@@ -11,6 +11,7 @@ import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart
 import 'package:buzz_buddy/view/pages/profile/widgets/saved_and_posts_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ScreenProfile extends StatefulWidget {
   const ScreenProfile({super.key});
@@ -40,7 +41,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
           length: 2,
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: kPrimaryColor,
+              // backgroundColor: kPrimaryColor,
               centerTitle: true,
               automaticallyImplyLeading: false,
               title: const Text(
@@ -59,7 +60,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                     icon: const Icon(Icons.settings))
               ],
             ),
-            backgroundColor: kwhiteColor,
+            // backgroundColor: kwhiteColor,
             body: SafeArea(
               child: NestedScrollView(
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -110,6 +111,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                               Padding(
                                 padding: const EdgeInsets.only(right: 20),
                                 child: customMaterialButton(
+                                  color: kPrimaryColor,
                                   onPressed: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
@@ -117,8 +119,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                                 const ScreenEditProfiile()));
                                   },
                                   text: 'Edit Profile',
-                                  color: const Color.fromARGB(
-                                      255, 234, 232, 232),
+                                
                                   width: media.height * 0.12,
                                   height: media.height * 0.05,
                                   textStyle: const TextStyle(fontSize: 16),
@@ -144,11 +145,23 @@ class _ScreenProfileState extends State<ScreenProfile> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                customTextColumn(
-                                    text1: '200',
-                                    text2: 'Post',
-                                    textStyle: profilecolumnStyle,
-                                    onTap: () {}),
+                                BlocConsumer<FetchMyPostBloc, FetchMyPostState>(
+                                  listener: (context, state) {
+                                 
+                                  },
+                                  builder: (context, state) {
+                                    if(state is FetchMyPostSuccesState){
+                                      return customTextColumn(text1: state.posts.length.toString(), text2: 'Post',
+                                                                    textStyle: profilecolumnStyle,
+                                                                    onTap: () {});
+                                    }
+                                    return customTextColumn(
+                                                                    text1: '0',
+                                                                    text2: 'Post',
+                                                                    textStyle: profilecolumnStyle,
+                                                                    onTap: () {});
+                                  },
+                                ),
                                 customTextColumn(
                                     text1: '111k',
                                     text2: 'Followers',
@@ -200,8 +213,8 @@ class _ScreenProfileState extends State<ScreenProfile> {
                             if (state is FetchMyPostSuccesState) {
                               return MyPostsGrid(post: state.posts);
                             } else if (state is FetchMyPostLoadingState) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
+                              return  Center(
+                                  child: LoadingAnimationWidget.fourRotatingDots(color: kPrimaryColor, size: 30));
                             } else {
                               return const Center(
                                   child: Text('No posts available'));

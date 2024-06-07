@@ -19,7 +19,7 @@ class ScreenSettings extends StatelessWidget {
             style: appBarTitleStyle,
           ),
           automaticallyImplyLeading: true,
-          backgroundColor: kPrimaryColor,
+          // backgroundColor: kPrimaryColor,
         ),
         body: Column(
           children: [

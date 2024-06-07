@@ -2,8 +2,10 @@ import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class PostListingPageTile extends StatelessWidget {
    final List<MyPostModel> post;
@@ -11,11 +13,11 @@ class PostListingPageTile extends StatelessWidget {
     super.key,
     required this.media,
     required this.mainImage,
-    required this.profileImage, required this.post,required this.onTapSettings, required this.userName, required this.postTime, required this.description, required this.likeCount, required this.commentCount, required this.likeButtonPressed, required this.commentButtonPressed, required this.index
+    required this.profileImage, required this.post, required this.userName, required this.postTime, required this.description, required this.likeCount, required this.commentCount, required this.likeButtonPressed, required this.commentButtonPressed, required this.index
   });
   final String profileImage;
   final String mainImage;
-   final void Function() onTapSettings;
+  //  final void Function() onTapSettings;
    final String userName;
    final String postTime;
    final String description;
@@ -99,11 +101,10 @@ class PostListingPageTile extends StatelessWidget {
             Container(
               color: Colors.blue,
               height: media.width * 0.984,
-              child: Image(
-                image: NetworkImage(mainImage),
-                fit: BoxFit.cover,
-                width: media.width,
-              ),
+              child: CachedNetworkImage(imageUrl: mainImage,fit: BoxFit.cover, placeholder: (context, url) {
+            return LoadingAnimationWidget.fourRotatingDots(color: grey, size: 30);
+          },
+          ),
             ),
             Column(
            

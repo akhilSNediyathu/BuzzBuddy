@@ -22,12 +22,15 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   @override
   Widget build(BuildContext context) {
+    var media = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: kwhiteColor,
+      // backgroundColor: kwhiteColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Image.asset(logo), Image.asset(buzzBuddyText)],
+          children: [Image.asset(logo,width:media.width*0.3 ,), 
+          kheight,
+          Image.asset(buzzBuddyText)],
         ),
       ),
     );

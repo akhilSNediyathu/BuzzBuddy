@@ -27,16 +27,16 @@ class CustomListTile extends StatelessWidget {
       trailing: onUnfollow != null
           ? ElevatedButton(
               onPressed: onUnfollow,
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(75, 36),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                backgroundColor: kwhiteColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                textStyle: const TextStyle(fontSize: 14),
-              ),
-              child: const Text('Unfollow'),
+              // style: ElevatedButton.styleFrom(
+              //   minimumSize: const Size(75, 36),
+              //   padding: const EdgeInsets.symmetric(horizontal: 10),
+              //   // backgroundColor: kwhiteColor,
+              //   shape: RoundedRectangleBorder(
+              //     borderRadius: BorderRadius.circular(20),
+              //   ),
+              //   textStyle: const TextStyle(fontSize: 14),
+              // ),
+              child: const Text('Unfollow',style: TextStyle(color: kwhiteColor),),
             )
           : null,
       onTap: onTap,

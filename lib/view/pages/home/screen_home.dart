@@ -54,14 +54,14 @@ class ScreenHome extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: kwhiteColor,
-        title: Image.asset(appBarLogo),
+       backgroundColor: Theme.of(context).brightness==Brightness.light?kwhiteColor:black,
+        title: Image.asset(appBarLogo,width: media.width*0.26,),
         elevation: 2,
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
         ],
       ),
-      backgroundColor: kwhiteColor,
+      // backgroundColor: kwhiteColor,
       body: ListView.builder(
         itemBuilder: (context, index) {
           return Padding(

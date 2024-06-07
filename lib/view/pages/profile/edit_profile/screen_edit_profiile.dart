@@ -18,7 +18,7 @@ class ScreenEditProfiile extends StatelessWidget {
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
-        backgroundColor: kPrimaryColor,
+        // backgroundColor: kPrimaryColor,
       ),
       body: SingleChildScrollView(
         child: Padding(

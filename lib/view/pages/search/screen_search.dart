@@ -13,6 +13,7 @@ class ScreenSearch extends StatelessWidget {
     var media = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).brightness==Brightness.light?kwhiteColor:black,
           title: const Text(
             'Explore',
             style: appBarTitleStyle,
