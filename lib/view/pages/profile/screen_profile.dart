@@ -23,13 +23,14 @@ class ScreenProfile extends StatefulWidget {
 class _ScreenProfileState extends State<ScreenProfile> {
   @override
   void initState() {
-   context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
+    context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
-    
+
     return BlocConsumer<FetchMyPostBloc, FetchMyPostState>(
       listener: (context, state) {
         if (state is FetchMyPostErrorState) {
@@ -96,8 +97,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                         image: NetworkImage(profileImages[0]),
                                         fit: BoxFit.cover,
                                       ),
-                                      borderRadius:
-                                          BorderRadius.circular(100),
+                                      borderRadius: BorderRadius.circular(100),
                                     ),
                                   ),
                                 ),
@@ -119,7 +119,6 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                                 const ScreenEditProfiile()));
                                   },
                                   text: 'Edit Profile',
-                                
                                   width: media.height * 0.12,
                                   height: media.height * 0.05,
                                   textStyle: const TextStyle(fontSize: 16),
@@ -146,20 +145,20 @@ class _ScreenProfileState extends State<ScreenProfile> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 BlocConsumer<FetchMyPostBloc, FetchMyPostState>(
-                                  listener: (context, state) {
-                                 
-                                  },
+                                  listener: (context, state) {},
                                   builder: (context, state) {
-                                    if(state is FetchMyPostSuccesState){
-                                      return customTextColumn(text1: state.posts.length.toString(), text2: 'Post',
-                                                                    textStyle: profilecolumnStyle,
-                                                                    onTap: () {});
+                                    if (state is FetchMyPostSuccesState) {
+                                      return customTextColumn(
+                                          text1: state.posts.length.toString(),
+                                          text2: 'Post',
+                                          textStyle: profilecolumnStyle,
+                                          onTap: () {});
                                     }
                                     return customTextColumn(
-                                                                    text1: '0',
-                                                                    text2: 'Post',
-                                                                    textStyle: profilecolumnStyle,
-                                                                    onTap: () {});
+                                        text1: '0',
+                                        text2: 'Post',
+                                        textStyle: profilecolumnStyle,
+                                        onTap: () {});
                                   },
                                 ),
                                 customTextColumn(
@@ -193,8 +192,8 @@ class _ScreenProfileState extends State<ScreenProfile> {
                 body: Column(
                   children: [
                     const Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       child: TabBar(
                         labelColor: black,
                         unselectedLabelColor: grey,
@@ -213,8 +212,10 @@ class _ScreenProfileState extends State<ScreenProfile> {
                             if (state is FetchMyPostSuccesState) {
                               return MyPostsGrid(post: state.posts);
                             } else if (state is FetchMyPostLoadingState) {
-                              return  Center(
-                                  child: LoadingAnimationWidget.fourRotatingDots(color: kPrimaryColor, size: 30));
+                              return Center(
+                                  child:
+                                      LoadingAnimationWidget.fourRotatingDots(
+                                          color: kPrimaryColor, size: 30));
                             } else {
                               return const Center(
                                   child: Text('No posts available'));

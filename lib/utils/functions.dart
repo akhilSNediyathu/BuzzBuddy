@@ -78,19 +78,20 @@ Future<void> googleSignOut() async {
   await _googleSignIn.signOut();
   log("User signed out");
 }
+
 String formatDate(String inputDate) {
   // Define the input format
   DateFormat inputFormat = DateFormat("yyyy-MM-dd HH:mm:ss.SSS'Z'");
   // Define the output format
   DateFormat outputFormat = DateFormat('dd MMM yyyy');
-  
+
   // Parse the input date string
   DateTime dateTime = inputFormat.parseUtc(inputDate);
   DateTime now = DateTime.now().toUtc();
-  
+
   // Calculate the difference
   Duration difference = now.difference(dateTime);
-  
+
   // Check if the date is within one week
   if (difference.inDays < 7) {
     // Check if the date is today

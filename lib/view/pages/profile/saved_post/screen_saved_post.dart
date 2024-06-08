@@ -18,11 +18,20 @@ class ScreenSavedPost extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return PostListingPageTile(
-            post: [],
-              media: media,
-              mainImage: mainImages[index],
-              profileImage: profileImages[index], userName: 'test', postTime: '', description: '', likeCount: '', commentCount: '', likeButtonPressed: () {  }, commentButtonPressed: () {  },index: 1,);
+          return SavedPostListingPageTile(
+            post: const [],
+            media: media,
+            mainImage: mainImages[index],
+            profileImage: profileImages[index],
+            userName: 'test',
+            postTime: '',
+            description: '',
+            likeCount: '',
+            commentCount: '',
+            likeButtonPressed: () {},
+            commentButtonPressed: () {},
+            index: 1,
+          );
         },
         itemCount: 5,
       ),

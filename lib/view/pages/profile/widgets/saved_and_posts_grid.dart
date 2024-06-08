@@ -39,15 +39,20 @@ class MyPostsGrid extends StatelessWidget {
               ),
             );
           },
-          child: CachedNetworkImage(imageUrl: post[index].image.toString(),fit: BoxFit.cover, placeholder: (context, url) {
-            return LoadingAnimationWidget.fourRotatingDots(color: grey, size: 30);
-          },
+          child: CachedNetworkImage(
+            imageUrl: post[index].image.toString(),
+            fit: BoxFit.cover,
+            placeholder: (context, url) {
+              return LoadingAnimationWidget.fourRotatingDots(
+                  color: grey, size: 30);
+            },
           ),
         );
       },
     );
   }
 }
+
 class SavedPostsGrid extends StatelessWidget {
   const SavedPostsGrid({super.key});
 
@@ -66,7 +71,7 @@ class SavedPostsGrid extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ScreenSavedPost(),
+                  builder: (context) => const ScreenSavedPost(),
                 ));
           },
           child: Container(

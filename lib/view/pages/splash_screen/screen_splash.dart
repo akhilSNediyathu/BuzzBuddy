@@ -28,9 +28,14 @@ class _ScreenSplashState extends State<ScreenSplash> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Image.asset(logo,width:media.width*0.3 ,), 
-          kheight,
-          Image.asset(buzzBuddyText)],
+          children: [
+            Image.asset(
+              logo,
+              width: media.width * 0.3,
+            ),
+            kheight,
+            Image.asset(buzzBuddyText)
+          ],
         ),
       ),
     );

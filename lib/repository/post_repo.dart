@@ -93,4 +93,35 @@ class PostRepo {
       return null;
     }
   }
+   static Future<Response?> editPost(
+      {required String description,
+      required image,
+      required String postId,
+      String? imageUrl}) async {
+    dynamic cloudinaryimageUrl;
+    try {
+      if (imageUrl == '') {
+        cloudinaryimageUrl = await PostRepo.uploadImage(await image.file);
+      }
+      final token = await getUsertoken();
+      final post = {
+        'imageUrl': imageUrl == '' ? cloudinaryimageUrl : imageUrl,
+        'description': description,
+      };
+      var response = await client.put(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.updatePost}/$postId'),
+          body: jsonEncode(post),
+          headers: {
+            "Content-Type": 'application/json',
+            'Authorization': 'Bearer $token'
+          });
+      debugPrint(response.statusCode.toString());
+      debugPrint(response.body);
+      return response;
+    } catch (e) {
+      log(e.toString());
+      return null;
+    }
+  }
 }

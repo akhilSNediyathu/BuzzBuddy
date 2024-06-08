@@ -16,9 +16,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final response =
           await AuthenticationRepo.userLogin(event.email, event.password);
       if (response != null && response.statusCode == 200) {
+        print(response.body);
         return emit(LoginSuccesState());
       } else if (response != null) {
         final responseData = jsonDecode(response.body);
+        
         return emit(LoginErrorState(error: responseData["message"]));
       } else {
         return emit(LoginErrorState(error: 'something went wrong'));

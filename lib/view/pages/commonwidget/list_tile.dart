@@ -36,7 +36,10 @@ class CustomListTile extends StatelessWidget {
               //   ),
               //   textStyle: const TextStyle(fontSize: 14),
               // ),
-              child: const Text('Unfollow',style: TextStyle(color: kwhiteColor),),
+              child: const Text(
+                'Unfollow',
+                style: TextStyle(color: kwhiteColor),
+              ),
             )
           : null,
       onTap: onTap,

@@ -15,17 +15,21 @@ MotionTabBar bottomNav(BuildContext contex) {
       Icons.chat,
       Icons.person
     ],
-    textStyle:  TextStyle(
-      color: Theme.of(contex).brightness==Brightness.light?black:kwhiteColor,
+    textStyle: TextStyle(
+      color:
+          Theme.of(contex).brightness == Brightness.light ? black : kwhiteColor,
     ),
     tabSize: 55,
     tabBarHeight: 60,
-  tabIconColor: Theme.of(contex).brightness==Brightness.light?black:kwhiteColor,
+    tabIconColor:
+        Theme.of(contex).brightness == Brightness.light ? black : kwhiteColor,
     tabIconSize: 28.0,
     tabIconSelectedSize: 26.0,
-    tabSelectedColor: Theme.of(contex).brightness==Brightness.light?kwhiteColor:black,
+    tabSelectedColor:
+        Theme.of(contex).brightness == Brightness.light ? kwhiteColor : black,
     tabIconSelectedColor: kPrimaryColor,
-    tabBarColor: Theme.of(contex).brightness==Brightness.light?kwhiteColor:black,
+    tabBarColor:
+        Theme.of(contex).brightness == Brightness.light ? kwhiteColor : black,
     onTabItemSelected: (int index) {
       currentPage.value = index;
     },

@@ -1,5 +1,8 @@
+// ignore_for_file: unnecessary_import
+
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/repository/post_repo.dart';
+import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 
 part 'add_post_event.dart';
@@ -13,10 +16,12 @@ class AddPostBloc extends Bloc<AddPostEvent, AddPostState> {
           await PostRepo.addPost(event.description, event.imagePath);
       if (response != null && response.statusCode == 200) {
         emit(AddPostSuccesState());
-        print(response.body);
+        if (kDebugMode) {
+          print(response.body);
+        }
       } else if (response != null) {
         emit(AddPostErrorState(error: 'something went wrong'));
-      } else {
+      }  else {
         emit(AddPostErrorState(error: 'unknown error'));
       }
     });

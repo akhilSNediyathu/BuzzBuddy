@@ -19,7 +19,6 @@ final ValueNotifier<String> pickImage = ValueNotifier('');
 class ScreenAddPost extends StatelessWidget {
   ScreenAddPost({super.key});
 
-  final List<AssetEntity> selectedAssetList = [];
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
   late XFile? file;
@@ -61,7 +60,7 @@ class ScreenAddPost extends StatelessWidget {
                               source: ImageSource.gallery,
                             );
                             if (file != null) {
-                              print(file!.path);
+                              //   print(file!.path);
                               pickImage.value = file!.path;
                             }
                           },
@@ -95,7 +94,7 @@ class ScreenAddPost extends StatelessWidget {
                           );
                         }
                         return customMaterialButton(
-                          onPressed: () async{
+                          onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               if (pickImage.value != '' &&
                                   textController.text.isNotEmpty) {
@@ -105,7 +104,9 @@ class ScreenAddPost extends StatelessWidget {
                                         description: textController.text,
                                       ),
                                     );
-                                 context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
+                                context
+                                    .read<FetchMyPostBloc>()
+                                    .add(FetchAllMyPostsEvent());
                               } else {
                                 customSnackbar(
                                     context, 'select an image', amber);

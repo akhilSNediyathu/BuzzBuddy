@@ -10,9 +10,9 @@ import 'package:shimmer/shimmer.dart';
 
 class ScreenMyPost extends StatefulWidget {
   final int index;
-  
 
-  const ScreenMyPost({super.key,  required this.index, required List<MyPostModel> post});
+  const ScreenMyPost(
+      {super.key, required this.index, required List<MyPostModel> post});
 
   @override
   State<ScreenMyPost> createState() => _ScreenMyPostState();
@@ -40,14 +40,12 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
         builder: (context, state) {
           if (state is FetchMyPostLoadingState) {
             return ListView.builder(
-              
-              itemCount: 6, 
+              itemCount: 6,
               itemBuilder: (context, index) {
                 return Shimmer.fromColors(
-                  baseColor: grey300!,
-                  highlightColor: grey100!,
-                  child: shimmerWidget1(media)
-                );
+                    baseColor: grey300!,
+                    highlightColor: grey100!,
+                    child: shimmerWidget1(media));
               },
             );
           } else if (state is FetchMyPostSuccesState) {
@@ -55,15 +53,16 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
               return const Center(child: Text('No posts available.'));
             }
             return ListView.builder(
-              controller: ScrollController(initialScrollOffset: widget.index*700),
+              controller:
+                  ScrollController(initialScrollOffset: widget.index * 700),
               itemBuilder: (context, index) {
                 final postItem = state.posts[index];
-                return PostListingPageTile(
+                return MyPostListingPageTile(
                   media: media,
                   mainImage: postItem.image.toString(),
                   profileImage: postItem.userId?.profilePic ?? '',
                   post: state.posts,
-                 
+
                   userName: postItem.userId?.userName.toString() ?? '',
                   postTime: formatDate(postItem.createdAt.toString()),
                   description: postItem.description.toString(),

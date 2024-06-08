@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
 import 'package:buzz_buddy/repository/post_repo.dart';
@@ -27,37 +26,56 @@ class FetchMyPostBloc extends Bloc<FetchMyPostEvent, FetchMyPostState> {
         final responseBody = jsonDecode(response.body);
         
 
+
+
+
         return emit(FetchMyPostErrorState(error: responseBody["message"]));
       } else {
         return emit(FetchMyPostErrorState(error: "something went wrong"));
       }
     });
-    on<OnMyPostDeleteButtonPressedEvent>((event, emit) async{
-      emit(OnDeleteButtonClickedLoadingState());
-      var response = await PostRepo.deletePost(event.postId);
+    on<OnMyPostDeleteButtonPressedEvent>(
+      (event, emit) async {
+        emit(OnDeleteButtonClickedLoadingState());
+        var response = await PostRepo.deletePost(event.postId);
+        if (response != null && response.statusCode == 200) {
+          add(FetchAllMyPostsEvent());
+          return emit(OnDeleteButtonClickedSuccesState());
+        } else if (response != null) {
+          final responseBody = jsonDecode(response.body);
+          return emit(
+              OnDeleteButtonClickedErrrorState(error: responseBody['message']));
+        } else {
+          return emit(
+              OnDeleteButtonClickedErrrorState(error: 'Something went wrong'));
+        }
+      },
+    );
+    on<OnEditPostButtonClicked>((event, emit) async{
+      emit(EditUserPostLoadingState());
+      final response = await PostRepo.editPost(description: event.description, image: event.imageUrl, postId: event.postId);
       if(response!=null&&response.statusCode==200){
-        add(FetchAllMyPostsEvent());
-        return emit(OnDeleteButtonClickedSuccesState());
+       return emit(EditUserPostSuccesState());
+      }else if(response!=null && response.statusCode==500){
+       return emit(EditUserPosterrorState(error: 'Server not responding'));
+
       }else if(response!=null){
-        final responseBody= jsonDecode(response.body);
-        return emit(OnDeleteButtonClickedErrrorState(error: responseBody['message']));
-        
+        final responseBody = jsonDecode(response.body);
+        return emit(EditUserPosterrorState(error: responseBody['message']));
       }else{
-        return emit(OnDeleteButtonClickedErrrorState(error: 'Something went wrong'));
-
+        return emit(EditUserPosterrorState(error: 'Something went wrong'));
       }
-
       
     },);
   }
   List<MyPostModel> parsePostsFromJson(String jsonString) {
-  final List parsedData = jsonDecode(jsonString) as List;
-  final List<MyPostModel> posts = [];
+    final List parsedData = jsonDecode(jsonString) as List;
+    final List<MyPostModel> posts = [];
 
-  for (var item in parsedData) {
-    posts.add(MyPostModel.fromJson(item));
+    for (var item in parsedData) {
+      posts.add(MyPostModel.fromJson(item));
+    }
+
+    return posts;
   }
-
-  return posts;
-}
 }
