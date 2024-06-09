@@ -100,7 +100,7 @@ class ScreenUpdateUserPost extends StatelessWidget {
                                       }
                                       return customMaterialButton(
                                                                         onPressed: () {
-                                                                        //  context.read<FetchMyPostBloc>().add(OnEditPostButtonClicked(description: textController.text, imageUrl: imagePicker, postId: postId))
+                                                                        //  context.read<FetchMyPostBloc>().add(OnEditPostButtonClicked(description: textController.text, imageUrl: pickNewImage.value, postId: model.id.toString()));
                                                                         },
                                                                         text: 'save',
                                                                         color: kPrimaryColor,

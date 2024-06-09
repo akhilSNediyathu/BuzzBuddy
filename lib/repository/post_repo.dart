@@ -93,7 +93,7 @@ class PostRepo {
       return null;
     }
   }
-   static Future<Response?> editPost(
+   static Future<Response?>  editPost(
       {required String description,
       required image,
       required String postId,
@@ -101,7 +101,7 @@ class PostRepo {
     dynamic cloudinaryimageUrl;
     try {
       if (imageUrl == '') {
-        cloudinaryimageUrl = await PostRepo.uploadImage(await image.file);
+        cloudinaryimageUrl = await PostRepo.uploadImage(image);
       }
       final token = await getUsertoken();
       final post = {

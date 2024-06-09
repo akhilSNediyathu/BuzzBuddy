@@ -12,7 +12,7 @@ import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:photo_manager/photo_manager.dart';
+
 
 final ValueNotifier<String> pickImage = ValueNotifier('');
 
