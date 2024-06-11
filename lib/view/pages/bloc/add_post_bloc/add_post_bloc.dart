@@ -10,6 +10,7 @@ part 'add_post_state.dart';
 
 class AddPostBloc extends Bloc<AddPostEvent, AddPostState> {
   AddPostBloc() : super(AddPostInitial()) {
+   
     on<OnPostButtonClickedEvent>((event, emit) async {
       emit(AddPostLoadingstate());
       final response =

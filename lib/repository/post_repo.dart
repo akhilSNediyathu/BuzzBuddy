@@ -97,15 +97,17 @@ class PostRepo {
       {required String description,
       required image,
       required String postId,
-      String? imageUrl}) async {
+      required imageUrl}) async {
     dynamic cloudinaryimageUrl;
     try {
-      if (imageUrl == '') {
+   
+      if (image != '') {
+        
         cloudinaryimageUrl = await PostRepo.uploadImage(image);
       }
       final token = await getUsertoken();
       final post = {
-        'imageUrl': imageUrl == '' ? cloudinaryimageUrl : imageUrl,
+        'imageUrl': image != '' ?cloudinaryimageUrl: imageUrl,
         'description': description,
       };
       var response = await client.put(

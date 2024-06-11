@@ -3,7 +3,6 @@
 import 'dart:io';
 
 import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
-
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/validations.dart';
 import 'package:buzz_buddy/view/pages/add_post/widgets/add_post_text_fields.dart';
@@ -19,110 +18,119 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ScreenUpdateUserPost extends StatelessWidget {
   final MyPostModel model;
-  ScreenUpdateUserPost({super.key, required this.model}){
-     textController.text = model.description.toString();
+  ScreenUpdateUserPost({super.key, required this.model}) {
+    textController.text = model.description.toString();
   }
+
   final ValueNotifier<String> pickNewImage = ValueNotifier('');
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
   late XFile? file;
+
   
+
   @override
-  
   Widget build(BuildContext context) {
-    
     var media = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title:const Text('Edit Post',style: appBarTitleStyle,),
+          title: const Text('Edit Post', style: appBarTitleStyle),
         ),
-          body: BlocConsumer<FetchMyPostBloc, FetchMyPostState>(
-            listener: (context, state) {
-              if(state is OnDeleteButtonClickedSuccesState){
-                Navigator.pop(context);
-              }else if(state is OnDeleteButtonClickedErrrorState){
-                customSnackbar(context, state.error, amber);
-              }
-            },
-            builder: (context, state) {
-              return SingleChildScrollView(
-                        child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Form(
-                                key: _formKey,
-                                child: Column(children: [
-                                  ValueListenableBuilder(
-                                    valueListenable: pickNewImage,
-                                    builder: (context, value, child) {
-                                      return GestureDetector(
-                                        onTap: () async {
-                                          file = await ImagePicker().pickImage(
-                                            source: ImageSource.gallery,
-                                          );
-                                          if (file != null) {
-                                            //   print(file!.path);
-                                            pickNewImage.value = file!.path;
-                                          }
-                                        },
-                                        child: Container(
-                                          color: grey,
-                                          width: media.width,
-                                          height: media.height * 0.4,
-                                          child: pickNewImage.value == ''
-                                              ? CachedNetworkImage(
-                            imageUrl: model.image.toString(),
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) {
-                              return LoadingAnimationWidget.fourRotatingDots(
-                                  color: grey, size: 30);
+        body: BlocConsumer<FetchMyPostBloc, FetchMyPostState>(
+          listener: (context, state) {
+            if (state is EditUserPostSuccesState) {
+              customSnackbar(context, 'Post edited successfully', green);
+              Navigator.pop(context);
+            } else if (state is EditUserPosterrorState) {
+              customSnackbar(context, state.error, amber);
+            }
+          },
+          builder: (context, state) {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      ValueListenableBuilder(
+                        valueListenable: pickNewImage,
+                        builder: (context, value, child) {
+                          return GestureDetector(
+                            onTap: () async {
+                              file = await ImagePicker().pickImage(
+                                source: ImageSource.gallery,
+                              );
+                              if (file != null) {
+                                pickNewImage.value = file!.path;
+                              }
                             },
-                          )
-                                              : Image.file(File(pickNewImage.value),
-                                                  fit: BoxFit.cover),
-                                        ),
-                                      );
-                                    },
+                            child: Container(
+                              color: grey,
+                              width: media.width,
+                              height: media.height * 0.4,
+                              child: pickNewImage.value == ''
+                                  ? CachedNetworkImage(
+                                      imageUrl: model.image.toString(),
+                                      fit: BoxFit.cover,
+                                      placeholder: (context, url) {
+                                        return LoadingAnimationWidget.fourRotatingDots(
+                                          color: grey, size: 30);
+                                      },
+                                    )
+                                  : Image.file(File(pickNewImage.value), fit: BoxFit.cover),
+                            ),
+                          );
+                        },
+                      ),
+                      kheight20,
+                      PostTextFormField(
+                        controller: textController,
+                        hintText: 'Write a caption...',
+                        keyboard: TextInputType.text,
+                        validator: validatePostdesctiption, // Use the new validation function
+                      ),
+                      kheight50,
+                      BlocBuilder<FetchMyPostBloc, FetchMyPostState>(
+                        builder: (context, state) {
+                          if (state is EditUserPostLoadingState || state is FetchMyPostLoadingState) {
+                            return loadingButton(
+                              media: media, 
+                              onPressed: () {}, 
+                              color: kPrimaryColor
+                            );
+                          }
+                          return customMaterialButton(
+                            onPressed: () {
+                              
+                              if (_formKey.currentState?.validate() ?? false) {
+                                context.read<FetchMyPostBloc>().add(
+                                  OnEditPostButtonClicked(
+                                    image: pickNewImage.value,
+                                    description: textController.text,
+                                    imageUrl: model.image.toString(),
+                                    postId: model.id.toString(),
                                   ),
-                                  kheight,
-                                  PostTextFormField(
-                                    controller: textController,
-                                    hintText: 'Write a caption...',
-                                    keyboard: TextInputType.text,
-                                    validator: validatePostdesctiption,
-                                  ),
-                                  kheight50,
-                                  BlocBuilder<FetchMyPostBloc, FetchMyPostState>(
-                                    builder: (context, state) {
-                                      if(state is OnDeleteButtonClickedLoadingState){
-                                        return loadingButton(media: media, onPressed: (){}, color: kPrimaryColor);
-                                      }
-                                      return customMaterialButton(
-                                                                        onPressed: () {
-                                                                        //  context.read<FetchMyPostBloc>().add(OnEditPostButtonClicked(description: textController.text, imageUrl: pickNewImage.value, postId: model.id.toString()));
-                                                                      context.read<FetchMyPostBloc>()  .add(
-                                          OnEditPostButtonClicked(
-                                            image: pickNewImage.value == ''
-                                                ? model.image
-                                                :pickNewImage.value,
-                                            description: textController.text,
-                                            postId: model.id.toString(),
-                                            imageUrl:pickNewImage.value == ''
-                                                ? model.image.toString()
-                                                : '',
-                                          ),
-                                        );
-                                                                        },
-                                                                        text: 'save',
-                                                                        color: kPrimaryColor,
-                                                                        width: media.width,
-                                                                        height: media.height * 0.06);
-                                    },
-                                  )
-                                ]))));
-            },
-          )),
+                                );
+                              }
+                            },
+                            text: 'Save',
+                            color: kPrimaryColor,
+                            width: media.width,
+                            height: media.height * 0.06
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

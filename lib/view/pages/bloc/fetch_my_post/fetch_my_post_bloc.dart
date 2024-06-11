@@ -52,9 +52,11 @@ class FetchMyPostBloc extends Bloc<FetchMyPostEvent, FetchMyPostState> {
       },
     );
     on<OnEditPostButtonClicked>((event, emit) async{
-      emit(EditUserPostLoadingState());
-      final response = await PostRepo.editPost(description: event.description, image: event.imageUrl, postId: event.postId);
+      
+      emit(EditUserPostLoadingState ());
+      final response = await PostRepo.editPost(description: event.description, image: event.image, postId: event.postId,imageUrl: event.imageUrl);
       if(response!=null&&response.statusCode==200){
+        add(FetchAllMyPostsEvent());
        return emit(EditUserPostSuccesState());
       }else if(response!=null && response.statusCode==500){
        return emit(EditUserPosterrorState(error: 'Server not responding'));

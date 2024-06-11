@@ -116,8 +116,8 @@ class MyPostListingPageTile extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
             kheight,
-            Container(
-              color: Colors.blue,
+            SizedBox(
+             // color: Colors.blue,
               height: media.width * 0.984,
               child: CachedNetworkImage(
                 imageUrl: mainImage,
