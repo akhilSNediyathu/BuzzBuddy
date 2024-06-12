@@ -64,7 +64,7 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
                   post: state.posts,
 
                   userName: postItem.userId?.userName.toString() ?? '',
-                  postTime: formatDate(postItem.createdAt.toString()),
+                  postTime:postItem.createdAt==postItem.updatedAt? formatDate(postItem.createdAt.toString()):("${formatDate(postItem.updatedAt.toString())} (Edited)"),
                   description: postItem.description.toString(),
                   likeCount: postItem.likes!.length.toString(),
                   commentCount: '2', // need to add

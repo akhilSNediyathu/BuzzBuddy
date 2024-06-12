@@ -1,7 +1,9 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/mainwidget.dart';
+import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggestion.dart';
 
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key});
@@ -63,7 +65,9 @@ class ScreenHome extends StatelessWidget {
         ),
         elevation: 2,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings))
+          IconButton(onPressed: () {
+            Navigator.push(context,MaterialPageRoute(builder: (context) => ScreenUsersSuggestion()));
+          }, icon: const  Icon(Iconsax.user_cirlce_add,))
         ],
       ),
       // backgroundColor: kwhiteColor,

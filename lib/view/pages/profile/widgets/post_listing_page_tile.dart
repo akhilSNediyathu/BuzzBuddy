@@ -129,27 +129,25 @@ class MyPostListingPageTile extends StatelessWidget {
               ),
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     IconButton(
                         onPressed: () {},
-                        icon: Image.asset(
-                          likeIcon,
-                          width: 65,
-                          fit: BoxFit.cover,
-                        )),
+                        icon:const Icon(Icons.favorite_border,
+                        ),iconSize: 30,color: customIconColor,
+                        ),
                     IconButton(
                       onPressed: () {},
-                      icon: Image.asset(
-                        commentIcon,
-                      ),
+                      icon:const Icon(Icons.mode_comment_outlined,),iconSize: 28,color: customIconColor,
                     ),
                     // IconButton(onPressed: () {}, icon: Image.asset(savePostIcon))
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: const EdgeInsets.only(left: 
+                  10),
                   child: Text('$likeCount likes'),
                 )
               ],

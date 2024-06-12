@@ -13,6 +13,8 @@ final grey300 = Colors.grey[300];
 final grey100 = Colors.grey[100];
 const kwhiteColor = Colors.white;
 
+const Color customIconColor = Color(0xFFA1824A);
+
 const kwidth = SizedBox(
   width: 10,
 );

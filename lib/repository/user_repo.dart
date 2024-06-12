@@ -42,4 +42,16 @@ class UserRepo {
       log(e.toString());
     }
   }
+  //fetchsuggession user
+  static Future fetchSuggessionUser() async {
+    try {
+      final token = await getUsertoken();
+      var response = client.get(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.suggessions}'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
