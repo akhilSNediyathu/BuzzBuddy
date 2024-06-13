@@ -43,7 +43,7 @@ class UserRepo {
     }
   }
   //fetchsuggession user
-  static Future fetchSuggessionUser() async {
+  static Future<Response?> fetchSuggessionUser() async {
     try {
       final token = await getUsertoken();
       var response = client.get(
@@ -52,6 +52,7 @@ class UserRepo {
       return response;
     } catch (e) {
       log(e.toString());
+      return null;
     }
   }
 }

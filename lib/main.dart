@@ -7,6 +7,7 @@ import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc
 import 'package:buzz_buddy/view/pages/bloc/login_bloc/login_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/otp_verification/otp_verification_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/sign_up_bloc/sign_up_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/suggestions_bloc/fetch_user_suggestions_bloc.dart';
 import 'package:buzz_buddy/view/pages/splash_screen/screen_splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -45,6 +46,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => FetchMyPostBloc(),
+        ), BlocProvider(
+          create: (context) => FetchUserSuggestionsBloc(),
         ),
       ],
       child: MaterialApp(
