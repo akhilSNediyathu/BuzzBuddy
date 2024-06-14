@@ -68,19 +68,26 @@ class HomeWidgetMain extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                        onPressed: () {},
-                        icon:const Icon(Icons.favorite_border,
-                        ),iconSize: 30,color: customIconColor,
-                        ),
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite_border,
+                  ),
+                  iconSize: 30,
+                  color: customIconColor,
+                ),
                 const Text('1 like')
               ],
             ),
             Row(
               children: [
                 IconButton(
-                      onPressed: () {},
-                      icon:const Icon(Icons.mode_comment_outlined,),iconSize: 28,color: customIconColor,
-                    ),
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.mode_comment_outlined,
+                  ),
+                  iconSize: 28,
+                  color: customIconColor,
+                ),
                 const Text('1 comment ')
               ],
             ),

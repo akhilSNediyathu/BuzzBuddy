@@ -10,15 +10,17 @@ final class OnMyPostDeleteButtonPressedEvent extends FetchMyPostEvent {
 
   OnMyPostDeleteButtonPressedEvent({required this.postId});
 }
-final class OnEditPostButtonClicked extends FetchMyPostEvent{
-    final dynamic image;
+
+final class OnEditPostButtonClicked extends FetchMyPostEvent {
+  final dynamic image;
   final String imageUrl;
   final String description;
   final String postId;
 
-
-
-  OnEditPostButtonClicked({ required this.image,
+  OnEditPostButtonClicked({
+    required this.image,
     required this.description,
     required this.postId,
-    required this.imageUrl,});}
+    required this.imageUrl,
+  });
+}

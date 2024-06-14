@@ -22,6 +22,7 @@ class ScreenFollowing extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) => Card(
           child: CustomListTile(
+              buttonText: 'unfollow',
               profileImageUrl: profileImages[index],
               titleText: account[index],
               onUnfollow: () {},

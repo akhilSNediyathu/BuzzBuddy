@@ -27,8 +27,6 @@ class ScreenUpdateUserPost extends StatelessWidget {
   final textController = TextEditingController();
   late XFile? file;
 
-  
-
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
@@ -76,11 +74,13 @@ class ScreenUpdateUserPost extends StatelessWidget {
                                       imageUrl: model.image.toString(),
                                       fit: BoxFit.cover,
                                       placeholder: (context, url) {
-                                        return LoadingAnimationWidget.fourRotatingDots(
-                                          color: grey, size: 30);
+                                        return LoadingAnimationWidget
+                                            .fourRotatingDots(
+                                                color: grey, size: 30);
                                       },
                                     )
-                                  : Image.file(File(pickNewImage.value), fit: BoxFit.cover),
+                                  : Image.file(File(pickNewImage.value),
+                                      fit: BoxFit.cover),
                             ),
                           );
                         },
@@ -90,37 +90,37 @@ class ScreenUpdateUserPost extends StatelessWidget {
                         controller: textController,
                         hintText: 'Write a caption...',
                         keyboard: TextInputType.text,
-                        validator: validatePostdesctiption, // Use the new validation function
+                        validator:
+                            validatePostdesctiption, // Use the new validation function
                       ),
                       kheight50,
                       BlocBuilder<FetchMyPostBloc, FetchMyPostState>(
                         builder: (context, state) {
-                          if (state is EditUserPostLoadingState || state is FetchMyPostLoadingState) {
+                          if (state is EditUserPostLoadingState ||
+                              state is FetchMyPostLoadingState) {
                             return loadingButton(
-                              media: media, 
-                              onPressed: () {}, 
-                              color: kPrimaryColor
-                            );
+                                media: media,
+                                onPressed: () {},
+                                color: kPrimaryColor);
                           }
                           return customMaterialButton(
-                            onPressed: () {
-                              
-                              if (_formKey.currentState?.validate() ?? false) {
-                                context.read<FetchMyPostBloc>().add(
-                                  OnEditPostButtonClicked(
-                                    image: pickNewImage.value,
-                                    description: textController.text,
-                                    imageUrl: model.image.toString(),
-                                    postId: model.id.toString(),
-                                  ),
-                                );
-                              }
-                            },
-                            text: 'Save',
-                            color: kPrimaryColor,
-                            width: media.width,
-                            height: media.height * 0.06
-                          );
+                              onPressed: () {
+                                if (_formKey.currentState?.validate() ??
+                                    false) {
+                                  context.read<FetchMyPostBloc>().add(
+                                        OnEditPostButtonClicked(
+                                          image: pickNewImage.value,
+                                          description: textController.text,
+                                          imageUrl: model.image.toString(),
+                                          postId: model.id.toString(),
+                                        ),
+                                      );
+                                }
+                              },
+                              text: 'Save',
+                              color: kPrimaryColor,
+                              width: media.width,
+                              height: media.height * 0.06);
                         },
                       )
                     ],

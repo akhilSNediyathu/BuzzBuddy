@@ -73,7 +73,13 @@ class MyPostListingPageTile extends StatelessWidget {
                 PopupMenuButton<String>(
                   onSelected: (String result) {
                     if (result == 'Edit') {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ScreenUpdateUserPost(model: post[index],),));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ScreenUpdateUserPost(
+                              model: post[index],
+                            ),
+                          ));
                     } else if (result == 'Delete') {
                       showConfirmationDialog(
                           context: context,
@@ -117,7 +123,7 @@ class MyPostListingPageTile extends StatelessWidget {
             ),
             kheight,
             SizedBox(
-             // color: Colors.blue,
+              // color: Colors.blue,
               height: media.width * 0.984,
               child: CachedNetworkImage(
                 imageUrl: mainImage,
@@ -134,20 +140,26 @@ class MyPostListingPageTile extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
-                        icon:const Icon(Icons.favorite_border,
-                        ),iconSize: 30,color: customIconColor,
-                        ),
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.favorite_border,
+                      ),
+                      iconSize: 30,
+                      color: customIconColor,
+                    ),
                     IconButton(
                       onPressed: () {},
-                      icon:const Icon(Icons.mode_comment_outlined,),iconSize: 28,color: customIconColor,
+                      icon: const Icon(
+                        Icons.mode_comment_outlined,
+                      ),
+                      iconSize: 28,
+                      color: customIconColor,
                     ),
                     // IconButton(onPressed: () {}, icon: Image.asset(savePostIcon))
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 
-                  10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Text('$likeCount likes'),
                 )
               ],

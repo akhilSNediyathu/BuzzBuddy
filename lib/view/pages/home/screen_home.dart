@@ -65,9 +65,16 @@ class ScreenHome extends StatelessWidget {
         ),
         elevation: 2,
         actions: [
-          IconButton(onPressed: () {
-            Navigator.push(context,MaterialPageRoute(builder: (context) => ScreenUsersSuggestion()));
-          }, icon: const  Icon(Iconsax.user_cirlce_add,))
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScreenUsersSuggestion()));
+              },
+              icon: const Icon(
+                Iconsax.user_cirlce_add,
+              ))
         ],
       ),
       // backgroundColor: kwhiteColor,

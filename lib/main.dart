@@ -1,6 +1,7 @@
 import 'package:buzz_buddy/firebase_options.dart';
 import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
+
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 
 import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc.dart';
@@ -13,6 +14,8 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'view/pages/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,8 +49,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => FetchMyPostBloc(),
-        ), BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => FetchUserSuggestionsBloc(),
+        ),
+         BlocProvider(
+          create: (context) => FollowUnfollowBloc(),
         ),
       ],
       child: MaterialApp(

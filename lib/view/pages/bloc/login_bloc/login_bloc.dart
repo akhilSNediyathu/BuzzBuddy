@@ -20,7 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         return emit(LoginSuccesState());
       } else if (response != null) {
         final responseData = jsonDecode(response.body);
-        
+
         return emit(LoginErrorState(error: responseData["message"]));
       } else {
         return emit(LoginErrorState(error: 'something went wrong'));

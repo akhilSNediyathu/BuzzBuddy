@@ -30,6 +30,7 @@ class UserRepo {
       return null;
     }
   }
+
   //Fetch loggedIn user details
   static Future fetchLoggedInUserDetails() async {
     try {
@@ -42,6 +43,7 @@ class UserRepo {
       log(e.toString());
     }
   }
+
   //fetchsuggession user
   static Future<Response?> fetchSuggessionUser() async {
     try {
@@ -53,6 +55,60 @@ class UserRepo {
     } catch (e) {
       log(e.toString());
       return null;
+    }
+  }
+  
+//fetch followers
+  static Future fetchFollowers() async {
+    try {
+      final token = await getUsertoken();
+      var response = client.get(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.getFollowers}'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  //fetch followers
+  static Future fetchFollowing() async {
+    try {
+      final token = await getUsertoken();
+      var response = client.get(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.getFollowing}'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+//follow user
+  static Future followUser({required String followeesId}) async {
+    try {
+      final token = await getUsertoken();
+      var response = client.post(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.followUser}/$followeesId'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  //unfollow user
+  static Future unfollowUser({required String followeesId}) async {
+    try {
+      final token = await getUsertoken();
+      var response = client.put(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.unfollowUser}/$followeesId'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

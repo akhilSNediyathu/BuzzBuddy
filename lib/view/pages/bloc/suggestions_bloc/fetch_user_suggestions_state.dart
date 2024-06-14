@@ -4,14 +4,18 @@ part of 'fetch_user_suggestions_bloc.dart';
 sealed class FetchUserSuggestionsState {}
 
 final class FetchUserSuggestionsInitial extends FetchUserSuggestionsState {}
+
 final class FetchUserSuggestionsSuccessState extends FetchUserSuggestionsState {
-  final SuggessionModel suggessionModel;
+  final UserSuggestionModel suggessionModel;
 
   FetchUserSuggestionsSuccessState({required this.suggessionModel});
 }
+
 final class FetchUserSuggestionsErroState extends FetchUserSuggestionsState {
   final String error;
 
   FetchUserSuggestionsErroState({required this.error});
 }
-final class FetchUserSuggestionsLoadingState extends FetchUserSuggestionsState {}
+
+final class FetchUserSuggestionsLoadingState
+    extends FetchUserSuggestionsState {}

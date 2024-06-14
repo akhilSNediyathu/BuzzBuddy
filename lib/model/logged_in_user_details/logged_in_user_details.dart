@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'logged_in_user_details.g.dart';
 
-
 @JsonSerializable()
 class LoggedInUserDetails {
   @JsonKey(name: '_id')

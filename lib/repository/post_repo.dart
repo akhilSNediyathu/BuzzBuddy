@@ -93,21 +93,20 @@ class PostRepo {
       return null;
     }
   }
-   static Future<Response?>  editPost(
+
+  static Future<Response?> editPost(
       {required String description,
       required image,
       required String postId,
       required imageUrl}) async {
     dynamic cloudinaryimageUrl;
     try {
-   
       if (image != '') {
-        
         cloudinaryimageUrl = await PostRepo.uploadImage(image);
       }
       final token = await getUsertoken();
       final post = {
-        'imageUrl': image != '' ?cloudinaryimageUrl: imageUrl,
+        'imageUrl': image != '' ? cloudinaryimageUrl : imageUrl,
         'description': description,
       };
       var response = await client.put(

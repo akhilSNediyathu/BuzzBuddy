@@ -22,6 +22,7 @@ class ScreenFollowers extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, index) => Card(
           child: CustomListTile(
+            buttonText: 'unfollow',
               profileImageUrl: profileImages[index],
               titleText: account[index],
               imageSize: media.height * 0.05,
