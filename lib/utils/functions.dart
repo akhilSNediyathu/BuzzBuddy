@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:buzz_buddy/model/post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -109,4 +111,8 @@ String formatDate(String inputDate) {
   } else {
     return outputFormat.format(dateTime);
   }
+}
+List<Post> parsePosts(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+  return parsed.map<Post>((json) => Post.fromJson(json)).toList();
 }

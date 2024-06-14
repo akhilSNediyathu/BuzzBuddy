@@ -57,7 +57,7 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
               BlocBuilder<FetchUserSuggestionsBloc, FetchUserSuggestionsState>(
             builder: (context, state) {
               if (state is FetchUserSuggestionsSuccessState) {
-                // Check if there are suggestions available
+                
                 if (state.suggessionModel.data!.isEmpty) {
                   return const Center(
                     child: Text(
@@ -99,9 +99,9 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                   );
                 }
               } else if (state is FetchUserSuggestionsLoadingState) {
-                // Show shimmer effect while loading
+                // Show shimmer 
                 return ListView.builder(
-                  itemCount: 6, // Number of shimmer tiles to show
+                  itemCount: 6, 
                   itemBuilder: (context, index) {
                     return Shimmer.fromColors(
                       baseColor: grey300!,

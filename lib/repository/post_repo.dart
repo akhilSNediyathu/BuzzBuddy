@@ -125,4 +125,72 @@ class PostRepo {
       return null;
     }
   }
+
+  //fetch followers post
+  static Future getFollowersPost({required int page}) async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.get(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.allFollowingsPost}?page=$page&pageSize=5'),
+          headers: {'Authorization': 'Bearer $token'});
+
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+//save post
+  static Future savePost({required String postId}) async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.post(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.savePost}/$postId'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+// remove saved post
+  static Future removeSavedPost({required String postId}) async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.delete(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.removeSavedPost}/$postId'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+// get saved posts
+  static Future fetchSavedPosts() async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.get(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.fetchSavedPost}'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  //fetch explore post
+  static Future fetchExplorePosts() async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.get(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.explorePosts}'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

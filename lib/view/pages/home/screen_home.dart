@@ -4,7 +4,8 @@ import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggest
 
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-
+String logginedUserToken = '';
+String logginedUserId = '';
 class ScreenHome extends StatelessWidget {
   ScreenHome({super.key});
   final List<String> profileImages = [
