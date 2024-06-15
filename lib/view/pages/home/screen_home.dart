@@ -1,13 +1,25 @@
 import 'package:buzz_buddy/utils/constants.dart';
+import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/mainwidget.dart';
 import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggestion.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shimmer/shimmer.dart';
+
 String logginedUserToken = '';
 String logginedUserId = '';
-class ScreenHome extends StatelessWidget {
-  ScreenHome({super.key});
+
+class ScreenHome extends StatefulWidget {
+  const ScreenHome({super.key});
+
+  @override
+  State<ScreenHome> createState() => _ScreenHomeState();
+}
+
+class _ScreenHomeState extends State<ScreenHome> {
   final List<String> profileImages = [
     'https://pyxis.nymag.com/v1/imgs/af9/4b3/d79e0525b97fd56eea6dd98f2743be69a1-17-daenerys.rhorizontal.w710.jpg',
     'https://images.thequint.com/thequint%2F2018-04%2F91702cf7-aea4-4506-b347-d74bdc8ea38b%2F1894926e_68a9_4078_b24f_ab4e12fbbbb0.jpeg?rect=0%2C0%2C1024%2C576',
@@ -23,6 +35,7 @@ class ScreenHome extends StatelessWidget {
     'https://wallpapers.com/images/hd/peter-dinklage-tyrion-lannister-0xqszly1l5t0241r.jpg',
     'https://www.mensjournal.com/.image/t_share/MjA0ODc4NDc1NzI5ODM5NDUw/9.png'
   ];
+
   final List<String> likedPerson = [
     'Roman Pierce',
     'Tej Parkor',
@@ -30,6 +43,7 @@ class ScreenHome extends StatelessWidget {
     'Ken Block',
     'Luke Hobbs'
   ];
+
   final List<String> date = [
     'May 15',
     ' May 16',
@@ -37,6 +51,7 @@ class ScreenHome extends StatelessWidget {
     'June 10',
     'June 12'
   ];
+
   final List<String> description = [
     'Thinking about a knockout audio system for your car? Not sure what you need, want, or can afford? Car Audio For Dummies is a great place to find some answers! But wait — what if speakers that vibrate your floorboards',
     'This is a must-have for anyone interested in achieving better performance through car modification!So you want to turn your Yugo into a Viper? Sorry--you need a certified magician. But if you want to turn your sedate',
@@ -44,6 +59,7 @@ class ScreenHome extends StatelessWidget {
     'Auto Repair For Dummies, 2nd Edition (9781119543619) was previously published as Auto Repair For Dummies, 2nd Edition (9780764599026). While this version features a new Dummies cover and design, the',
     'Drive into the 21st century in an electric car With falling cost of ownership, expanded incentives for purchasing, and more model and body type options than ever, it may finally be time to retire the old gas-'
   ];
+
   final List<String> account = [
     'Paul William Walker',
     'Jordana Breuster',
@@ -51,6 +67,13 @@ class ScreenHome extends StatelessWidget {
     'Michele Rodregues',
     'Decard Shaw'
   ];
+  @override
+  void initState() {
+    context
+        .read<AllFollowersPostsBloc>()
+        .add(AllFollowersPostsInitialFetchEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,18 +102,36 @@ class ScreenHome extends StatelessWidget {
         ],
       ),
       // backgroundColor: kwhiteColor,
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: HomeWidgetMain(
-              media: media,
-              profileImage: profileImages[index],
-              mainImage: mainImages[index],
-            ),
-          );
+      body: BlocBuilder<AllFollowersPostsBloc, AllFollowersPostsState>(
+        builder: (context, state) {
+          if (state is AllFollowersPostsSuccesfulState) {
+            return ListView.builder(
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: HomeWidgetMain(
+                    media: media,
+                    profileImage: state.post[index].userId.profilePic,
+                    mainImage: state.post[index].image,
+                  ),
+                );
+              },
+              itemCount: state.post.length,
+            );
+          } else if (state is AllFollowersPostsLoadingState) {
+            return ListView.builder(
+              itemCount: 10,
+              itemBuilder: (context, index) => Shimmer.fromColors(
+                  baseColor: grey300!,
+                  highlightColor: grey100!,
+                  child: shimmerWidget1(media)),
+            );
+          } else {
+            return const Center(
+              child: Text('something went wrong try refresh'),
+            );
+          }
         },
-        itemCount: mainImages.length,
       ),
     );
   }

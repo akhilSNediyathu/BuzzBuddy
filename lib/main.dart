@@ -1,11 +1,13 @@
 import 'package:buzz_buddy/firebase_options.dart';
 import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
 
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 
 import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/login_bloc/login_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/logined_user_details/login_user_details_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/otp_verification/otp_verification_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/suggestions_bloc/fetch_user_suggestions_bloc.dart';
@@ -55,6 +57,12 @@ class MyApp extends StatelessWidget {
         ),
          BlocProvider(
           create: (context) => FollowUnfollowBloc(),
+        ),
+          BlocProvider(
+          create: (context) => AllFollowersPostsBloc(),
+        ),
+          BlocProvider(
+          create: (context) => LoginUserDetailsBloc(),
         ),
       ],
       child: MaterialApp(

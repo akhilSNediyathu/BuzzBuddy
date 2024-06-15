@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:buzz_buddy/controller/utils/api_urls.dart';
+import 'package:buzz_buddy/repository/post_repo.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:flutter/foundation.dart';
 // import 'package:flutter/material.dart';
@@ -32,7 +34,7 @@ class UserRepo {
   }
 
   //Fetch loggedIn user details
-  static Future fetchLoggedInUserDetails() async {
+  static Future<Response?> fetchLoggedInUserDetails() async {
     try {
       final token = await getUsertoken();
       var response = await client.get(
@@ -41,6 +43,7 @@ class UserRepo {
       return response;
     } catch (e) {
       log(e.toString());
+      return null;
     }
   }
 
@@ -57,7 +60,7 @@ class UserRepo {
       return null;
     }
   }
-  
+
 //fetch followers
   static Future fetchFollowers() async {
     try {
@@ -110,5 +113,44 @@ class UserRepo {
     } catch (e) {
       log(e.toString());
     }
+  }
+  //Edit Profile
+  static Future editProfile(
+      {required String image,
+    required  String name,
+     required String bio,
+    required  String imageUrl,
+    required  String bgImageUrl,
+      required String bgImage}) async {
+    try {
+      dynamic cloudinaryimageUrl;
+      dynamic cloudinarybgimageUrl;
+      if (image != '') {
+        cloudinaryimageUrl = await PostRepo.uploadImage(image);
+      }
+      if (bgImage != '') {
+        cloudinarybgimageUrl = await PostRepo.uploadImage(bgImage);
+      }
+      final token = await getUsertoken();
+      final details = {
+        "name": name ,
+        "bio": bio ,
+        "image": image != '' ? cloudinaryimageUrl : imageUrl,
+        "backGroundImage": bgImage != '' ? cloudinarybgimageUrl : bgImageUrl
+      };
+      var response = await client.put(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.editProfile}'),
+          body: jsonEncode(details),
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json'
+          });
+      debugPrint(response.statusCode.toString());
+      debugPrint(response.body);
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+    // final image
   }
 }

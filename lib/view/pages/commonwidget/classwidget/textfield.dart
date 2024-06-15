@@ -10,9 +10,12 @@ class CustomTextField extends StatelessWidget {
       this.margin,
       this.keyboardType,
       this.obscureText = false,
+      this.minlines,
       this.rightIcon,
+      this.maxlines,
       this.validator});
-
+  final int? minlines;
+  final int? maxlines;
   final TextEditingController controller;
   final String hintText;
   final String? icon;
@@ -25,12 +28,15 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        maxLines: maxlines,
         controller: controller,
+        minLines: minlines,
         validator: validator,
         keyboardType: keyboardType,
         decoration: InputDecoration(
           labelText: hintText,
           labelStyle: const TextStyle(fontWeight: FontWeight.w500),
+          alignLabelWithHint: true,
           border: OutlineInputBorder(
               borderSide:
                   const BorderSide(color: textFieldBorderColor, width: 2.0),

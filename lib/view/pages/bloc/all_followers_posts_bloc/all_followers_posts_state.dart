@@ -20,24 +20,16 @@
 part of 'all_followers_posts_bloc.dart';
 
 @immutable
-sealed class AllFollowersPostsState {
-  final posts;
+sealed class AllFollowersPostsState {}
 
-  const AllFollowersPostsState(this.posts);
-}
+final class AllFollowersPostsInitial extends AllFollowersPostsState {}
 
-final class AllFollowersPostsInitial extends AllFollowersPostsState {
-  const AllFollowersPostsInitial(super.posts);
-}
-
-final class AllFollowersPostsLoadingState extends AllFollowersPostsState {
-  const AllFollowersPostsLoadingState(super.posts);
-}
+final class AllFollowersPostsLoadingState extends AllFollowersPostsState {}
 
 final class AllFollowersPostsSuccesfulState extends AllFollowersPostsState {
-  const AllFollowersPostsSuccesfulState({required posts}) : super(posts);
+  final List<FollowersPostModel> post;
+
+  AllFollowersPostsSuccesfulState({required this.post});
 }
 
-final class AllFollowersPostsServerErrorState extends AllFollowersPostsState {
-  const AllFollowersPostsServerErrorState(super.posts);
-}
+final class AllFollowersPostsServerErrorState extends AllFollowersPostsState {}
