@@ -6,6 +6,7 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -116,3 +117,12 @@ List<Post> parsePosts(String responseBody) {
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
   return parsed.map<Post>((json) => Post.fromJson(json)).toList();
 }
+  Future<void> pickImage(ValueNotifier<String> imageNotifier) async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      imageNotifier.value = pickedFile.path;
+    }
+  }

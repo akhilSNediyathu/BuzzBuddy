@@ -94,7 +94,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => ScreenUsersSuggestion()));
+                        builder: (context) =>const ScreenUsersSuggestion()));
               },
               icon: const Icon(
                 Iconsax.user_cirlce_add,

@@ -66,7 +66,6 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                     ),
                   );
                 } else {
-                  // Display list of suggestions
                   return ListView.builder(
                     itemCount: state.suggessionModel.data!.length,
                     itemBuilder: (context, index) {
@@ -111,7 +110,7 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                   },
                 );
               } else if (state is FetchUserSuggestionsErroState) {
-                // Show error message if there was an error loading suggestions
+                // Show error 
                 return const Center(
                   child: Text(
                     'Failed to load suggestions. Please try again later.',
@@ -119,7 +118,6 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                   ),
                 );
               } else {
-                // Fallback for any other states
                 return const Center(
                   child: Text(
                     'No suggestions available at the moment.',

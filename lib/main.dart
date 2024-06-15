@@ -2,6 +2,7 @@ import 'package:buzz_buddy/firebase_options.dart';
 import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/edit_user_profile_bloc/edit_user_profile_bloc.dart';
 
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 
@@ -63,6 +64,9 @@ class MyApp extends StatelessWidget {
         ),
           BlocProvider(
           create: (context) => LoginUserDetailsBloc(),
+        ),
+          BlocProvider(
+          create: (context) => EditUserProfileBloc(),
         ),
       ],
       child: MaterialApp(
