@@ -1,10 +1,12 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
 import 'package:buzz_buddy/view/pages/login/screen_login.dart';
 import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/custom_settings_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenSettings extends StatelessWidget {
   const ScreenSettings({super.key});
@@ -24,7 +26,11 @@ class ScreenSettings extends StatelessWidget {
         body: Column(
           children: [
             customSettingsListTile(
-                onTap: () {},
+                onTap: () {
+                  context
+                      .read<FetchFollowingBloc>()
+                      .add(OnFetchFollowingUsersEvent());
+                },
                 leading: const Icon(Icons.doorbell_outlined),
                 title: "Notifiacation",
                 trailing: const Icon(

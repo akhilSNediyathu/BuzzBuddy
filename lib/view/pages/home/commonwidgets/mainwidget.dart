@@ -1,16 +1,20 @@
+import 'package:buzz_buddy/model/followers_posts_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
+import 'package:buzz_buddy/utils/functions.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgetMain extends StatelessWidget {
-  const HomeWidgetMain(
-      {super.key,
-      required this.media,
-      required this.mainImage,
-      required this.profileImage});
-  final String profileImage;
-  final String mainImage;
+  const HomeWidgetMain({
+    super.key,
+    required this.media,
+    required this.model, required this.onLikeTap, required this.onCommentTap, required this.onSaveTap,
+  });
 
   final Size media;
+  final FollowersPostModel model;
+  final VoidCallback onLikeTap;
+  final VoidCallback onCommentTap;
+  final VoidCallback onSaveTap;
 
   @override
   Widget build(BuildContext context) {
@@ -24,29 +28,35 @@ class HomeWidgetMain extends StatelessWidget {
               width: media.height * 0.08,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(profileImage), fit: BoxFit.cover),
+                      image: NetworkImage(model.userId.profilePic),
+                      fit: BoxFit.cover),
                   color: kwhiteColor,
                   borderRadius: kradius100),
             ),
             kwidth,
-            const Column(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Name',
-                  style: TextStyle(fontWeight: FontWeight.w700),
+                  model.userId.name ?? model.userId.userName,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
-                Text('2d ago'),
+                Text(
+                  model.createdAt == model.updatedAt
+                      ? formatDate(model.createdAt.toString())
+                      : ("${formatDate(model.updatedAt.toString())} (Edited)"),
+                ),
               ],
             )
           ],
         ),
         kheight,
-        const Padding(
-          padding: EdgeInsets.all(8.0),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Text(
-            'fgdgs',
+            model.description,
             maxLines: 3,
-            style: TextStyle(
+            style: const TextStyle(
               overflow: TextOverflow.ellipsis,
             ),
             textAlign: TextAlign.left,
@@ -57,7 +67,7 @@ class HomeWidgetMain extends StatelessWidget {
           color: Colors.blue,
           height: media.width * 0.984,
           child: Image(
-            image: NetworkImage(mainImage),
+            image: NetworkImage(model.image),
             fit: BoxFit.cover,
             width: media.width,
           ),
@@ -75,7 +85,7 @@ class HomeWidgetMain extends StatelessWidget {
                   iconSize: 30,
                   color: customIconColor,
                 ),
-                const Text('1 like')
+                Text(model.likes.length.toString())
               ],
             ),
             Row(

@@ -1,13 +1,15 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/dummydata.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/logined_user_details/login_user_details_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/logined_user_fetch_posts_bloc/logined_user_fetch_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
 import 'package:buzz_buddy/view/pages/profile/edit_profile/screen_edit_profiile.dart';
 import 'package:buzz_buddy/view/pages/profile/followers/screen_followers.dart';
 import 'package:buzz_buddy/view/pages/profile/following/screen_following.dart';
+
 import 'package:buzz_buddy/view/pages/profile/settings_page/screen_settings.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/profile_succes_dummy_container.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
@@ -30,6 +32,8 @@ class _ScreenProfileState extends State<ScreenProfile> {
   void initState() {
     context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
     context.read<LoginUserDetailsBloc>().add(OnLoginedUserDataFetchEvent());
+    context.read<FetchFollowersBloc>().add(OnfetchAllFollowersEvent());
+    context.read<FetchFollowingBloc>().add(OnFetchFollowingUsersEvent());
     super.initState();
   }
 
@@ -109,7 +113,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (ctx) =>
-                                                     ScreenEditProfile()));
+                                                    const ScreenEditProfile()));
                                       },
                                       text: 'Edit Profile',
                                       width: media.height * 0.12,
@@ -128,7 +132,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                     if (state
                                         is LoginUserDetailsDataFetchSuccesState) {
                                       return userNameAndBio(
-                                          state.userModel.userName,
+                                          state.userModel.name ?? '',
                                           state.userModel.bio ?? '');
                                     } else {
                                       return userNameAndBio('', '');
@@ -162,26 +166,60 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                             onTap: () {});
                                       },
                                     ),
-                                    customTextColumn(
-                                        text1: '111k',
-                                        text2: 'Followers',
-                                        textStyle: profilecolumnStyle,
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (ctx) =>
-                                                      const ScreenFollowers()));
-                                        }),
-                                    customTextColumn(
-                                        text1: '50',
-                                        text2: 'Following',
-                                        textStyle: profilecolumnStyle,
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (ctx) =>
-                                                      const ScreenFollowing()));
-                                        }),
+                                    BlocBuilder<FetchFollowersBloc,
+                                        FetchFollowersState>(
+                                      builder: (context, state) {
+                                        if (state
+                                            is FetchFollowersSuccesState) {
+                                          return customTextColumn(
+                                              text1: state
+                                                  .followersModel.totalCount
+                                                  .toString(),
+                                              text2: 'Followers',
+                                              textStyle: profilecolumnStyle,
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (ctx) =>
+                                                            ScreenFollowers(
+                                                              model: state
+                                                                  .followersModel,
+                                                            )));
+                                              });
+                                        } else {
+                                          return customTextColumn(
+                                              text1: '',
+                                              text2: 'Followers',
+                                              textStyle: profilecolumnStyle,
+                                              onTap: () {});
+                                        }
+                                      },
+                                    ),
+                                    BlocBuilder<FetchFollowingBloc,
+                                        FetchFollowingState>(
+                                      builder: (context, state) {
+                                        if (state
+                                            is FetchFollowingSuccesState) {
+                                          return customTextColumn(
+                                              text1: state.model.totalCount
+                                                  .toString(),
+                                              text2: 'Following',
+                                              textStyle: profilecolumnStyle,
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (ctx) =>
+                                                            const ScreenFollowing()));
+                                              });
+                                        } else {
+                                          return customTextColumn(
+                                              text1: '',
+                                              text2: 'Following',
+                                              textStyle: profilecolumnStyle,
+                                              onTap: () {});
+                                        }
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),

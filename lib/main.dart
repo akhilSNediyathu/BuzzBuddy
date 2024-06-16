@@ -3,6 +3,9 @@ import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/edit_user_profile_bloc/edit_user_profile_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+
 
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 
@@ -56,17 +59,23 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FetchUserSuggestionsBloc(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => FollowUnfollowBloc(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (context) => AllFollowersPostsBloc(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (context) => LoginUserDetailsBloc(),
         ),
-          BlocProvider(
+        BlocProvider(
           create: (context) => EditUserProfileBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FetchFollowersBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FetchFollowingBloc(),
         ),
       ],
       child: MaterialApp(

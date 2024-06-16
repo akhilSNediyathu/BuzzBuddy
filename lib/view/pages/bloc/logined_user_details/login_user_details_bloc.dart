@@ -15,7 +15,7 @@ class LoginUserDetailsBloc
       emit(LoginUserDetailsDataFetchLoadingState());
       final response = await UserRepo.fetchLoggedInUserDetails();
       if (response != null && response.statusCode == 200) {
-        print('hi');
+    
         final responseBody = jsonDecode(response.body);
         final LoginUserModel model = LoginUserModel.fromJson(responseBody);
         return emit(LoginUserDetailsDataFetchSuccesState(userModel: model));
