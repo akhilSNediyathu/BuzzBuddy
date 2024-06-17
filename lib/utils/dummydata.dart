@@ -35,3 +35,7 @@ final List<String> account = [
   'Ramsy Bolton',
   '	Arya Stark'
 ];
+const String profileImageDummy =
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa6YvRump6DC1zR3Bu5fz9358Gcgviuu5nag&s';
+const String coverImageDummy =
+    'https://t4.ftcdn.net/jpg/02/61/49/05/360_F_261490536_nJ5LSRAVZA0CK9Nvt2E1fXJVUfpiqvhT.jpg';

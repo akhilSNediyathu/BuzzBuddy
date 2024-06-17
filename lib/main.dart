@@ -2,14 +2,17 @@ import 'package:buzz_buddy/firebase_options.dart';
 import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/comment_post_bloc/comment_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/delete_comment_bloc/delete_comment_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/edit_user_profile_bloc/edit_user_profile_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
-
 
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 
 import 'package:buzz_buddy/view/pages/bloc/forgot_pass_bloc/forgot_password_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/login_bloc/login_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/logined_user_details/login_user_details_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/otp_verification/otp_verification_bloc.dart';
@@ -77,6 +80,18 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FetchFollowingBloc(),
         ),
+        BlocProvider(
+          create: (context) => FetchExploreBloc(),
+        ),
+        BlocProvider(
+          create: (context) => GetCommentsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CommentPostBloc(),
+        ),
+        BlocProvider(
+          create: (context) => DeleteCommentBloc(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

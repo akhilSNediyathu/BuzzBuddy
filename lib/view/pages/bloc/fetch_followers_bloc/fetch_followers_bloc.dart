@@ -22,6 +22,7 @@ class FetchFollowersBloc
         return emit(FetchFollowersSuccesState(followersModel: followersModel));
       } else {
         return emit(FetchFollowersErrorState());
+        
       }
     });
   }

@@ -1,5 +1,9 @@
+import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
+import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
+import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/mainwidget.dart';
 import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggestion.dart';
@@ -12,6 +16,7 @@ import 'package:shimmer/shimmer.dart';
 String logginedUserToken = '';
 String logginedUserId = '';
 
+
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
 
@@ -20,12 +25,21 @@ class ScreenHome extends StatefulWidget {
 }
 
 class _ScreenHomeState extends State<ScreenHome> {
+  TextEditingController commentController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  final List<Comment> _comments = [];
   @override
   void initState() {
     context
         .read<AllFollowersPostsBloc>()
         .add(AllFollowersPostsInitialFetchEvent());
+    getToken();
     super.initState();
+  }
+
+  getToken() async {
+    logginedUserToken = (await getUsertoken())!;
+    logginedUserId = (await getUserId())!;
   }
 
   @override
@@ -47,7 +61,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>const ScreenUsersSuggestion()));
+                        builder: (context) => const ScreenUsersSuggestion()));
               },
               icon: const Icon(
                 Iconsax.user_cirlce_add,
@@ -63,11 +77,22 @@ class _ScreenHomeState extends State<ScreenHome> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: HomeWidgetMain(
-                        onLikeTap: (){},
-                        onCommentTap: (){},
-                        onSaveTap: (){},
+                    onLikeTap: () {},
+                    onCommentTap: () {
+                      context.read<GetCommentsBloc>().add(
+                          CommentsFetchEvent(postId: state.post[index].id));
+                      commentBottomSheet(
+                          context, state.post[index], commentController,
+                          formkey: _formkey,
+                          userName: state.post[index].userId.userName,
+                          profiePic:
+                              state.post[index].userId.profilePic.toString(),
+                          comments: _comments,
+                          id: state.post[index].id.toString());
+                    },
+                    onSaveTap: () {},
                     media: media,
-                  model: state.post[index],
+                    model: state.post[index],
                   ),
                 );
               },

@@ -1,8 +1,12 @@
+import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
+import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
+import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/post_listing_page_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +23,9 @@ class ScreenMyPost extends StatefulWidget {
 }
 
 class _ScreenMyPostState extends State<ScreenMyPost> {
+       TextEditingController commentController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  final List<Comment> _comments = [];
   @override
   void initState() {
     context.read<FetchMyPostBloc>().add(FetchAllMyPostsEvent());
@@ -71,7 +78,18 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
                   likeCount: postItem.likes!.length.toString(),
                   commentCount: '2', // need to add
                   likeButtonPressed: () {},
-                  commentButtonPressed: () {},
+                  commentButtonPressed: () {
+                        context.read<GetCommentsBloc>().add(
+                          CommentsFetchEvent(postId: postItem.id.toString()));
+                      commentBottomSheet(
+                          context, postItem, commentController,
+                          formkey: _formkey,
+                          userName:profileuserName ,
+                          profiePic:
+                             logginedUserProfileImage,
+                          comments: _comments,
+                          id: postItem.id.toString());
+                  },
                   index: index,
                 );
               },

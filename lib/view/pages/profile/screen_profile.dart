@@ -9,6 +9,7 @@ import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
 import 'package:buzz_buddy/view/pages/profile/edit_profile/screen_edit_profiile.dart';
 import 'package:buzz_buddy/view/pages/profile/followers/screen_followers.dart';
 import 'package:buzz_buddy/view/pages/profile/following/screen_following.dart';
+import 'package:buzz_buddy/view/pages/profile/my_post/screen_my_post.dart';
 
 import 'package:buzz_buddy/view/pages/profile/settings_page/screen_settings.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/profile_succes_dummy_container.dart';
@@ -19,6 +20,10 @@ import 'package:buzz_buddy/view/pages/profile/widgets/user_and_bio_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+String logginedUserProfileImage = '';
+String profilepageUserId = '';
+String profileuserName = '';
 
 class ScreenProfile extends StatefulWidget {
   const ScreenProfile({super.key});
@@ -87,6 +92,12 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                 builder: (context, state) {
                                   if (state
                                       is LoginUserDetailsDataFetchSuccesState) {
+                                    profileuserName = state.userModel.name ??
+                                        state.userModel.userName;
+                                    logginedUserProfileImage =
+                                        state.userModel.profilePic;
+                                    profilepageUserId = state.userModel.id;
+
                                     return profileContainer(
                                         media,
                                         state.userModel.profilePic,
@@ -152,12 +163,22 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                       listener: (context, state) {},
                                       builder: (context, state) {
                                         if (state is FetchMyPostSuccesState) {
-                                          return customTextColumn(
-                                              text1:
-                                                  state.posts.length.toString(),
-                                              text2: 'Post',
-                                              textStyle: profilecolumnStyle,
-                                              onTap: () {});
+                                          return GestureDetector(
+                                            child: customTextColumn(
+                                                text1: state.posts.length
+                                                    .toString(),
+                                                text2: 'Posts',
+                                                textStyle: profilecolumnStyle,
+                                                onTap: () {
+                                                  Navigator.of(context)
+                                                      .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ScreenMyPost(
+                                                            index: 0,
+                                                            post: state.posts),
+                                                  ));
+                                                }),
+                                          );
                                         }
                                         return customTextColumn(
                                             text1: '0',

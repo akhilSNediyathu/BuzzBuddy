@@ -3,7 +3,7 @@ import 'package:buzz_buddy/view/pages/chat/screen_chat.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/bottomnav.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
 import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
-import 'package:buzz_buddy/view/pages/search/screen_search.dart';
+import 'package:buzz_buddy/view/pages/explore/screen_search.dart';
 
 import 'package:flutter/material.dart';
 

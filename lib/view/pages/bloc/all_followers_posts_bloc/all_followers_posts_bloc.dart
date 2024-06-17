@@ -46,13 +46,12 @@ class AllFollowersPostsBloc
       final List<dynamic> responseBody = jsonDecode(result.body);
 
       debugPrint('Status code: ${result.statusCode}');
-    
 
       if (result.statusCode == 200) {
         List<FollowersPostModel> posts = responseBody
             .map((json) => FollowersPostModel.fromJson(json))
             .toList();
-       
+
         emit(AllFollowersPostsSuccesfulState(post: posts));
       } else {
         emit(AllFollowersPostsServerErrorState());

@@ -1,13 +1,18 @@
 import 'package:buzz_buddy/model/followers_posts_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeWidgetMain extends StatelessWidget {
   const HomeWidgetMain({
     super.key,
     required this.media,
-    required this.model, required this.onLikeTap, required this.onCommentTap, required this.onSaveTap,
+    required this.model,
+    required this.onLikeTap,
+    required this.onCommentTap,
+    required this.onSaveTap,
   });
 
   final Size media;
@@ -63,13 +68,16 @@ class HomeWidgetMain extends StatelessWidget {
           ),
         ),
         kheight,
-        Container(
-          color: Colors.blue,
+        SizedBox(
           height: media.width * 0.984,
-          child: Image(
-            image: NetworkImage(model.image),
+          width: media.width,
+          child: CachedNetworkImage(
+            imageUrl: model.image,
             fit: BoxFit.cover,
-            width: media.width,
+            placeholder: (context, url) {
+              return LoadingAnimationWidget.fourRotatingDots(
+                  color: grey, size: 30);
+            },
           ),
         ),
         Row(
@@ -85,13 +93,13 @@ class HomeWidgetMain extends StatelessWidget {
                   iconSize: 30,
                   color: customIconColor,
                 ),
-                Text(model.likes.length.toString())
+                Text('${model.likes.length} likes')
               ],
             ),
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: onCommentTap,
                   icon: const Icon(
                     Icons.mode_comment_outlined,
                   ),

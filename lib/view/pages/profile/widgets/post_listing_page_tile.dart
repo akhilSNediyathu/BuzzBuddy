@@ -148,7 +148,7 @@ class MyPostListingPageTile extends StatelessWidget {
                       color: customIconColor,
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: commentButtonPressed,
                       icon: const Icon(
                         Icons.mode_comment_outlined,
                       ),
