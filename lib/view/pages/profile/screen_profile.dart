@@ -1,3 +1,4 @@
+import 'package:buzz_buddy/model/logined_user_details_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/dummydata.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 String logginedUserProfileImage = '';
 String profilepageUserId = '';
 String profileuserName = '';
+late LoginUserModel userdetails;
 
 class ScreenProfile extends StatefulWidget {
   const ScreenProfile({super.key});
@@ -97,6 +99,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                     logginedUserProfileImage =
                                         state.userModel.profilePic;
                                     profilepageUserId = state.userModel.id;
+                                    userdetails = state.userModel;
 
                                     return profileContainer(
                                         media,

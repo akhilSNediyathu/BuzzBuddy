@@ -2,6 +2,10 @@ import 'package:buzz_buddy/firebase_options.dart';
 import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/saved_post_bloc/saved_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/search_user_bloc/explore_page_search_users_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/comment_post_bloc/comment_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/delete_comment_bloc/delete_comment_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/edit_user_profile_bloc/edit_user_profile_bloc.dart';
@@ -91,7 +95,19 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DeleteCommentBloc(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => ExplorePageSearchUsersBloc(),
+        ),
+           BlocProvider(
+          create: (context) => LikeUnlikePostBloc(),
+        ),
+           BlocProvider(
+          create: (context) => SavedPostBloc(),
+        ),
+           BlocProvider(
+          create: (context) => FetchSavedPostsBloc(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

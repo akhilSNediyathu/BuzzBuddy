@@ -77,19 +77,20 @@ class _ScreenHomeState extends State<ScreenHome> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: HomeWidgetMain(
-                    onLikeTap: () {},
+                    
                     onCommentTap: () {
                       context.read<GetCommentsBloc>().add(
-                          CommentsFetchEvent(postId: state.post[index].id));
+                          CommentsFetchEvent(postId: state.post[index].id.toString()));
                       commentBottomSheet(
                           context, state.post[index], commentController,
                           formkey: _formkey,
-                          userName: state.post[index].userId.userName,
+                          userName: state.post[index].userId.userName.toString(),
                           profiePic:
                               state.post[index].userId.profilePic.toString(),
                           comments: _comments,
                           id: state.post[index].id.toString());
                     },
+
                     onSaveTap: () {},
                     media: media,
                     model: state.post[index],

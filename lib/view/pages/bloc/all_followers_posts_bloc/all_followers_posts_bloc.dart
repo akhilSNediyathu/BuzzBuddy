@@ -48,8 +48,8 @@ class AllFollowersPostsBloc
       debugPrint('Status code: ${result.statusCode}');
 
       if (result.statusCode == 200) {
-        List<FollowersPostModel> posts = responseBody
-            .map((json) => FollowersPostModel.fromJson(json))
+        List<FollwersPostModel> posts = responseBody
+            .map((json) => FollwersPostModel.fromJson(json))
             .toList();
 
         emit(AllFollowersPostsSuccesfulState(post: posts));
@@ -77,8 +77,8 @@ class AllFollowersPostsBloc
       final List<dynamic> responseBody = jsonDecode(result.body);
 
       if (result.statusCode == 200) {
-        List<FollowersPostModel> newPosts = responseBody
-            .map((json) => FollowersPostModel.fromJson(json))
+        List<FollwersPostModel> newPosts = responseBody
+            .map((json) => FollwersPostModel.fromJson(json))
             .toList();
         emit(AllFollowersPostsSuccesfulState(post: newPosts));
       } else {

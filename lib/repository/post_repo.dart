@@ -255,4 +255,31 @@ class PostRepo {
       log(e.toString());
     }
   }
+  //Like post
+  static Future likePost({required String postId}) async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.patch(
+          Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.likePost}/$postId'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+//unlike post
+  static Future unlikePost({required String postId}) async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.patch(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.unlikePost}/$postId'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
 }

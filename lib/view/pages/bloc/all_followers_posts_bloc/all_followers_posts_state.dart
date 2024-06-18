@@ -27,7 +27,7 @@ final class AllFollowersPostsInitial extends AllFollowersPostsState {}
 final class AllFollowersPostsLoadingState extends AllFollowersPostsState {}
 
 final class AllFollowersPostsSuccesfulState extends AllFollowersPostsState {
-  final List<FollowersPostModel> post;
+  final List<FollwersPostModel> post;
 
   AllFollowersPostsSuccesfulState({required this.post});
 }

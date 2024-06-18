@@ -153,4 +153,45 @@ class UserRepo {
     }
     // final image
   }
+  //get single user
+  static Future getSingleUser({required String userid}) async {
+    try {
+      final token = await getUsertoken();
+      var response = client.get(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.getSingleUser}/$userid'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+//get connections
+  static Future getConnections({required String userId}) async {
+    try {
+      final token = await getUsertoken();
+      var response = client.get(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.getConnections}/$userId'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+// search all users
+  static Future searchAllUsers({required String query}) async {
+    try {
+      final token = await getUsertoken();
+      var response = await client.get(
+          Uri.parse(
+              '${ApiEndpoints.baseUrl}${ApiEndpoints.searchAllUsers}$query'),
+          headers: {'Authorization': 'Bearer $token'});
+      return response;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

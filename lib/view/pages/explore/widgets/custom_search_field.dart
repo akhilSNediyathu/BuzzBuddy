@@ -6,18 +6,20 @@ class TextFormFieldExplore extends StatelessWidget {
   final String hintText;
   final TextInputType keyboard;
   final String? Function(String?)? validator;
+  final Function(String) onTextChanged;
 
   const TextFormFieldExplore({
     super.key,
     required this.controller,
     required this.hintText,
     required this.keyboard,
-    this.validator,
+    this.validator, required this.onTextChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onTextChanged,
       validator: validator,
       cursorWidth: 2,
       controller: controller,
