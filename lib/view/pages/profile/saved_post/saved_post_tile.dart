@@ -1,21 +1,15 @@
-import 'package:buzz_buddy/model/my_post_model/my_post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
-import 'package:buzz_buddy/view/pages/profile/my_post/update_user_post/screen_update_user_post.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class MyPostListingPageTile extends StatelessWidget {
-  final List<MyPostModel> post;
-  const MyPostListingPageTile(
+class SavedPostListingPageTile extends StatelessWidget {
+  const SavedPostListingPageTile(
       {super.key,
       required this.media,
       required this.mainImage,
       required this.profileImage,
-      required this.post,
       required this.userName,
       required this.postTime,
       required this.description,
@@ -23,7 +17,8 @@ class MyPostListingPageTile extends StatelessWidget {
       required this.commentCount,
       required this.likeButtonPressed,
       required this.commentButtonPressed,
-      required this.index});
+      required this.index,
+      required this.removeSaved});
   final String profileImage;
   final String mainImage;
   //  final void Function() onTapSettings;
@@ -34,6 +29,7 @@ class MyPostListingPageTile extends StatelessWidget {
   final String commentCount;
   final VoidCallback likeButtonPressed;
   final VoidCallback commentButtonPressed;
+  final Future<void> Function() removeSaved;
 
   final Size media;
   final int index;
@@ -72,41 +68,22 @@ class MyPostListingPageTile extends StatelessWidget {
                 const Spacer(),
                 PopupMenuButton<String>(
                   onSelected: (String result) {
-                    if (result == 'Edit') {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ScreenUpdateUserPost(
-                              model: post[index],
-                            ),
-                          ));
-                    } else if (result == 'Delete') {
+                    if (result == 'Remove') {
                       showConfirmationDialog(
                           context: context,
                           title: 'Are you sure?',
-                          content:
-                              'this action will remove this post permenently ',
+                          content: 'remove this post from saved..! ',
                           confirmButtonText: 'confirm',
                           cancelButtonText: 'cancel',
-                          onConfirm: () async {
-                            context.read<FetchMyPostBloc>().add(
-                                OnMyPostDeleteButtonPressedEvent(
-                                    postId: post[index].id.toString()));
-                            context
-                                .read<FetchMyPostBloc>()
-                                .add(FetchAllMyPostsEvent());
-                          });
+                          onConfirm: removeSaved
+                          );
                     }
                   },
                   itemBuilder: (BuildContext context) =>
                       <PopupMenuEntry<String>>[
                     const PopupMenuItem<String>(
-                      value: 'Edit',
-                      child: Text('Edit'),
-                    ),
-                    const PopupMenuItem<String>(
-                      value: 'Delete',
-                      child: Text('Delete'),
+                      value: 'Remove',
+                      child: Text('Remove'),
                     ),
                   ],
                 ),
@@ -123,7 +100,6 @@ class MyPostListingPageTile extends StatelessWidget {
             ),
             kheight,
             SizedBox(
-              // color: Colors.blue,
               height: media.width * 0.984,
               width: media.width,
               child: CachedNetworkImage(
@@ -144,23 +120,21 @@ class MyPostListingPageTile extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.favorite_border,
+                        color: customIconColor,
                       ),
-                      iconSize: 30,
-                      color: customIconColor,
                     ),
                     IconButton(
                       onPressed: commentButtonPressed,
                       icon: const Icon(
                         Icons.mode_comment_outlined,
+                        color: customIconColor,
                       ),
-                      iconSize: 28,
-                      color: customIconColor,
                     ),
                     // IconButton(onPressed: () {}, icon: Image.asset(savePostIcon))
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text('$likeCount likes'),
                 )
               ],

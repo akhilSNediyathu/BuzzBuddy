@@ -12,7 +12,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 
 class ScreenEditProfile extends StatefulWidget {
-  const ScreenEditProfile({super.key});
+  const ScreenEditProfile(
+      {super.key, required this.cvImage, required this.prImage});
+  final String cvImage;
+  final String prImage;
   @override
   State<ScreenEditProfile> createState() => _ScreenEditProfileState();
 }
@@ -22,9 +25,12 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
   final TextEditingController bioController = TextEditingController();
   final ValueNotifier<String> profileImageNotifier = ValueNotifier('');
   final ValueNotifier<String> coverImageNotifier = ValueNotifier('');
+
   String profileImageUrl = '';
   String coverImageUrl = '';
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  _ScreenEditProfileState();
 
   @override
   void initState() {
@@ -81,7 +87,7 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
                               image: DecorationImage(
                                 image: coverImagePath.isNotEmpty
                                     ? FileImage(File(coverImagePath))
-                                    : NetworkImage(coverImageUrl)
+                                    : NetworkImage(widget.cvImage)
                                         as ImageProvider,
                                 fit: BoxFit.cover,
                               ),
@@ -111,8 +117,7 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
                                               image: profileImagePath.isNotEmpty
                                                   ? FileImage(
                                                       File(profileImagePath))
-                                                  : NetworkImage(
-                                                          profileImageUrl)
+                                                  : NetworkImage(widget.prImage)
                                                       as ImageProvider,
                                               fit: BoxFit.cover,
                                             ),
@@ -160,7 +165,7 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
                           );
                         },
                       ),
-                      kheight100, 
+                      kheight100,
                       Form(
                         key: _formKey,
                         child: Column(

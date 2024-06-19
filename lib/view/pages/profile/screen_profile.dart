@@ -4,6 +4,7 @@ import 'package:buzz_buddy/utils/dummydata.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/logined_user_details/login_user_details_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
@@ -26,6 +27,8 @@ String logginedUserProfileImage = '';
 String profilepageUserId = '';
 String profileuserName = '';
 late LoginUserModel userdetails;
+  
+  String coverImageUrl = '';
 
 class ScreenProfile extends StatefulWidget {
   const ScreenProfile({super.key});
@@ -41,6 +44,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
     context.read<LoginUserDetailsBloc>().add(OnLoginedUserDataFetchEvent());
     context.read<FetchFollowersBloc>().add(OnfetchAllFollowersEvent());
     context.read<FetchFollowingBloc>().add(OnFetchFollowingUsersEvent());
+    context.read<FetchSavedPostsBloc>().add(SavedPostsInitialFetchEvent());
     super.initState();
   }
 
@@ -100,6 +104,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                         state.userModel.profilePic;
                                     profilepageUserId = state.userModel.id;
                                     userdetails = state.userModel;
+                                    coverImageUrl =state.userModel.backGroundImage;
 
                                     return profileContainer(
                                         media,
@@ -127,7 +132,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (ctx) =>
-                                                    const ScreenEditProfile()));
+                                                     ScreenEditProfile(cvImage:coverImageUrl,prImage:  logginedUserProfileImage,)));
                                       },
                                       text: 'Edit Profile',
                                       width: media.height * 0.12,
@@ -258,9 +263,9 @@ class _ScreenProfileState extends State<ScreenProfile> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 20, vertical: 10),
                           child: TabBar(
-                            labelColor: black,
+                            labelColor: oceanGreen,
                             unselectedLabelColor: grey,
-                            indicatorColor: black,
+                            indicatorColor: oceanGreen,
                             tabs: [
                               Tab(text: 'My Posts'),
                               Tab(text: 'Saved Posts'),

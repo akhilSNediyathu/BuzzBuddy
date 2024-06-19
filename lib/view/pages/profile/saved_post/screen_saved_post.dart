@@ -1,10 +1,26 @@
+import 'package:buzz_buddy/model/comment_model.dart';
+import 'package:buzz_buddy/model/saved_post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/utils/dummydata.dart';
-import 'package:buzz_buddy/view/pages/profile/widgets/post_listing_page_tile.dart';
+
+import 'package:buzz_buddy/utils/functions.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/saved_post_bloc/saved_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
+import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
+import 'package:buzz_buddy/view/pages/explore/widgets/explore_page_shimmer.dart';
+import 'package:buzz_buddy/view/pages/profile/saved_post/saved_post_tile.dart';
+import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenSavedPost extends StatelessWidget {
-  const ScreenSavedPost({super.key});
+  ScreenSavedPost({super.key, required this.model});
+  final List<SavedPostModel> model;
+  final TextEditingController commentController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  final List<Comment> _comments = [];
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +32,59 @@ class ScreenSavedPost extends StatelessWidget {
         automaticallyImplyLeading: true,
         backgroundColor: kPrimaryColor,
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return SavedPostListingPageTile(
-            post: const [],
-            media: media,
-            mainImage: mainImages[index],
-            profileImage: profileImages[index],
-            userName: 'test',
-            postTime: '',
-            description: '',
-            likeCount: '',
-            commentCount: '',
-            likeButtonPressed: () {},
-            commentButtonPressed: () {},
-            index: 1,
-          );
+      body: BlocBuilder<FetchSavedPostsBloc, FetchSavedPostsState>(
+        builder: (context, state) {
+          if (state is FetchSavedPostsSuccesfulState) {
+            if(state.posts.isNotEmpty){
+                  return ListView.builder(
+              itemBuilder: (context, index) {
+                return SavedPostListingPageTile(
+                  media: media,
+                  mainImage: state.posts[index].postId.image,
+                  profileImage: state.posts[index].postId.userId.profilePic,
+                  userName: state.posts[index].postId.userId.userName,
+                  postTime: state.posts[index].postId.createdAt ==
+                          state.posts[index].postId.updatedAt
+                      ? formatDate(
+                          state.posts[index].postId.createdAt.toString())
+                      : ("${formatDate(state.posts[index].postId.updatedAt.toString())} (Edited)"),
+                  description: state.posts[index].postId.description,
+                  likeCount: state.posts[index].postId.likes.length.toString(),
+                  commentCount: '',
+                  likeButtonPressed: () {},
+                  removeSaved: () async {
+                    context.read<SavedPostBloc>().add(
+                        RemoveSavedPostButtonClickEvent(
+                            postId: state.posts[index].postId.id));
+                    context
+                        .read<FetchSavedPostsBloc>()
+                        .add(SavedPostsInitialFetchEvent());
+                  },
+                  commentButtonPressed: () {
+                    context.read<GetCommentsBloc>().add(CommentsFetchEvent(
+                        postId: state.posts[index].postId.id.toString()));
+                    commentBottomSheet(
+                        context, state.posts[index].postId, commentController,
+                        formkey: _formkey,
+                        userName: profileuserName,
+                        profiePic: logginedUserProfileImage,
+                        comments: _comments,
+                        id: state.posts[index].postId.id.toString());
+                  },
+                  index: index,
+                );
+              },
+              itemCount: model.length,
+            );
+            }else{
+                return errorStateWidget('no items found', greyMeduim);  
+            }
+          } else if (state is FetchSavedPostsLoadingState) {
+            return explorePostShimmerLoading();
+          } else {
+            return errorStateWidget('something went wrong', greyMeduim);
+          }
         },
-        itemCount: 5,
       ),
     );
   }
