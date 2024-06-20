@@ -99,7 +99,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
             } else {
               // unexpected states
               return errorStateWidget(
-                  'Unexpected state encountered. Try refreshing.', greyMeduim);
+                  'Something went wrong, Try refreshing.', greyMeduim);
             }
           },
         ),

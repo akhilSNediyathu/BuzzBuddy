@@ -14,7 +14,7 @@ class ScreenMainScreen extends StatelessWidget {
 
   final List<Widget> pages = [
    const ScreenHome(),
-    ScreenSearch(),
+ const ScreenSearch(),
     ScreenAddPost(),
     const ScreenChat(),
     const ScreenProfile(),
