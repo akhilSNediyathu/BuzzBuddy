@@ -33,3 +33,4 @@ final class AllFollowersPostsSuccesfulState extends AllFollowersPostsState {
 }
 
 final class AllFollowersPostsServerErrorState extends AllFollowersPostsState {}
+

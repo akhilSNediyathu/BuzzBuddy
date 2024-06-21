@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/model/followers_posts_model.dart';
 import 'package:buzz_buddy/model/followers_userid_model.dart';
 import 'package:buzz_buddy/model/saved_post_model.dart';
@@ -5,6 +8,7 @@ import 'package:buzz_buddy/model/saved_post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/saved_post_bloc/saved_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
@@ -31,7 +35,9 @@ class HomeWidgetMain extends StatelessWidget {
 
   final VoidCallback onCommentTap;
   final VoidCallback onSaveTap;
+
   List<SavedPostModel> posts = [];
+  List<Comment> comments = [];
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +108,17 @@ class HomeWidgetMain extends StatelessWidget {
           blocs: [
             context.watch<LikeUnlikePostBloc>(),
             context.watch<FetchSavedPostsBloc>(),
-            context.watch<SavedPostBloc>()
+            context.watch<SavedPostBloc>(),
           ],
           builder: (context, state) {
             var state2 = state[1];
             if (state2 is FetchSavedPostsSuccesfulState) {
               posts = state2.posts;
             }
+            context
+                .read<GetCommentsBloc>()
+                .add(CommentsFetchEvent(postId: model.id.toString()));
+
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -171,7 +181,21 @@ class HomeWidgetMain extends StatelessWidget {
                       iconSize: 28,
                       color: customIconColor,
                     ),
-                    const Text('1 comment ')
+                    BlocBuilder<GetCommentsBloc, GetCommentsState>(
+                      builder: (context, state) {
+                        if (state is GetCommentsSuccsfulState) {
+                          log(state.comments.length.toString());
+                          if (state.comments.isNotEmpty) {
+                            return Text(
+                                '${state.comments.length.toString()} comments');
+                          } else {
+                            return const Text('0 comments');
+                          }
+                        } else {
+                          return const Text("comments");
+                        }
+                      },
+                    )
                   ],
                 ),
                 IconButton(

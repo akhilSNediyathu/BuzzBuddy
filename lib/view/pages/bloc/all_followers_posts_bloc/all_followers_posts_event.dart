@@ -17,3 +17,4 @@ sealed class AllFollowersPostsEvent {}
 class AllFollowersPostsInitialFetchEvent extends AllFollowersPostsEvent {}
 
 class LoadMoreEvent extends AllFollowersPostsEvent {}
+class Fetchcomments extends AllFollowersPostsBloc {}

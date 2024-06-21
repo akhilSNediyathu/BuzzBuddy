@@ -1,3 +1,5 @@
+
+
 import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
@@ -15,7 +17,6 @@ import 'package:shimmer/shimmer.dart';
 
 String logginedUserToken = '';
 String logginedUserId = '';
-
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -74,23 +75,25 @@ class _ScreenHomeState extends State<ScreenHome> {
           if (state is AllFollowersPostsSuccesfulState) {
             return ListView.builder(
               itemBuilder: (context, index) {
+        
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: HomeWidgetMain(
-                    
                     onCommentTap: () {
-                      context.read<GetCommentsBloc>().add(
-                          CommentsFetchEvent(postId: state.post[index].id.toString()));
+                      context.read<GetCommentsBloc>().add(CommentsFetchEvent(
+                          postId: state.post[index].id.toString()));
                       commentBottomSheet(
                           context, state.post[index], commentController,
                           formkey: _formkey,
-                          userName: state.post[index].userId.userName.toString(),
+                          userName:
+                              state.post[index].userId.userName.toString(),
                           profiePic:
                               state.post[index].userId.profilePic.toString(),
                           comments: _comments,
                           id: state.post[index].id.toString());
+                      context.read<GetCommentsBloc>().add(CommentsFetchEvent(
+                          postId: state.post[index].id.toString()));
                     },
-
                     onSaveTap: () {},
                     media: media,
                     model: state.post[index],
