@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/model/my_post_model/user_id.dart';
 import 'package:buzz_buddy/repository/user_repo.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,8 @@ class ExplorePageSearchUsersBloc
       if (response.statusCode == 200) {
         debugPrint('searchallusers statuscode-${response.statusCode}');
         List<dynamic> jsonResponse = jsonDecode(response.body);
-        final List<UserId> users =
-            jsonResponse.map((user) => UserId.fromJson(user)).toList();
+        final List<UserIdSearchModel> users =
+            jsonResponse.map((user) => UserIdSearchModel.fromJson(user)).toList();
         emit(ExplorePageSearchUserSuccesState(users: users));
       } else {
         emit(ExplorePageSearchUsersErrorState());

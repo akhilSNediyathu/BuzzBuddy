@@ -1,9 +1,12 @@
 // Function to build the grid view of posts
+
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/bloc/search_user_bloc/explore_page_search_users_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/list_tile.dart';
+import 'package:buzz_buddy/view/pages/explore/explore_user_profile.dart';
+import 'package:buzz_buddy/view/pages/explore/screen_explore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +30,11 @@ Widget postsGridViewWidget(FetchExplorePostsSuccesState state, Size media,
         final post = state.posts[index];
         return GestureDetector(
           onTap: () {
-            debugPrint('Post tapped: ${post.image}');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ScreenExplore(),
+                ));
           },
           child: Padding(
             padding: const EdgeInsets.all(4.0),
@@ -83,9 +90,20 @@ Widget fetchExploreErrorReloadWidget(BuildContext context) {
 
 // Function to build the list view of users
 Widget filteredUsersListView(
-    ExplorePageSearchUserSuccesState state, Size media) {
+  ExplorePageSearchUserSuccesState state,
+  Size media,
+) {
   return ListView.builder(
     itemBuilder: (context, index) => CustomListTile(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ScreenExploreUserProfile(
+                  userId: state.users[index].id.toString(),
+                  user: state.users[index]),
+            ));
+      },
       profileImageUrl: state.users[index].profilePic.toString(),
       buttonText: '',
       titleText: state.users[index].userName.toString(),

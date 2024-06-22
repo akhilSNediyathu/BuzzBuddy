@@ -1,16 +1,15 @@
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
+
 import 'package:buzz_buddy/view/pages/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
-import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class SavedPostListingPageTile extends StatelessWidget {
-  const SavedPostListingPageTile({
+class ExplorePageMainTile extends StatelessWidget {
+  const ExplorePageMainTile({
     super.key,
     required this.media,
     required this.mainImage,
@@ -37,7 +36,7 @@ class SavedPostListingPageTile extends StatelessWidget {
   final VoidCallback likeButtonPressed;
   final VoidCallback? commentButtonPressed;
   final Future<void> Function() removeSaved;
-  final FetchSavedPostsSuccesfulState statesaved;
+  final FetchExplorePostsSuccesState statesaved;
   final Size media;
   final int index;
 
@@ -78,27 +77,7 @@ class SavedPostListingPageTile extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                PopupMenuButton<String>(
-                  onSelected: (String result) {
-                    if (result == 'Remove') {
-                      showConfirmationDialog(
-                        context: context,
-                        title: 'Are you sure?',
-                        content: 'Remove this post from saved..!',
-                        confirmButtonText: 'Confirm',
-                        cancelButtonText: 'Cancel',
-                        onConfirm: removeSaved,
-                      );
-                    }
-                  },
-                  itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<String>>[
-                    const PopupMenuItem<String>(
-                      value: 'Remove',
-                      child: Text('Remove'),
-                    ),
-                  ],
-                ),
+                //
               ],
             ),
             kheight,
@@ -125,8 +104,8 @@ class SavedPostListingPageTile extends StatelessWidget {
             ),
             BlocBuilder<LikeUnlikePostBloc, LikeUnlikePostState>(
               builder: (context, state) {
-                bool isLiked = post.postId.likes.contains(logginedUserId);
-                int currentLikeCount = post.postId.likes.length;
+                bool isLiked = post.likes.contains(logginedUserId);
+                int currentLikeCount = post.likes.length;
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,29 +116,23 @@ class SavedPostListingPageTile extends StatelessWidget {
                           onTap: () {
                             if (isLiked) {
                               context.read<LikeUnlikePostBloc>().add(
-                                    UnlikePostButtonClickEvent(
-                                        postId: post.postId.id),
+                                    UnlikePostButtonClickEvent(postId: post.id),
                                   );
 
-                              post.postId.likes.remove(logginedUserId);
+                              post.likes.remove(logginedUserId);
                             } else {
                               context.read<LikeUnlikePostBloc>().add(
-                                    LikePostButtonClickEvent(
-                                        postId: post.postId.id),
+                                    LikePostButtonClickEvent(postId: post.id),
                                   );
 
-                              post.postId.likes.add(logginedUserId);
+                              post.likes.add(logginedUserId);
                             }
-
-                            context
-                                .read<AllFollowersPostsBloc>()
-                                .add(AllFollowersPostsInitialFetchEvent());
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Icon(
                               isLiked ? Icons.favorite : Icons.favorite_border,
-                              color: isLiked ? red : null,
+                              color: isLiked ? red : customIconColor,
                             ),
                           ),
                         ),

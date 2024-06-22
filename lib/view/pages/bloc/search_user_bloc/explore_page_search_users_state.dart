@@ -5,7 +5,7 @@ sealed class ExplorePageSearchUsersState {}
 
 final class ExplorePageSearchUsersInitial extends ExplorePageSearchUsersState {}
 final class ExplorePageSearchUserSuccesState extends ExplorePageSearchUsersState {
-      final List<UserId> users;
+      final List<UserIdSearchModel> users;
 
   ExplorePageSearchUserSuccesState({required this.users});
 }

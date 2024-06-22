@@ -2,6 +2,7 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/bloc/search_user_bloc/explore_page_search_users_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';import 'package:buzz_buddy/view/pages/explore/debouncer/debouncer.dart';
+import 'package:buzz_buddy/view/pages/explore/explore_user_profile.dart';
 import 'package:buzz_buddy/view/pages/explore/widgets/custom_search_field.dart';
 import 'package:buzz_buddy/view/pages/explore/widgets/explore_page_shimmer.dart';
 import 'package:buzz_buddy/view/pages/explore/widgets/main_widgets.dart';
@@ -87,7 +88,7 @@ class _ScreenSearchState extends State<ScreenSearch> {
                         is ExplorePageSearchUserSuccesState) {
                       return searchState.users.isEmpty
                           ? errorStateWidget('No User Found!', greyMeduim)
-                          : filteredUsersListView(searchState, media);
+                          : filteredUsersListView(searchState, media,);
                     } else {
                       return errorStateWidget('No User Found!', greyMeduim);
                     }
