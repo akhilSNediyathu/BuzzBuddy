@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/model/saved_post_model.dart';
 import 'package:buzz_buddy/repository/post_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-
 
 part 'fetch_saved_posts_event.dart';
 part 'fetch_saved_posts_state.dart';
@@ -25,6 +25,7 @@ class FetchSavedPostsBloc
     final responseBody = jsonDecode(result.body);
     final List data = responseBody;
     debugPrint('saved post fetch statuscode-${result.statusCode}');
+
     if (result.statusCode == 200) {
       final List<SavedPostModel> posts =
           data.map((json) => SavedPostModel.fromJson(json)).toList();

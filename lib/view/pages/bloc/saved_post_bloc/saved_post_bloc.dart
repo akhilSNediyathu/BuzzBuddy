@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/model/save_post_model.dart';
@@ -19,10 +20,13 @@ class SavedPostBloc extends Bloc<SavedPostEvent, SavedPostState> {
 
   FutureOr<void> savePostButtonClickEvent(
       SavePostButtonClickEvent event, Emitter<SavedPostState> emit) async {
+   
     emit(SavePostLoadingState());
     final Response result = await PostRepo.savePost(postId: event.postId);
     final responseBody = jsonDecode(result.body);
+
     debugPrint('save post statuscode-${result.statusCode}');
+
     if (result.statusCode == 200) {
       final SavePostModel post = SavePostModel.fromJson(responseBody);
       emit(SavePostSuccesfulState(post: post));
@@ -41,7 +45,6 @@ class SavedPostBloc extends Bloc<SavedPostEvent, SavedPostState> {
         await PostRepo.removeSavedPost(postId: event.postId);
     debugPrint('delete saved post statuscode-${result.statusCode}');
     if (result.statusCode == 200) {
-
       emit(RemoveSavedPostSuccesfulState());
     } else if (result.statusCode == 500) {
       emit(RemoveSavedPostServerErrorState());

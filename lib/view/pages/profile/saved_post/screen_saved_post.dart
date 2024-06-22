@@ -44,11 +44,10 @@ class ScreenSavedPost extends StatelessWidget {
                     mainImage: state.posts[index].postId.image,
                     profileImage: state.posts[index].postId.userId.profilePic,
                     userName: state.posts[index].postId.userId.userName,
-                    postTime: state.posts[index].postId.createdAt ==
-                            state.posts[index].postId.updatedAt
-                        ? formatDate(
-                            state.posts[index].postId.createdAt.toString())
-                        : ("${formatDate(state.posts[index].postId.updatedAt.toString())} (Edited)"),
+                    postTime: state.posts[index].createdAt ==
+                            state.posts[index].editedTime
+                        ? formatDate(state.posts[index].createdAt.toString())
+                        : ("${formatDate(state.posts[index].editedTime.toString())} (Edited)"),
                     description: state.posts[index].postId.description,
                     likeCount:
                         state.posts[index].postId.likes.length.toString(),

@@ -1,60 +1,65 @@
 import 'package:buzz_buddy/model/followers_userid_model.dart';
 
-
 class FollwersPostModel {
-    List<dynamic> taggedUsers;
-    String? id;
-    FollowersUserIdModel userId;
-    String? image;
-    String? description;
-    List<FollowersUserIdModel> likes;
-    bool? hidden;
-    bool? blocked;
-    List<String> tags;
-    DateTime date;
-    DateTime createdAt;
-    DateTime updatedAt;
-    int? v;
-    bool? isLiked;
-    bool? isSaved;
+  List<dynamic> taggedUsers;
+  String? id;
+  FollowersUserIdModel userId;
+  String? image;
+  String? description;
+  List<FollowersUserIdModel> likes;
+  bool? hidden;
+  bool? blocked;
+  List<String> tags;
+  DateTime date;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int? v;
+  bool? isLiked;
+  bool? isSaved;
+  DateTime? editedTime;
+  int? commentCount;
 
-    FollwersPostModel({
-        required this.taggedUsers,
-        required this.id,
-        required this.userId,
-        required this.image,
-        required this.description,
-        required this.likes,
-        required this.hidden,
-        required this.blocked,
-        required this.tags,
-        required this.date,
-        required this.createdAt,
-        required this.updatedAt,
-        required this.v,
-         this.isLiked,
-         this.isSaved,
-    });
+  FollwersPostModel(
+      {required this.taggedUsers,
+      required this.id,
+      required this.userId,
+      required this.image,
+      required this.description,
+      required this.likes,
+      required this.hidden,
+      required this.blocked,
+      required this.tags,
+      required this.date,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.v,
+      this.isLiked,
+      this.isSaved,
+      this.editedTime,
+      this.commentCount});
 
-    factory FollwersPostModel.fromJson(Map<String, dynamic> json) => FollwersPostModel(
-        taggedUsers: List<dynamic>.from(json["taggedUsers"].map((x) => x)),
-        id: json["_id"],
-        userId: FollowersUserIdModel.fromJson(json["userId"]),
-        image: json["image"],
-        description: json["description"],
-        likes: List<FollowersUserIdModel>.from(json["likes"].map((x) => FollowersUserIdModel.fromJson(x))),
-        hidden: json["hidden"],
-        blocked: json["blocked"],
-        tags: List<String>.from(json["tags"].map((x) => x)),
-        date: DateTime.parse(json["date"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-        isLiked: json["isLiked"],
-        isSaved: json["isSaved"],
-    );
+  factory FollwersPostModel.fromJson(Map<String, dynamic> json) =>
+      FollwersPostModel(
+          taggedUsers: List<dynamic>.from(json["taggedUsers"].map((x) => x)),
+          id: json["_id"],
+          userId: FollowersUserIdModel.fromJson(json["userId"]),
+          image: json["image"],
+          description: json["description"],
+          likes: List<FollowersUserIdModel>.from(
+              json["likes"].map((x) => FollowersUserIdModel.fromJson(x))),
+          hidden: json["hidden"],
+          blocked: json["blocked"],
+          tags: List<String>.from(json["tags"].map((x) => x)),
+          date: DateTime.parse(json["date"]),
+          createdAt: DateTime.parse(json["createdAt"]),
+          updatedAt: DateTime.parse(json["updatedAt"]),
+          v: json["__v"],
+          isLiked: json["isLiked"],
+          isSaved: json["isSaved"],
+          commentCount: json["commentCount"],
+          editedTime: DateTime.parse(json["edited"]));
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "taggedUsers": List<dynamic>.from(taggedUsers.map((x) => x)),
         "_id": id,
         "userId": userId.toJson(),
@@ -70,5 +75,7 @@ class FollwersPostModel {
         "__v": v,
         "isLiked": isLiked,
         "isSaved": isSaved,
-    };
+        "edited": editedTime,
+        "commentCount": commentCount,
+      };
 }

@@ -74,30 +74,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                 profilepageUserId = state.userModel.id;
                 userdetails = state.userModel;
                 coverImageUrl = state.userModel.backGroundImage;
-                final postsCount = context.read<FetchMyPostBloc>().state
-                        is FetchMyPostSuccesState
-                    ? (context.read<FetchMyPostBloc>().state
-                            as FetchMyPostSuccesState)
-                        .posts
-                        .length
-                    : 0;
-
-                final followersCount = context.read<FetchFollowersBloc>().state
-                        is FetchFollowersSuccesState
-                    ? (context.read<FetchFollowersBloc>().state
-                            as FetchFollowersSuccesState)
-                        .followersModel
-                        .totalCount
-                    : 0;
-
-                final followingCount = context.read<FetchFollowingBloc>().state
-                        is FetchFollowingSuccesState
-                    ? (context.read<FetchFollowingBloc>().state
-                            as FetchFollowingSuccesState)
-                        .model
-                        .totalCount
-                    : 0;
-
+        
                 return NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) {
                     return [
@@ -122,9 +99,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                       ),
                       SliverToBoxAdapter(
                         child: ProfileSession2(
-                          postsCount: postsCount,
-                          followersCount: followersCount,
-                          followingCount: followingCount,
+                        
                           onPostsTap: () {
                             if (context.read<FetchMyPostBloc>().state
                                 is FetchMyPostSuccesState) {

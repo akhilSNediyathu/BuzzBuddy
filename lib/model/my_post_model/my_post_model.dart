@@ -21,6 +21,7 @@ class MyPostModel {
   DateTime? updatedAt;
   @JsonKey(name: '__v')
   int? v;
+  DateTime? editedTime;
 
   MyPostModel({
     this.id,
@@ -36,6 +37,7 @@ class MyPostModel {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.editedTime
   });
 
   factory MyPostModel.fromJson(Map<String, dynamic> json) {

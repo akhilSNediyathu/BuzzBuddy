@@ -23,7 +23,7 @@ class ScreenMyPost extends StatefulWidget {
 }
 
 class _ScreenMyPostState extends State<ScreenMyPost> {
-       TextEditingController commentController = TextEditingController();
+  TextEditingController commentController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   final List<Comment> _comments = [];
   @override
@@ -71,24 +71,22 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
                   post: state.posts,
 
                   userName: postItem.userId?.userName.toString() ?? '',
-                  postTime: postItem.createdAt == postItem.updatedAt
+                  postTime: postItem.createdAt == postItem.editedTime
                       ? formatDate(postItem.createdAt.toString())
-                      : ("${formatDate(postItem.updatedAt.toString())} (Edited)"),
+                      : ("${formatDate(postItem.editedTime.toString())} (Edited)"),
                   description: postItem.description.toString(),
                   likeCount: postItem.likes!.length.toString(),
                   commentCount: '2', // need to add
                   likeButtonPressed: () {},
                   commentButtonPressed: () {
-                        context.read<GetCommentsBloc>().add(
-                          CommentsFetchEvent(postId: postItem.id.toString()));
-                      commentBottomSheet(
-                          context, postItem, commentController,
-                          formkey: _formkey,
-                          userName:profileuserName ,
-                          profiePic:
-                             logginedUserProfileImage,
-                          comments: _comments,
-                          id: postItem.id.toString());
+                    context.read<GetCommentsBloc>().add(
+                        CommentsFetchEvent(postId: postItem.id.toString()));
+                    commentBottomSheet(context, postItem, commentController,
+                        formkey: _formkey,
+                        userName: profileuserName,
+                        profiePic: logginedUserProfileImage,
+                        comments: _comments,
+                        id: postItem.id.toString());
                   },
                   index: index,
                 );

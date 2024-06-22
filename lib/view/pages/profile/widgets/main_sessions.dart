@@ -1,4 +1,6 @@
 import 'package:buzz_buddy/utils/constants.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/profile_succes_dummy_container.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
@@ -58,18 +60,19 @@ class ProfileSession1 extends StatelessWidget {
     );
   }
 }
+
 class ProfileSession2 extends StatelessWidget {
-  final int postsCount;
-  final int followersCount;
-  final int followingCount;
+//   final int postsCount;
+//   final int followersCount;
+//   final int followingCount;
   final VoidCallback onPostsTap;
   final VoidCallback onFollowersTap;
   final VoidCallback onFollowingTap;
 
   const ProfileSession2({
-    required this.postsCount,
-    required this.followersCount,
-    required this.followingCount,
+//     required this.postsCount,
+//     required this.followersCount,
+//     required this.followingCount,
     required this.onPostsTap,
     required this.onFollowersTap,
     required this.onFollowingTap,
@@ -83,23 +86,55 @@ class ProfileSession2 extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          customTextColumn(
-            text1: postsCount.toString(),
-            text2: 'Posts',
-            textStyle: profilecolumnStyle,
-            onTap: onPostsTap,
+          BlocBuilder<FetchMyPostBloc, FetchMyPostState>(
+            builder: (context, state) {
+              return state is FetchMyPostSuccesState
+                  ? customTextColumn(
+                      text1: state.posts.length.toString(),
+                      text2: 'Posts',
+                      textStyle: profilecolumnStyle,
+                      onTap: onPostsTap,
+                    )
+                  : customTextColumn(
+                      text1: '',
+                      text2: 'Posts',
+                      textStyle: profilecolumnStyle,
+                      onTap: () {});
+            },
           ),
-          customTextColumn(
-            text1: followersCount.toString(),
-            text2: 'Followers',
-            textStyle: profilecolumnStyle,
-            onTap: onFollowersTap,
+          BlocBuilder<FetchFollowersBloc, FetchFollowersState>(
+            builder: (context, state) {
+              return state is FetchFollowersSuccesState
+                  ? customTextColumn(
+                      text1: state.followersModel.followers.length.toString(),
+                      text2: 'Followers',
+                      textStyle: profilecolumnStyle,
+                      onTap: onFollowersTap,
+                    )
+                  : customTextColumn(
+                      text1: '',
+                      text2: 'Followers',
+                      textStyle: profilecolumnStyle,
+                      onTap: onFollowersTap,
+                    );
+            },
           ),
-          customTextColumn(
-            text1: followingCount.toString(),
-            text2: 'Following',
-            textStyle: profilecolumnStyle,
-            onTap: onFollowingTap,
+          BlocBuilder<FetchFollowingBloc, FetchFollowingState>(
+            builder: (context, state) {
+              return state is FetchFollowingSuccesState
+                  ? customTextColumn(
+                      text1: state.model.following.length.toString(),
+                      text2: 'Following',
+                      textStyle: profilecolumnStyle,
+                      onTap: onFollowingTap,
+                    )
+                  : customTextColumn(
+                      text1: '',
+                      text2: 'Following',
+                      textStyle: profilecolumnStyle,
+                      onTap: onFollowingTap,
+                    );
+            },
           ),
         ],
       ),

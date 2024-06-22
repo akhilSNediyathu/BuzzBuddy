@@ -41,6 +41,7 @@ class HomeWidgetMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -68,9 +69,9 @@ class HomeWidgetMain extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  model.createdAt == model.updatedAt
+                  model.createdAt == model.editedTime
                       ? formatDate(model.createdAt.toString())
-                      : ("${formatDate(model.updatedAt.toString())} (Edited)"),
+                      : ("${formatDate(model.editedTime.toString())} (Edited)"),
                 ),
               ],
             )
@@ -181,21 +182,7 @@ class HomeWidgetMain extends StatelessWidget {
                       iconSize: 28,
                       color: customIconColor,
                     ),
-                    BlocBuilder<GetCommentsBloc, GetCommentsState>(
-                      builder: (context, state) {
-                        if (state is GetCommentsSuccsfulState) {
-                          log(state.comments.length.toString());
-                          if (state.comments.isNotEmpty) {
-                            return Text(
-                                '${state.comments.length.toString()} comments');
-                          } else {
-                            return const Text('0 comments');
-                          }
-                        } else {
-                          return const Text("comments");
-                        }
-                      },
-                    )
+                    Text("${model.commentCount.toString()} comments")
                   ],
                 ),
                 IconButton(

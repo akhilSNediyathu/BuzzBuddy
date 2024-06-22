@@ -4,14 +4,15 @@ class SavedPostModel {
   DateTime createdAt;
   DateTime updatedAt;
   int? v;
+  DateTime? editedTime;
 
-  SavedPostModel({
-    required this.userId,
-    required this.postId,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
-  });
+  SavedPostModel(
+      {required this.userId,
+      required this.postId,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.v,
+      this.editedTime});
 
   factory SavedPostModel.fromJson(Map<String, dynamic> json) => SavedPostModel(
         userId: json["userId"],
@@ -19,6 +20,7 @@ class SavedPostModel {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        editedTime: DateTime.parse(json["editedTime"] ?? json["createdAt"]),
       );
 
   Map<String, dynamic> toJson() => {
