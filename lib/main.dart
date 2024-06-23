@@ -3,6 +3,7 @@ import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/pages/bloc/add_post_bloc/add_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
+import 'package:buzz_buddy/view/pages/bloc/get_connections_bloc/get_connections_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/saved_post_bloc/saved_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/search_user_bloc/explore_page_search_users_bloc.dart';
@@ -108,6 +109,10 @@ class MyApp extends StatelessWidget {
            BlocProvider(
           create: (context) => FetchSavedPostsBloc(),
         ),
+            BlocProvider(
+          create: (context) => GetConnectionsBloc(),
+        ),
+        
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

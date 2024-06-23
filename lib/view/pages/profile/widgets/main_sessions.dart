@@ -42,13 +42,13 @@ class ProfileSession1 extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 20),
               child: customMaterialButton(
-                color: kPrimaryColor,
-                onPressed: onEditProfile,
-                text: 'Edit Profile',
-                width: media.height * 0.12,
-                height: media.height * 0.05,
-                textStyle: const TextStyle(fontSize: 16),
-              ),
+                  color: kPrimaryColor,
+                  onPressed: onEditProfile,
+                  text: 'Edit Profile',
+                  width: media.height * 0.12,
+                  height: media.height * 0.05,
+                  textStyle: const TextStyle(fontSize: 16),
+                  borderRadius: 20),
             ),
           ],
         ),
@@ -62,17 +62,11 @@ class ProfileSession1 extends StatelessWidget {
 }
 
 class ProfileSession2 extends StatelessWidget {
-//   final int postsCount;
-//   final int followersCount;
-//   final int followingCount;
   final VoidCallback onPostsTap;
   final VoidCallback onFollowersTap;
   final VoidCallback onFollowingTap;
 
   const ProfileSession2({
-//     required this.postsCount,
-//     required this.followersCount,
-//     required this.followingCount,
     required this.onPostsTap,
     required this.onFollowersTap,
     required this.onFollowingTap,

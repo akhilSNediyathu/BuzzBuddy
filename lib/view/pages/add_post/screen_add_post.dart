@@ -93,6 +93,7 @@ class ScreenAddPost extends StatelessWidget {
                           );
                         }
                         return customMaterialButton(
+                              borderRadius: 20,
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               if (pickImage.value != '' &&

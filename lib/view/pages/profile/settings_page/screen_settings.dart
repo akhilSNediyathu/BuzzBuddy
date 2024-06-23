@@ -4,6 +4,8 @@ import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
 import 'package:buzz_buddy/view/pages/login/screen_login.dart';
 import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
+import 'package:buzz_buddy/view/pages/profile/about_us/screen_about_us.dart';
+import 'package:buzz_buddy/view/pages/profile/privacy_policy/screen_privacy_policies.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/custom_settings_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,20 +27,26 @@ class ScreenSettings extends StatelessWidget {
         ),
         body: Column(
           children: [
+            // customSettingsListTile(
+            //     onTap: () {
+            //       context
+            //           .read<FetchFollowingBloc>()
+            //           .add(OnFetchFollowingUsersEvent());
+            //     },
+            //     leading: const Icon(Icons.doorbell_outlined),
+            //     title: "Notifiacation",
+            //     trailing: const Icon(
+            //       Icons.arrow_forward_ios,
+            //       size: 20,
+            //     )),
             customSettingsListTile(
                 onTap: () {
-                  context
-                      .read<FetchFollowingBloc>()
-                      .add(OnFetchFollowingUsersEvent());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PrivacyPolicyPage(),
+                      ));
                 },
-                leading: const Icon(Icons.doorbell_outlined),
-                title: "Notifiacation",
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                )),
-            customSettingsListTile(
-                onTap: () {},
                 leading: const Icon(Icons.privacy_tip_outlined),
                 title: "Privacy Policies",
                 trailing: const Icon(
@@ -46,7 +54,13 @@ class ScreenSettings extends StatelessWidget {
                   size: 20,
                 )),
             customSettingsListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ScreenAboutUs(),
+                      ));
+                },
                 leading: const Icon(Icons.info_outline),
                 title: "About us",
                 trailing: const Icon(

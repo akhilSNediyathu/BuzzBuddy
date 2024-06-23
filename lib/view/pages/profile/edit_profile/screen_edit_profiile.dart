@@ -196,6 +196,7 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
                                       color: kPrimaryColor);
                                 }
                                 return customMaterialButton(
+                                    borderRadius: 20,
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       if (userDetailsState

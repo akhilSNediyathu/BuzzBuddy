@@ -6,7 +6,7 @@ Widget customMaterialButton({
   required Color color,
   required double width,
   required double height,
-  double borderRadius = 20.0,
+  required double borderRadius,
   TextStyle textStyle = const TextStyle(color: Colors.black),
 }) {
   return MaterialButton(

@@ -118,6 +118,7 @@ class ScreenUpdateUserPost extends StatelessWidget {
                                 }
                               },
                               text: 'Save',
+                              borderRadius: 20,
                               color: kPrimaryColor,
                               width: media.width,
                               height: media.height * 0.06);

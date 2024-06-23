@@ -41,12 +41,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     );
   }
 
-  // goToLogin(context) async {
-  //   await Future.delayed(const Duration(seconds: 3));
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => ScreenRegister()),
-  //   );
+
 }
 
 Future<void> checkUserLogin(context) async {

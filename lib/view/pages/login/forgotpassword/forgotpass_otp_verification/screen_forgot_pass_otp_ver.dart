@@ -192,6 +192,7 @@ class ScreenForgotpassOtpVerificaion extends StatelessWidget {
                                 color: kPrimaryColor);
                           }
                           return customMaterialButton(
+                              borderRadius: 20,
                             onPressed: () async {
                               if (validateOtp()) {
                                 String otp = _controllers

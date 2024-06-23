@@ -193,6 +193,7 @@ class PostRepo {
       log(e.toString());
     }
   }
+
   //comment post
   static Future commentPost(
       {required String postId,
@@ -233,7 +234,7 @@ class PostRepo {
               '${ApiEndpoints.baseUrl}${ApiEndpoints.getAllComments}/$postId'),
           headers: {'Authorization': 'Bearer $token'});
       debugPrint(response.statusCode.toString());
-      debugPrint(response.body);
+
       return response;
     } catch (e) {
       log(e.toString());
@@ -255,6 +256,7 @@ class PostRepo {
       log(e.toString());
     }
   }
+
   //Like post
   static Future likePost({required String postId}) async {
     try {
@@ -281,5 +283,4 @@ class PostRepo {
       log(e.toString());
     }
   }
-
 }

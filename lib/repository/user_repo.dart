@@ -12,7 +12,7 @@ import 'package:http/http.dart';
 class UserRepo {
   static var client = http.Client();
   //Fetch loggedIn user posts
-  static Future<Response?> fetchUserPosts({String? userId}) async {
+  static Future fetchUserPosts({String? userId}) async {
     try {
       final loggineduserId = await getUserId();
       if (kDebugMode) {
@@ -29,7 +29,7 @@ class UserRepo {
       return response;
     } catch (e) {
       log(e.toString());
-      return null;
+      
     }
   }
 
