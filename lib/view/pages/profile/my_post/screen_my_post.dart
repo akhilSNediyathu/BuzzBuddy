@@ -83,8 +83,8 @@ class _ScreenMyPostState extends State<ScreenMyPost> {
                         CommentsFetchEvent(postId: postItem.id.toString()));
                     commentBottomSheet(context, postItem, commentController,
                         formkey: _formkey,
-                        userName: profileuserName,
-                        profiePic: logginedUserProfileImage,
+                        // userName: profileuserName,
+                        // profiePic: logginedUserProfileImage,
                         comments: _comments,
                         id: postItem.id.toString());
                   },

@@ -19,7 +19,20 @@ String logginedUserProfileImage = '';
 String profilepageUserId = '';
 String profileuserName = '';
 String coverImageUrl = '';
-late LoginUserModel userdetails;
+LoginUserModel userdetails = LoginUserModel(
+    id: '',
+    userName: '',
+    email: '',
+    phone: '',
+    online: true,
+    blocked: false,
+    verified: false,
+    role: '',
+    isPrivate: false,
+    createdAt: DateTime(20242024 - 06 - 24),
+    updatedAt: DateTime(20242024 - 06 - 24),
+    profilePic: '',
+    backGroundImage: '');
 
 class ScreenProfile extends StatefulWidget {
   const ScreenProfile({super.key});
@@ -74,7 +87,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                 profilepageUserId = state.userModel.id;
                 userdetails = state.userModel;
                 coverImageUrl = state.userModel.backGroundImage;
-        
+
                 return NestedScrollView(
                   headerSliverBuilder: (context, innerBoxIsScrolled) {
                     return [
@@ -99,7 +112,6 @@ class _ScreenProfileState extends State<ScreenProfile> {
                       ),
                       SliverToBoxAdapter(
                         child: ProfileSession2(
-                        
                           onPostsTap: () {
                             if (context.read<FetchMyPostBloc>().state
                                 is FetchMyPostSuccesState) {

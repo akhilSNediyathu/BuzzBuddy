@@ -25,7 +25,7 @@ class ScreenHome extends StatefulWidget {
 }
 
 class _ScreenHomeState extends State<ScreenHome> {
-  TextEditingController commentController = TextEditingController();
+  TextEditingController commentControllers = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   final List<Comment> _comments = [];
 
@@ -85,21 +85,32 @@ class _ScreenHomeState extends State<ScreenHome> {
                       padding: const EdgeInsets.all(8.0),
                       child: HomeWidgetMain(
                         onCommentTap: () {
+                          //   context.read<GetCommentsBloc>().add(
+                          //       CommentsFetchEvent(
+                          //           postId: state.post[index].id.toString()));
+                          //   commentBottomSheet(
+                          //       context, state.post[index], commentControllers,
+                          //       formkey: _formkey,
+                          //       // userName:
+                          //       //     state.post[index].userId.userName.toString(),
+                          //       // profiePic: state.post[index].userId.profilePic
+                          //       //   .toString(),
+                          //       comments: _comments,
+                          //       id: state.post[index].id.toString());
+                          //   context.read<GetCommentsBloc>().add(
+                          //       CommentsFetchEvent(
+                          //           postId: state.post[index].id.toString()));
+                          //   //   context
+                          //   //       .read<AllFollowersPostsBloc>()
+                          //   //       .add(AllFollowersPostsInitialFetchEvent());
                           context.read<GetCommentsBloc>().add(
                               CommentsFetchEvent(
                                   postId: state.post[index].id.toString()));
                           commentBottomSheet(
-                              context, state.post[index], commentController,
+                              context, state.post[index], commentControllers,
                               formkey: _formkey,
-                              userName:
-                                  state.post[index].userId.userName.toString(),
-                              profiePic: state.post[index].userId.profilePic
-                                  .toString(),
                               comments: _comments,
                               id: state.post[index].id.toString());
-                          context.read<GetCommentsBloc>().add(
-                              CommentsFetchEvent(
-                                  postId: state.post[index].id.toString()));
                         },
                         onSaveTap: () {},
                         media: media,

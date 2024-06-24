@@ -10,7 +10,7 @@ import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottom
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
 import 'package:buzz_buddy/view/pages/explore/widgets/explore_page_shimmer.dart';
 import 'package:buzz_buddy/view/pages/profile/saved_post/saved_post_tile.dart';
-import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,8 +67,8 @@ class ScreenSavedPost extends StatelessWidget {
                       commentBottomSheet(
                           context, state.posts[index].postId, commentController,
                           formkey: _formkey,
-                          userName: profileuserName,
-                          profiePic: logginedUserProfileImage,
+                          //   userName: profileuserName,
+                          //   profiePic: logginedUserProfileImage,
                           comments: _comments,
                           id: state.posts[index].postId.id.toString());
                     },

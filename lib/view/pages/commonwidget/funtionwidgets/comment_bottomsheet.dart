@@ -1,6 +1,4 @@
 import 'package:buzz_buddy/model/comment_model.dart';
-import 'package:buzz_buddy/model/followers_posts_model.dart';
-import 'package:buzz_buddy/model/post_user_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/bloc/comment_post_bloc/comment_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/bloc/delete_comment_bloc/delete_comment_bloc.dart';
@@ -12,17 +10,16 @@ import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:multi_bloc_builder/builders/multi_bloc_builder.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
 
-User? loggedinuser;
-Future<dynamic> commentBottomSheet(BuildContext context,
-     post, TextEditingController commentController,
+Future<dynamic> commentBottomSheet(
+    BuildContext context, post, TextEditingController commentController,
     {required GlobalKey<FormState> formkey,
-    required String profiePic,
-    required String userName,
     required List<Comment> comments,
     required String id}) {
   return showModalBottomSheet(
+    backgroundColor: kwhiteColor,
     context: context,
     builder: (context) => Padding(
       padding: const EdgeInsets.all(10.0),
@@ -32,6 +29,7 @@ Future<dynamic> commentBottomSheet(BuildContext context,
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(logginedUserProfileImage),
+                backgroundColor: grey,
                 radius: 25,
               ),
               kwidth,
@@ -56,7 +54,7 @@ Future<dynamic> commentBottomSheet(BuildContext context,
                             content: commentController.text,
                             createdAt: DateTime.now(),
                             user: CommentUser(
-                              id: profilepageUserId,
+                              id: logginedUserId,
                               userName: profileuserName,
                               profilePic: logginedUserProfileImage,
                             ),
@@ -77,24 +75,18 @@ Future<dynamic> commentBottomSheet(BuildContext context,
                           if (formkey.currentState!.validate()) {
                             context.read<CommentPostBloc>().add(
                                   CommentPostButtonClickEvent(
-                                    userName: userName,
-                                    postId: id,
-                                    content: commentController.text,
-                                  ),
+                                      userName: profileuserName,
+                                      postId: id,
+                                      content: commentController.text),
                                 );
-                          } else {
-                       //     print('Error: logginedUser is null');
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'Post',
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
-                              color: Theme.of(context).brightness ==
-                                      Brightness.light
-                                  ? black
-                                  : kwhiteColor),
+                              color: black),
                         ),
                       ),
                     ),
@@ -173,9 +165,9 @@ Future<dynamic> commentBottomSheet(BuildContext context,
                                     GestureDetector(
                                       onTap: () {
                                         confirmationDialog(context,
-                                            title: 'Delete this comment?',
+                                            title: 'Delete',
                                             content:
-                                                'Are you sure you want to delete this comment',
+                                                'Are you sure want to Delete comment ?',
                                             onpressed: () {
                                           Navigator.pop(context);
                                           context.read<DeleteCommentBloc>().add(
@@ -183,13 +175,10 @@ Future<dynamic> commentBottomSheet(BuildContext context,
                                                   commentId: comment.id));
                                         });
                                       },
-                                      child: Icon(
-                                        Icons.delete_outline,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? red
-                                            : red,
-                                        size: 24,
+                                      child: const Icon(
+                                        Icons.delete_rounded,
+                                        color: grey,
+                                        size: 22,
                                       ),
                                     )
                                 ],

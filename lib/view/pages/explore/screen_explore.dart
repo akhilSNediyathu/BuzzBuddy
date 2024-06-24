@@ -58,10 +58,10 @@ class ScreenExplore extends StatelessWidget {
                           commentBottomSheet(
                               context, state.posts[index], commentController,
                               formkey: _formkey,
-                              userName:
-                                  state.posts[index].userId.userName.toString(),
-                              profiePic: state.posts[index].userId.profilePic
-                                  .toString(),
+                              // userName:
+                              //     state.posts[index].userId.userName.toString(),
+                              // profiePic: state.posts[index].userId.profilePic
+                              //     .toString(),
                               comments: _comments,
                               id: state.posts[index].id.toString());
                           context.read<GetCommentsBloc>().add(

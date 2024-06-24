@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/model/post_model.dart';
@@ -21,12 +22,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ProfileInitialPostFetchEvent event, Emitter<ProfileState> emit) async {
     emit(ProfilePostFetchLoadingState());
     debugPrint('event user id is -${event.userId}');
-    final Response result = await UserRepo.fetchUserPosts(userId: event.userId);
+    final Response result =
+        await UserRepo.fetchUserPostsOther(userId: event.userId);
     final responseBody = jsonDecode(result.body);
     final List<Post> posts = parsePosts(result.body);
     debugPrint('user posts:-$responseBody');
 
     if (result.statusCode == 200) {
+      // log(responseBody.toString());
       emit(ProfilePostFetchSuccesfulState(posts: posts));
     } else if (responseBody['status'] == 404) {
       emit(ProfilePostFetchUserNotFoundState());

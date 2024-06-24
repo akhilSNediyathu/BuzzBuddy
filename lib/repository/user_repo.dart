@@ -194,4 +194,22 @@ class UserRepo {
       log(e.toString());
     }
   }
+  static Future fetchUserPostsOther({required String userId}) async {
+    try {
+     
+      
+      var response = await client.get(Uri.parse(
+          '${ApiEndpoints.baseUrl}${ApiEndpoints.getPostByUserId}/$userId'));
+      if (kDebugMode) {
+        print(
+            '${ApiEndpoints.baseUrl}${ApiEndpoints.getPostByUserId}/$userId');
+      }
+      // debugPrint(response.statusCode.toString());
+      // debugPrint(response.body);
+      return response;
+    } catch (e) {
+      log(e.toString());
+      
+    }
+  }
 }

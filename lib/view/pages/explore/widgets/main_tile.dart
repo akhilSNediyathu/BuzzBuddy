@@ -36,7 +36,7 @@ class ExplorePageMainTile extends StatelessWidget {
   final VoidCallback likeButtonPressed;
   final VoidCallback? commentButtonPressed;
   final Future<void> Function() removeSaved;
-  final FetchExplorePostsSuccesState statesaved;
+  final dynamic statesaved;
   final Size media;
   final int index;
 
