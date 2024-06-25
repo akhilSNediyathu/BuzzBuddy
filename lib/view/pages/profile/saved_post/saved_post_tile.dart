@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:readmore/readmore.dart';
 
 class SavedPostListingPageTile extends StatelessWidget {
   const SavedPostListingPageTile({
@@ -102,13 +103,18 @@ class SavedPostListingPageTile extends StatelessWidget {
               ],
             ),
             kheight,
-            Text(
+            ReadMoreText(
               description,
-              maxLines: 3,
-              style: const TextStyle(
-                overflow: TextOverflow.ellipsis,
-              ),
-              textAlign: TextAlign.left,
+              trimMode: TrimMode.Line,
+              trimLines: 2,
+              colorClickableText: blueAccent,
+              trimCollapsedText: 'more.',
+              style: const TextStyle(fontWeight: FontWeight.w500),
+              trimExpandedText: 'show less',
+              moreStyle: const TextStyle(
+                  fontSize: 14, color: grey, fontWeight: FontWeight.bold),
+              lessStyle: const TextStyle(
+                  fontSize: 14, color: grey, fontWeight: FontWeight.bold),
             ),
             kheight,
             SizedBox(

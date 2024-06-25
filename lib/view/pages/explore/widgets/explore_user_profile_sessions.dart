@@ -4,12 +4,16 @@ import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/model/following_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
+import 'package:buzz_buddy/view/bloc/conversation_bloc/conversation_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_all_conversations_bloc.dart/fetch_all_conversations_bloc.dart';
 import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
 import 'package:buzz_buddy/view/bloc/get_connections_bloc/get_connections_bloc.dart';
 import 'package:buzz_buddy/view/bloc/profile_posts_bloc/profile_bloc.dart';
+import 'package:buzz_buddy/view/pages/chat/chat_screen/chat_screen.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
 import 'package:buzz_buddy/view/pages/explore/screen_other_user_posts.dart';
+import 'package:buzz_buddy/view/pages/home/screen_home.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/profile_succes_dummy_container.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
@@ -18,7 +22,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:timeago/timeago.dart';
 
 class ExploreUserProfileSession1 extends StatelessWidget {
   final Size media;
@@ -123,17 +126,42 @@ class ExploreUserProfileSession1 extends StatelessWidget {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: customMaterialButton(
-                borderRadius: 10,
-                color: kPrimaryColor,
-                onPressed: onEditProfile,
-                text: 'messsage',
-                width: media.height * 0.1,
-                height: media.height * 0.05,
-                textStyle: const TextStyle(fontSize: 16),
-              ),
+            BlocConsumer<ConversationBloc, ConversationState>(
+              listener: (context, state) {
+                if (state is ConversationSuccesfulState) {
+                  context
+                      .read<FetchAllConversationsBloc>()
+                      .add(AllConversationsInitialFetchEvent());
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ChatScreen(
+                            conversationId: state.conversationId,
+                            recieverid: user.id,
+                            name: user.userName,
+                            profilepic: user.profilePic,
+                            username: user.userName),
+                      ));
+                }
+              },
+              builder: (context, state) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: customMaterialButton(
+                    borderRadius: 10,
+                    color: kPrimaryColor,
+                    onPressed: () {
+                      context.read<ConversationBloc>().add(
+                          CreateConversationButtonClickEvent(
+                              members: [logginedUserId, user.id]));
+                    },
+                    text: 'messsage',
+                    width: media.height * 0.1,
+                    height: media.height * 0.05,
+                    textStyle: const TextStyle(fontSize: 16),
+                  ),
+                );
+              },
             ),
           ],
         ),

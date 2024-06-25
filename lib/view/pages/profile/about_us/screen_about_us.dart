@@ -22,16 +22,6 @@ class ScreenAboutUs extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: SizedBox(
-                  height: media.width * 0.6,
-                  width: media.width * 0.5,
-                  child: Image.asset(
-                    logo,
-                    fit: BoxFit.cover,
-                  )),
-            ),
-            kheight20,
             // Welcome Text
             const Text(
               'Welcome to Buzz Buddy!',
@@ -141,6 +131,9 @@ class ScreenAboutUs extends StatelessWidget {
               'We’d love to hear from you! If you have any questions, feedback, or suggestions, feel free to reach out to us at ',
               style: TextStyle(fontSize: 16.0),
             ),
+            Center(
+              child: Image.asset(appBarLogo, width: media.width * 0.4),
+            ),
             // InkWell(
             //   onTap: () {
             //     // Handle email tap
@@ -183,7 +176,7 @@ class ScreenAboutUs extends StatelessWidget {
             //     ),
             //   ],
             // ),
-            kheight50,
+            // kheight50,
           ],
         ),
       ),

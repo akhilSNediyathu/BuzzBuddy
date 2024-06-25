@@ -1,6 +1,7 @@
 import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
+import 'package:buzz_buddy/utils/socket/socket.dart';
 import 'package:buzz_buddy/view/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
 import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
@@ -16,7 +17,6 @@ import 'package:shimmer/shimmer.dart';
 
 String logginedUserToken = '';
 String logginedUserId = '';
- int countComment = 0;
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -29,10 +29,11 @@ class _ScreenHomeState extends State<ScreenHome> {
   TextEditingController commentControllers = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   final List<Comment> _comments = [];
- 
+
   @override
   void initState() {
     super.initState();
+    SocketService().connectSocket(context: context);
     context
         .read<AllFollowersPostsBloc>()
         .add(AllFollowersPostsInitialFetchEvent());
@@ -79,10 +80,10 @@ class _ScreenHomeState extends State<ScreenHome> {
         child: BlocBuilder<AllFollowersPostsBloc, AllFollowersPostsState>(
           builder: (context, state) {
             if (state is AllFollowersPostsSuccesfulState) {
+              dynamic post = state.post;
               if (state.post.isNotEmpty) {
                 return ListView.builder(
                   itemBuilder: (context, index) {
-                    countComment = state.post[index].commentCount??0;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: HomeWidgetMain(
@@ -116,13 +117,12 @@ class _ScreenHomeState extends State<ScreenHome> {
                         },
                         onSaveTap: () {},
                         media: media,
-                        model: state.post[index],
+                        model: post[index],
                         index: index,
-                        count: countComment.toString(),
                       ),
                     );
                   },
-                  itemCount: state.post.length,
+                  itemCount: post.length,
                 );
               } else {
                 return errorStateWidget(

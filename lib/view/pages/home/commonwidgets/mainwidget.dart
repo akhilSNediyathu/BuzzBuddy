@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:multi_bloc_builder/builders/multi_bloc_builder.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../../model/user_suggestion_model.dart';
 
@@ -26,12 +27,12 @@ class HomeWidgetMain extends StatelessWidget {
     required this.onCommentTap,
     required this.onSaveTap,
     required this.index,
-    required this.count,
+    
   });
 
   final Size media;
   final FollwersPostModel model;
-  final String count;
+
 
   final VoidCallback onCommentTap;
   final VoidCallback onSaveTap;
@@ -81,17 +82,21 @@ class HomeWidgetMain extends StatelessWidget {
         // Post Description Section
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            model.description.toString(),
-            maxLines: 3,
-            style: const TextStyle(
-              overflow: TextOverflow.ellipsis,
-            ),
-            textAlign: TextAlign.left,
+          child: ReadMoreText(
+            model.description ?? '',
+            trimMode: TrimMode.Line,
+            trimLines: 2,
+            colorClickableText: blueAccent,
+            trimCollapsedText: 'more.',
+            style: const TextStyle(fontWeight: FontWeight.w500),
+            trimExpandedText: 'show less',
+            moreStyle: const TextStyle(
+                fontSize: 14, color: grey, fontWeight: FontWeight.bold),
+            lessStyle: const TextStyle(
+                fontSize: 14, color: grey, fontWeight: FontWeight.bold),
           ),
         ),
-        kheight,
-        // Post Image Section
+        kheight, // Post Image Section
         SizedBox(
           height: media.width * 0.984,
           width: media.width,
@@ -180,7 +185,7 @@ class HomeWidgetMain extends StatelessWidget {
                       color: customIconColor,
                     ),
                     //   Text("${model.commentCount.toString()} comments")
-                    Text("${count} comments")
+                    Text("${model.commentCount} comments")
                   ],
                 ),
                 IconButton(

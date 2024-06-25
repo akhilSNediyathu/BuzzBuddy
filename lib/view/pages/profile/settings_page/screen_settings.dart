@@ -27,18 +27,14 @@ class ScreenSettings extends StatelessWidget {
         ),
         body: Column(
           children: [
-            // customSettingsListTile(
-            //     onTap: () {
-            //       context
-            //           .read<FetchFollowingBloc>()
-            //           .add(OnFetchFollowingUsersEvent());
-            //     },
-            //     leading: const Icon(Icons.doorbell_outlined),
-            //     title: "Notifiacation",
-            //     trailing: const Icon(
-            //       Icons.arrow_forward_ios,
-            //       size: 20,
-            //     )),
+            customSettingsListTile(
+                onTap: () {},
+                leading: const Icon(Icons.receipt_long),
+                title: "Terms and conditions ",
+                trailing: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 20,
+                )),
             customSettingsListTile(
                 onTap: () {
                   Navigator.push(

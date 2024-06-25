@@ -1,5 +1,6 @@
 import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
+import 'package:buzz_buddy/view/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
 import 'package:buzz_buddy/view/bloc/comment_post_bloc/comment_post_bloc.dart';
 import 'package:buzz_buddy/view/bloc/delete_comment_bloc/delete_comment_bloc.dart';
 import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
@@ -19,7 +20,7 @@ Future<dynamic> commentBottomSheet(
     required List<Comment> comments,
     required String id}) {
   return showModalBottomSheet(
-    backgroundColor: kwhiteColor,
+//     backgroundColor: kwhiteColor,
     context: context,
     builder: (context) => Padding(
       padding: const EdgeInsets.all(10.0),
@@ -41,6 +42,9 @@ Future<dynamic> commentBottomSheet(
                     BlocListener<DeleteCommentBloc, DeleteCommentState>(
                       listener: (context, state) {
                         if (state is DeleteCommentSuccesfulState) {
+                          context
+                              .read<AllFollowersPostsBloc>()
+                              .add(AllFollowersPostsInitialFetchEvent());
                           comments.removeWhere(
                               (comment) => comment.id == state.commentId);
                         }
@@ -73,21 +77,23 @@ Future<dynamic> commentBottomSheet(
                       suffix: TextButton(
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
-                            countComment++;
                             context.read<CommentPostBloc>().add(
                                   CommentPostButtonClickEvent(
                                       userName: profileuserName,
                                       postId: id,
                                       content: commentController.text),
                                 );
+                            context
+                                .read<AllFollowersPostsBloc>()
+                                .add(AllFollowersPostsInitialFetchEvent());
                           }
                         },
                         child: const Text(
                           'Post',
                           style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                              color: black),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ),
@@ -170,7 +176,6 @@ Future<dynamic> commentBottomSheet(
                                             content:
                                                 'Are you sure want to Delete comment ?',
                                             onpressed: () {
-                                          
                                           Navigator.pop(context);
 
                                           context.read<DeleteCommentBloc>().add(

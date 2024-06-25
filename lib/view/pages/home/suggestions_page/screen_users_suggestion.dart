@@ -1,9 +1,11 @@
+import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
 import 'package:buzz_buddy/view/bloc/suggestions_bloc/fetch_user_suggestions_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/list_tile.dart';
+import 'package:buzz_buddy/view/pages/explore/explore_user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -19,7 +21,6 @@ class ScreenUsersSuggestion extends StatefulWidget {
 class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
   @override
   void initState() {
-    
     context.read<FetchUserSuggestionsBloc>().add(OnfetchUserSuggestionEvent());
     super.initState();
   }
@@ -74,6 +75,38 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                           );
                         }
                         return CustomListTile(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ScreenExploreUserProfile(
+                                      userId: state.suggessionModel.data![index].id
+                                          .toString(),
+                                      user: UserIdSearchModel(
+                                          id: state
+                                              .suggessionModel.data![index].id
+                                              .toString(),
+                                          userName: state.suggessionModel
+                                              .data![index].userName
+                                              .toString(),
+                                          email: state.suggessionModel
+                                              .data![index].email
+                                              .toString(),
+                                          profilePic: state.suggessionModel
+                                              .data![index].profilePic
+                                              .toString(),
+                                          online:
+                                              state.suggessionModel.data![index].online ?? true,
+                                          blocked: state.suggessionModel.data![index].blocked ?? false,
+                                          verified: state.suggessionModel.data![index].verified ?? false,
+                                          role: state.suggessionModel.data![index].role.toString(),
+                                          isPrivate: state.suggessionModel.data![index].isPrivate ?? false,
+                                          backGroundImage: state.suggessionModel.data![index].backGroundImage.toString(),
+                                          createdAt: state.suggessionModel.data![index].createdAt ?? DateTime(2000),
+                                          updatedAt: state.suggessionModel.data![index].updatedAt ?? DateTime(2000),
+                                          v: state.suggessionModel.data![index].v ?? 0)),
+                                ));
+                          },
                           buttonText: 'Follow',
                           onUnfollow: () {
                             context.read<FollowUnfollowBloc>().add(

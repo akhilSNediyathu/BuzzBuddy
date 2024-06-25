@@ -16,7 +16,7 @@ class ChatScreen extends StatefulWidget {
   final String name;
   final String username;
   final String profilepic;
-  ChatScreen(
+  const ChatScreen(
       {super.key,
       required this.conversationId,
       required this.recieverid,
@@ -109,15 +109,7 @@ class _ChatScreenState extends State<ChatScreen> {
             constraints: const BoxConstraints(maxWidth: 500),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-            //     image: DecorationImage(
-            //         image: AssetImage(
-            //           Theme.of(context).brightness == Brightness.light
-            //               ? chatbg
-            //               : chatbgdark,
-            //         ),
-            //         fit: BoxFit.cover)
-                    ),
+           
             child: Column(
               children: [
                 Expanded(
