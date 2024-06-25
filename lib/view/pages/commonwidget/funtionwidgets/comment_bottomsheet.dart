@@ -1,8 +1,8 @@
 import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/comment_post_bloc/comment_post_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/delete_comment_bloc/delete_comment_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
+import 'package:buzz_buddy/view/bloc/comment_post_bloc/comment_post_bloc.dart';
+import 'package:buzz_buddy/view/bloc/delete_comment_bloc/delete_comment_bloc.dart';
+import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/confirmation_dialogue.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
@@ -73,6 +73,7 @@ Future<dynamic> commentBottomSheet(
                       suffix: TextButton(
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
+                            countComment++;
                             context.read<CommentPostBloc>().add(
                                   CommentPostButtonClickEvent(
                                       userName: profileuserName,
@@ -169,7 +170,9 @@ Future<dynamic> commentBottomSheet(
                                             content:
                                                 'Are you sure want to Delete comment ?',
                                             onpressed: () {
+                                          
                                           Navigator.pop(context);
+
                                           context.read<DeleteCommentBloc>().add(
                                               DeleteCommentButtonClickEvent(
                                                   commentId: comment.id));

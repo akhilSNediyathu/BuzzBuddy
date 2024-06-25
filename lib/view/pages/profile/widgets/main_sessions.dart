@@ -1,7 +1,7 @@
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/profile_succes_dummy_container.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';

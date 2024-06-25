@@ -1,7 +1,7 @@
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
 
-import 'package:buzz_buddy/view/pages/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
+import 'package:buzz_buddy/view/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

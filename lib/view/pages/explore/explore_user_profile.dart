@@ -8,11 +8,11 @@ import 'package:multi_bloc_builder/builders/multi_bloc_builder.dart';
 // Import your specific BLoCs and other dependencies
 import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/get_connections_bloc/get_connections_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/logined_user_details/login_user_details_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/profile_posts_bloc/profile_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+import 'package:buzz_buddy/view/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
+import 'package:buzz_buddy/view/bloc/get_connections_bloc/get_connections_bloc.dart';
+import 'package:buzz_buddy/view/bloc/logined_user_details/login_user_details_bloc.dart';
+import 'package:buzz_buddy/view/bloc/profile_posts_bloc/profile_bloc.dart';
 import 'package:buzz_buddy/view/pages/explore/widgets/explore_user_profile_sessions.dart';
 
 class ScreenExploreUserProfile extends StatefulWidget {

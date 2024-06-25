@@ -3,9 +3,9 @@ import 'package:buzz_buddy/model/saved_post_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 
 import 'package:buzz_buddy/utils/functions.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/saved_post_bloc/saved_post_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
+import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
+import 'package:buzz_buddy/view/bloc/saved_post_bloc/saved_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
 import 'package:buzz_buddy/view/pages/explore/widgets/explore_page_shimmer.dart';

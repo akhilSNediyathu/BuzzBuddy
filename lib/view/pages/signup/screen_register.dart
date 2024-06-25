@@ -2,7 +2,7 @@ import 'package:buzz_buddy/model/user_model.dart';
 
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/validations.dart';
-import 'package:buzz_buddy/view/pages/bloc/sign_up_bloc/sign_up_bloc.dart';
+import 'package:buzz_buddy/view/bloc/sign_up_bloc/sign_up_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/classwidget/textfield.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/login_signup_row.dart';

@@ -1,6 +1,6 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
 import 'package:buzz_buddy/view/pages/login/screen_login.dart';
 import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';

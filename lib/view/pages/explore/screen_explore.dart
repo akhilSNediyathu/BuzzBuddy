@@ -1,8 +1,8 @@
 import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_explore_bloc/fetch_explore_bloc.dart';
+import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';

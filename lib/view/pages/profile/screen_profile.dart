@@ -1,10 +1,10 @@
 import 'package:buzz_buddy/model/logined_user_details_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_my_post/fetch_my_post_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/logined_user_details/login_user_details_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_followers_bloc/fetch_followers_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_my_post/fetch_my_post_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
+import 'package:buzz_buddy/view/bloc/logined_user_details/login_user_details_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/profile/edit_profile/screen_edit_profiile.dart';
 import 'package:buzz_buddy/view/pages/profile/followers/screen_followers.dart';

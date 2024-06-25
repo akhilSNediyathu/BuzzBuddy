@@ -1,7 +1,7 @@
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/suggestions_bloc/fetch_user_suggestions_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+import 'package:buzz_buddy/view/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
+import 'package:buzz_buddy/view/bloc/suggestions_bloc/fetch_user_suggestions_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/list_tile.dart';
 import 'package:flutter/material.dart';

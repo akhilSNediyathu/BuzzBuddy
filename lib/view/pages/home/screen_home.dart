@@ -1,8 +1,8 @@
 import 'package:buzz_buddy/model/comment_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
-import 'package:buzz_buddy/view/pages/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/get_comments_bloc/get_comments_bloc.dart';
+import 'package:buzz_buddy/view/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
+import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
@@ -16,6 +16,7 @@ import 'package:shimmer/shimmer.dart';
 
 String logginedUserToken = '';
 String logginedUserId = '';
+ int countComment = 0;
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
@@ -28,7 +29,7 @@ class _ScreenHomeState extends State<ScreenHome> {
   TextEditingController commentControllers = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   final List<Comment> _comments = [];
-
+ 
   @override
   void initState() {
     super.initState();
@@ -81,6 +82,7 @@ class _ScreenHomeState extends State<ScreenHome> {
               if (state.post.isNotEmpty) {
                 return ListView.builder(
                   itemBuilder: (context, index) {
+                    countComment = state.post[index].commentCount??0;
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: HomeWidgetMain(
@@ -115,6 +117,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                         onSaveTap: () {},
                         media: media,
                         model: state.post[index],
+                        index: index,
+                        count: countComment.toString(),
                       ),
                     );
                   },

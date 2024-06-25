@@ -4,10 +4,11 @@ import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/model/following_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/get_connections_bloc/get_connections_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/profile_posts_bloc/profile_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+import 'package:buzz_buddy/view/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
+import 'package:buzz_buddy/view/bloc/get_connections_bloc/get_connections_bloc.dart';
+import 'package:buzz_buddy/view/bloc/profile_posts_bloc/profile_bloc.dart';
+import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/loading_animation_widget.dart';
 import 'package:buzz_buddy/view/pages/explore/screen_other_user_posts.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/profile_succes_dummy_container.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/repeated_column.dart';
@@ -235,41 +236,45 @@ class ExploreSession3 extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         if (state is ProfilePostFetchSuccesfulState) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ScreenOtherUserPosts(posts: state.posts),
-                  ));
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 8.0,
-                  mainAxisSpacing: 10.0,
-                  childAspectRatio: 1.0,
+          if (state.posts.isNotEmpty) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ScreenOtherUserPosts(posts: state.posts),
+                    ));
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 10.0,
+                    childAspectRatio: 1.0,
+                  ),
+                  itemCount: state.posts.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      child: CachedNetworkImage(
+                        imageUrl: state.posts[index].image,
+                        placeholder: (context, url) =>
+                            LoadingAnimationWidget.fourRotatingDots(
+                                color: grey, size: 30),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  },
                 ),
-                itemCount: state.posts.length,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    child: CachedNetworkImage(
-                      imageUrl: state.posts[index].image,
-                      placeholder: (context, url) =>
-                          LoadingAnimationWidget.fourRotatingDots(
-                              color: grey, size: 30),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                },
               ),
-            ),
-          );
+            );
+          } else {
+            return errorStateWidget('No Posts ', greyMeduim);
+          }
         } else {
           return Center(
             child: LoadingAnimationWidget.fourRotatingDots(

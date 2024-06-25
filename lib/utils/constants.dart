@@ -14,6 +14,8 @@ final grey100 = Colors.grey[100];
 const kwhiteColor = Colors.white;
 const Color oceanGreen = Color(0xFF48A9A6);
 const blueAccent = Colors.blueAccent;
+const lightgrey = Color.fromARGB(255, 210, 210, 210);
+const darkgreymain = Color.fromARGB(255, 21, 21, 22);
 
 const Color customIconColor = Color(0xFFA1824A);
 

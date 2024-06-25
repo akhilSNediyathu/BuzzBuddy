@@ -1,8 +1,8 @@
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/utils/validations.dart';
-import 'package:buzz_buddy/view/pages/bloc/edit_user_profile_bloc/edit_user_profile_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/logined_user_details/login_user_details_bloc.dart';
+import 'package:buzz_buddy/view/bloc/edit_user_profile_bloc/edit_user_profile_bloc.dart';
+import 'package:buzz_buddy/view/bloc/logined_user_details/login_user_details_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/classwidget/textfield.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';

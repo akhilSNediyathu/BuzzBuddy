@@ -1,6 +1,8 @@
+import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/model/followers_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/list_tile.dart';
+import 'package:buzz_buddy/view/pages/explore/explore_user_profile.dart';
 import 'package:flutter/material.dart';
 
 class ScreenFollowers extends StatelessWidget {
@@ -43,6 +45,29 @@ class ScreenFollowers extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (context, index) => Card(
                 child: CustomListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ScreenExploreUserProfile(
+                                userId: model.followers[index].id,
+                                user: UserIdSearchModel(
+                                    id: model.followers[index].id,
+                                    userName: model.followers[index].userName,
+                                    email: model.followers[index].userName,
+                                    profilePic:
+                                        model.followers[index].profilePic,
+                                    online: model.followers[index].online,
+                                    blocked: model.followers[index].blocked,
+                                    verified: model.followers[index].verified,
+                                    role: model.followers[index].role,
+                                    isPrivate: model.followers[index].isPrivate,
+                                    backGroundImage:
+                                        model.followers[index].backGroundImage,
+                                    createdAt: model.followers[index].createdAt,
+                                    updatedAt: model.followers[index].updatedAt,
+                                    v: model.followers[index].v))));
+                  },
                   buttonText: 'unfollow',
                   profileImageUrl: model.followers[index].profilePic,
                   titleText: model.followers[index].userName,

@@ -1,10 +1,12 @@
+import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/bloc/fetch_following_bloc/fetch_following_bloc.dart';
-import 'package:buzz_buddy/view/pages/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
+import 'package:buzz_buddy/view/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/list_tile.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
+import 'package:buzz_buddy/view/pages/explore/explore_user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -66,6 +68,37 @@ class ScreenFollowing extends StatelessWidget {
               return ListView.builder(
                 itemBuilder: (context, index) => Card(
                   child: CustomListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ScreenExploreUserProfile(
+                                  userId: state.model.following[index].id,
+                                  user: UserIdSearchModel(
+                                      id: state.model.following[index].id,
+                                      userName:
+                                          state.model.following[index].userName,
+                                      email: state.model.following[index].email,
+                                      profilePic: state
+                                          .model.following[index].profilePic,
+                                      online:
+                                          state.model.following[index].online,
+                                      blocked:
+                                          state.model.following[index].blocked,
+                                      verified:
+                                          state.model.following[index].verified,
+                                      role: state.model.following[index].role,
+                                      isPrivate: state
+                                          .model.following[index].isPrivate,
+                                      backGroundImage: state.model
+                                          .following[index].backGroundImage,
+                                      createdAt: DateTime.parse(state
+                                          .model.following[index].createdAt),
+                                      updatedAt: DateTime.parse(state
+                                          .model.following[index].updatedAt),
+                                      v: state.model.following[index].v)),
+                            ));
+                      },
                       buttonText: 'unfollow',
                       profileImageUrl: followings[index].profilePic,
                       titleText: followings[index].userName,

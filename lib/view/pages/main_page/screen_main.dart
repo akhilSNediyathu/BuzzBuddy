@@ -1,5 +1,6 @@
 import 'package:buzz_buddy/view/pages/add_post/screen_add_post.dart';
-import 'package:buzz_buddy/view/pages/chat/screen_chat.dart';
+import 'package:buzz_buddy/view/pages/chat/chat_list/chat_list.dart';
+
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/bottomnav.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
 import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
@@ -13,10 +14,10 @@ class ScreenMainScreen extends StatelessWidget {
   ScreenMainScreen({super.key});
 
   final List<Widget> pages = [
-   const ScreenHome(),
- const ScreenSearch(),
+    const ScreenHome(),
+    const ScreenSearch(),
     ScreenAddPost(),
-    const ScreenChat(),
+    const FindChatPersonScreen(),
     const ScreenProfile(),
   ];
 
