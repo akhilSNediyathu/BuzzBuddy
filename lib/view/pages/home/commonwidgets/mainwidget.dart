@@ -27,12 +27,10 @@ class HomeWidgetMain extends StatelessWidget {
     required this.onCommentTap,
     required this.onSaveTap,
     required this.index,
-    
   });
 
   final Size media;
   final FollwersPostModel model;
-
 
   final VoidCallback onCommentTap;
   final VoidCallback onSaveTap;
@@ -43,15 +41,23 @@ class HomeWidgetMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final createdAt = DateTime.parse(model.createdAt.toString());
+    final editedTime = DateTime.parse(model.editedTime.toString());
+
+ 
+    bool isEdited =
+        !areDateTimesEqualIgnoringMilliseconds(createdAt, editedTime);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // User Info Section
+       
         Row(
           children: [
             Container(
-              height: media.height * 0.08,
-              width: media.height * 0.08,
+              height: media.height * 0.06,
+              width: media.height * 0.06,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(model.userId.profilePic.toString()),
@@ -70,9 +76,9 @@ class HomeWidgetMain extends StatelessWidget {
                   style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  model.createdAt == model.editedTime
-                      ? formatDate(model.createdAt.toString())
-                      : ("${formatDate(model.editedTime.toString())} (Edited)"),
+                  isEdited
+                      ? "${formatDate(editedTime.toString())} (Edited)"
+                      : formatDate(createdAt.toString()),
                 ),
               ],
             )
@@ -96,7 +102,8 @@ class HomeWidgetMain extends StatelessWidget {
                 fontSize: 14, color: grey, fontWeight: FontWeight.bold),
           ),
         ),
-        kheight, // Post Image Section
+        kheight,
+        // Post Image Section
         SizedBox(
           height: media.width * 0.984,
           width: media.width,
@@ -109,7 +116,6 @@ class HomeWidgetMain extends StatelessWidget {
             },
           ),
         ),
-
         MultiBlocBuilder(
           blocs: [
             context.watch<LikeUnlikePostBloc>(),
@@ -184,7 +190,6 @@ class HomeWidgetMain extends StatelessWidget {
                       iconSize: 28,
                       color: customIconColor,
                     ),
-                    //   Text("${model.commentCount.toString()} comments")
                     Text("${model.commentCount} comments")
                   ],
                 ),
@@ -236,5 +241,16 @@ class HomeWidgetMain extends StatelessWidget {
         )
       ],
     );
+  }
+
+
+  bool areDateTimesEqualIgnoringMilliseconds(
+      DateTime dateTime1, DateTime dateTime2) {
+    return dateTime1.year == dateTime2.year &&
+        dateTime1.month == dateTime2.month &&
+        dateTime1.day == dateTime2.day &&
+        dateTime1.hour == dateTime2.hour &&
+        dateTime1.minute == dateTime2.minute &&
+        dateTime1.second == dateTime2.second;
   }
 }

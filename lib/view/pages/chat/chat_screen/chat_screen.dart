@@ -3,6 +3,7 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/socket/socket.dart';
 import 'package:buzz_buddy/view/bloc/add_message/add_message_bloc.dart';
 import 'package:buzz_buddy/view/bloc/conversation_bloc/conversation_bloc.dart';
+import 'package:buzz_buddy/view/bloc/fetch_all_conversations_bloc.dart/fetch_all_conversations_bloc.dart';
 import 'package:buzz_buddy/view/pages/chat/chat_screen/widgets.dart';
 import 'package:buzz_buddy/view/pages/chat/chat_screen/widgets/chat_cards.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
@@ -109,7 +110,6 @@ class _ChatScreenState extends State<ChatScreen> {
             constraints: const BoxConstraints(maxWidth: 500),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-           
             child: Column(
               children: [
                 Expanded(
@@ -208,6 +208,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   senderId: logginedUserId,
                                   recieverId: widget.recieverid,
                                   conversationId: widget.conversationId));
+                          context
+                              .read<FetchAllConversationsBloc>()
+                              .add(AllConversationsInitialFetchEvent());
                           _messageController.clear();
                         }
                       },

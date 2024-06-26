@@ -1,4 +1,4 @@
-
+import 'package:buzz_buddy/main.dart';
 import 'package:buzz_buddy/model/all_messages_model.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/view/bloc/conversation_bloc/conversation_bloc.dart';
@@ -10,7 +10,7 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class SocketService {
   io.Socket socket = io.io(
-    'https://hyperedge.online',
+    'https://m0276vzs-7002.inc1.devtunnels.ms/',
     io.OptionBuilder()
         .setTransports(['websocket'])
         .disableAutoConnect()
@@ -18,7 +18,7 @@ class SocketService {
   );
 
   void connectSocket({required BuildContext context}) async {
-    //final BuildContext? ctx = NavigationService.navigatorKey.currentContext;
+    final BuildContext? ctx = NavigationService.navigatorKey.currentContext;
 
     if (socket.disconnected) {
       socket.connect();
@@ -40,14 +40,14 @@ class SocketService {
           v: 0,
         );
 
-        //   if (ctx != null) {
-        //     ctx
-        //         .read<ConversationBloc>()
-        //         .add(AddNewMessageEvent(message: message));
-        //   }
-      //   context
-      //       .read<FetchAllConversationsBloc>()
-      //       .add(AllConversationsInitialFetchEvent());
+        if (ctx != null) {
+          ctx
+              .read<ConversationBloc>()
+              .add(AddNewMessageEvent(message: message));
+        }
+        //   context
+        //       .read<FetchAllConversationsBloc>()
+        //       .add(AllConversationsInitialFetchEvent());
         context
             .read<ConversationBloc>()
             .add(AddNewMessageEvent(message: message));

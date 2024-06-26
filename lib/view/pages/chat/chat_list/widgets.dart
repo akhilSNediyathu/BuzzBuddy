@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class TextFormFieldChatPage extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final onchanged;
+  final ValueChanged<String>? onchanged;
   final TextInputType keyboard;
   final String? Function(String?)? validator;
   const TextFormFieldChatPage(

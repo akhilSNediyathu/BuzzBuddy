@@ -24,8 +24,6 @@ class FindChatPersonScreen extends StatefulWidget {
 }
 
 class _FindChatPersonScreenState extends State<FindChatPersonScreen> {
-  final profilepic =
-      'https://yt3.googleusercontent.com/0P0WUIUvlJ2KfaoTeDy5Xm-14u7m-7NJLy_2wa1pjBoxjHFuMqt7tMWWuZ93lETK-CYKTt4O=s900-c-k-c0x00ffffff-no-rj';
 
   final searchPersonController = TextEditingController();
   List<ConversationModel> conversations = [];
@@ -44,6 +42,7 @@ class _FindChatPersonScreenState extends State<FindChatPersonScreen> {
   }
 
   Future<void> refresh() async {
+     
     await Future.delayed(const Duration(seconds: 1));
     context
         .read<FetchAllConversationsBloc>()

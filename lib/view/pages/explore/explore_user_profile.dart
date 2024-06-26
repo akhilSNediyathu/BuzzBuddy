@@ -1,5 +1,3 @@
-import 'package:buzz_buddy/model/following_model.dart';
-import 'package:buzz_buddy/view/pages/explore/widgets/explore_page_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

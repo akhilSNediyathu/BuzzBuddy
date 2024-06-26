@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/model/explore_users_user_model.dart';
-import 'package:buzz_buddy/model/my_post_model/user_id.dart';
+
 import 'package:buzz_buddy/repository/user_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';

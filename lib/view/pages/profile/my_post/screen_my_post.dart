@@ -6,7 +6,7 @@ import 'package:buzz_buddy/view/bloc/fetch_my_post/fetch_my_post_bloc.dart';
 import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
-import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
+
 import 'package:buzz_buddy/view/pages/profile/widgets/post_listing_page_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
