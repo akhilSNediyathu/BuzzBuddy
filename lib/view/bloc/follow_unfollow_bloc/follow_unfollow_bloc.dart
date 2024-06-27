@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:buzz_buddy/repository/user_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+// ignore: unnecessary_import
 import 'package:meta/meta.dart';
 
 part 'follow_unfollow_event.dart';

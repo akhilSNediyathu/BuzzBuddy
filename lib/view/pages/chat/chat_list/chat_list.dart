@@ -1,4 +1,6 @@
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:buzz_buddy/model/conversations_model.dart';
 import 'package:buzz_buddy/model/get_users_chat_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';

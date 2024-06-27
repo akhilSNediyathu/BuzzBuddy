@@ -5,10 +5,10 @@ import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/showdialogue.d
 import 'package:buzz_buddy/view/pages/login/screen_login.dart';
 import 'package:buzz_buddy/view/pages/main_page/screen_main.dart';
 import 'package:buzz_buddy/view/pages/profile/about_us/screen_about_us.dart';
-import 'package:buzz_buddy/view/pages/profile/privacy_policy/screen_privacy_policies.dart';
+import 'package:buzz_buddy/view/pages/profile/settings_page/privacy_policy/screen_privacy_policies.dart';
+import 'package:buzz_buddy/view/pages/profile/terms_and_conditions/screen_terms_and_conditions.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/custom_settings_list_tile.dart';
 import 'package:flutter/material.dart';
-
 
 class ScreenSettings extends StatelessWidget {
   const ScreenSettings({super.key});
@@ -28,7 +28,13 @@ class ScreenSettings extends StatelessWidget {
         body: Column(
           children: [
             customSettingsListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ScreenTermsAndConditions(),
+                      ));
+                },
                 leading: const Icon(Icons.receipt_long),
                 title: "Terms and conditions ",
                 trailing: const Icon(

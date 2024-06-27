@@ -138,8 +138,19 @@ class _ScreenHomeState extends State<ScreenHome> {
                 ),
               );
             } else {
-              return const Center(
-                  child: Text('Something went wrong, try refreshing.'));
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Something went wrong, try refreshing.'),
+                    const SizedBox(height: 20),
+                    TextButton(
+                      onPressed: _onRefresh,
+                      child: const Text('Refresh'),
+                    ),
+                  ],
+                ),
+              );
             }
           },
         ),

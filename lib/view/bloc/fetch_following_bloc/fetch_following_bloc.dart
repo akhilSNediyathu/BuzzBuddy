@@ -6,6 +6,7 @@ import 'package:buzz_buddy/model/following_model.dart';
 import 'package:buzz_buddy/repository/user_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+// ignore: unnecessary_import
 import 'package:meta/meta.dart';
 
 part 'fetch_following_event.dart';

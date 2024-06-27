@@ -1,5 +1,5 @@
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/view/pages/profile/privacy_policy/widgets.dart';
+import 'package:buzz_buddy/view/pages/profile/settings_page/privacy_policy/widgets.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {

@@ -6,6 +6,7 @@ import 'package:buzz_buddy/utils/validations.dart';
 import 'package:buzz_buddy/view/pages/add_post/widgets/add_post_text_fields.dart';
 import 'package:buzz_buddy/view/bloc/add_post_bloc/add_post_bloc.dart';
 import 'package:buzz_buddy/view/bloc/fetch_my_post/fetch_my_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/common_appbar.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
@@ -26,11 +27,7 @@ class ScreenAddPost extends StatelessWidget {
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        // backgroundColor: kPrimaryColor,
-        centerTitle: true,
-        title: const Text('Start Post', style: appBarTitleStyle),
-      ),
+      appBar: customAppbar(title: 'Start Post', backEnabe: false),
       body: BlocConsumer<AddPostBloc, AddPostState>(
         listener: (context, state) {
           if (state is AddPostSuccesState) {
@@ -93,7 +90,7 @@ class ScreenAddPost extends StatelessWidget {
                           );
                         }
                         return customMaterialButton(
-                              borderRadius: 20,
+                          borderRadius: 20,
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               if (pickImage.value != '' &&
