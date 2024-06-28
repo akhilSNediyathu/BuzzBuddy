@@ -25,7 +25,7 @@ class Follower {
     String email;
     String password;
     String profilePic;
-    String phone;
+    String? phone;
     bool online;
     bool blocked;
     bool verified;
