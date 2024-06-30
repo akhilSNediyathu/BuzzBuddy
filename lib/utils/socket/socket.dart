@@ -10,7 +10,7 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class SocketService {
   io.Socket socket = io.io(
-    'https://m0276vzs-7002.inc1.devtunnels.ms/',
+    '51.21.38.66',
     io.OptionBuilder()
         .setTransports(['websocket'])
         .disableAutoConnect()

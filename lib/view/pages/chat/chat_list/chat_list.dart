@@ -1,5 +1,6 @@
-
 // ignore_for_file: use_build_context_synchronously
+
+import 'dart:async';
 
 import 'package:buzz_buddy/model/conversations_model.dart';
 import 'package:buzz_buddy/model/get_users_chat_model.dart';
@@ -26,7 +27,6 @@ class FindChatPersonScreen extends StatefulWidget {
 }
 
 class _FindChatPersonScreenState extends State<FindChatPersonScreen> {
-
   final searchPersonController = TextEditingController();
   List<ConversationModel> conversations = [];
   List<GetUserModel> users = [];
@@ -44,11 +44,17 @@ class _FindChatPersonScreenState extends State<FindChatPersonScreen> {
   }
 
   Future<void> refresh() async {
-     
-    await Future.delayed(const Duration(seconds: 1));
-    context
-        .read<FetchAllConversationsBloc>()
-        .add(AllConversationsInitialFetchEvent());
+    final fetchBloc = context.read<FetchAllConversationsBloc>();
+    final refreshCompleter = Completer<void>();
+
+    fetchBloc.add(AllConversationsInitialFetchEvent());
+    fetchBloc.stream.listen((state) {
+      if (state is FetchAllConversationsSuccesfulState) {
+        refreshCompleter.complete();
+      }
+    });
+
+    await refreshCompleter.future;
   }
 
   @override
@@ -57,7 +63,10 @@ class _FindChatPersonScreenState extends State<FindChatPersonScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title:const Text('chat hub',style: appBarTitleStyle,),
+        title: const Text(
+          'chat hub',
+          style: appBarTitleStyle,
+        ),
         bottom: PreferredSize(
           preferredSize: Size(size.width, 50),
           child: Padding(
@@ -120,13 +129,17 @@ class _FindChatPersonScreenState extends State<FindChatPersonScreen> {
                             constraints: const BoxConstraints(maxWidth: 500),
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) =>  ChatScreen(
-                                      username: user.userName,
-                                      recieverid: user.id,
-                                      name: user.userName,
-                                      profilepic: user.profilePic,
-                                      conversationId: conversation.id,
-                                    ),));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChatScreen(
+                                        username: user.userName,
+                                        recieverid: user.id,
+                                        name: user.userName,
+                                        profilepic: user.profilePic,
+                                        conversationId: conversation.id,
+                                      ),
+                                    ));
                               },
                               child: CustomCard(
                                 user: user,

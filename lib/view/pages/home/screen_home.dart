@@ -125,8 +125,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                   itemCount: post.length,
                 );
               } else {
-                return errorStateWidget(
-                    'No feeds available, follow someone', greyMeduim);
+                return noFeedAvailableMessage(context);
               }
             } else if (state is AllFollowersPostsLoadingState) {
               return ListView.builder(

@@ -8,6 +8,7 @@ import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/view/bloc/fetch_saved_posts/fetch_saved_posts_bloc.dart';
 import 'package:buzz_buddy/view/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
 import 'package:buzz_buddy/view/bloc/saved_post_bloc/saved_post_bloc.dart';
+import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggestion.dart';
 import 'package:buzz_buddy/view/pages/profile/screen_profile.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -41,18 +42,15 @@ class HomeWidgetMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final createdAt = DateTime.parse(model.createdAt.toString());
     final editedTime = DateTime.parse(model.editedTime.toString());
 
- 
     bool isEdited =
         !areDateTimesEqualIgnoringMilliseconds(createdAt, editedTime);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-       
         Row(
           children: [
             Container(
@@ -243,7 +241,6 @@ class HomeWidgetMain extends StatelessWidget {
     );
   }
 
-
   bool areDateTimesEqualIgnoringMilliseconds(
       DateTime dateTime1, DateTime dateTime2) {
     return dateTime1.year == dateTime2.year &&
@@ -253,4 +250,39 @@ class HomeWidgetMain extends StatelessWidget {
         dateTime1.minute == dateTime2.minute &&
         dateTime1.second == dateTime2.second;
   }
+}
+
+Widget noFeedAvailableMessage(BuildContext context) {
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          'No feed available!',
+          style: TextStyle(),
+        ),
+        const SizedBox(height: 10),
+        const Text(
+          'Follow someone to see their posts or explore suggestions.',
+          textAlign: TextAlign.center,
+          style: TextStyle(),
+        ),
+        const SizedBox(height: 20),
+        TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ScreenUsersSuggestion(),
+              ),
+            );
+          },
+          style: TextButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          ),
+          child: const Text('Go to Suggestions?'),
+        ),
+      ],
+    ),
+  );
 }

@@ -16,90 +16,112 @@ class ScreenSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            'Settings',
-            style: appBarTitleStyle,
-          ),
-          automaticallyImplyLeading: true,
-          // backgroundColor: kPrimaryColor,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Settings',
+          style: appBarTitleStyle,
         ),
-        body: Column(
-          children: [
-            customSettingsListTile(
-                onTap: () {
-                  Navigator.push(
+        automaticallyImplyLeading: true,
+        // backgroundColor: kPrimaryColor,
+      ),
+      body: Column(
+        children: [
+          customSettingsListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ScreenTermsAndConditions(),
+                ),
+              );
+            },
+            leading: const Icon(Icons.receipt_long),
+            title: "Terms and conditions ",
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+            ),
+          ),
+          customSettingsListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PrivacyPolicyPage(),
+                ),
+              );
+            },
+            leading: const Icon(Icons.privacy_tip_outlined),
+            title: "Privacy Policies",
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+            ),
+          ),
+          customSettingsListTile(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ScreenAboutUs(),
+                ),
+              );
+            },
+            leading: const Icon(Icons.info_outline),
+            title: "About us",
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+            ),
+          ),
+          customSettingsListTile(
+            onTap: () async {
+              showConfirmationDialog(
+                context: context,
+                title: 'Log out!',
+                content: 'Are you sure..?',
+                confirmButtonText: "confirm",
+                cancelButtonText: "cancel",
+                onConfirm: () async {
+                  await clearUserSession();
+                  await googleSignOut();
+                  currentPage.value = 0;
+                  if (context.mounted) {
+                    Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const ScreenTermsAndConditions(),
-                      ));
+                      MaterialPageRoute(builder: (context) {
+                        return ScreenLogin();
+                      }),
+                      (Route<dynamic> route) => false,
+                    );
+                  }
                 },
-                leading: const Icon(Icons.receipt_long),
-                title: "Terms and conditions ",
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                )),
-            customSettingsListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PrivacyPolicyPage(),
-                      ));
-                },
-                leading: const Icon(Icons.privacy_tip_outlined),
-                title: "Privacy Policies",
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                )),
-            customSettingsListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ScreenAboutUs(),
-                      ));
-                },
-                leading: const Icon(Icons.info_outline),
-                title: "About us",
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                )),
-            customSettingsListTile(
-                onTap: () async {
-                  showConfirmationDialog(
-                    context: context,
-                    title: 'Log out!',
-                    content: 'Are you sure..?',
-                    confirmButtonText: "confirm",
-                    cancelButtonText: "cancel",
-                    onConfirm: () async {
-                      await clearUserSession();
-                      await googleSignOut();
-                      currentPage.value = 0;
-                      if (context.mounted) {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return ScreenLogin();
-                          }),
-                          (Route<dynamic> route) => false,
-                        );
-                      }
-                    },
-                  );
-                },
-                leading: const Icon(Icons.logout),
-                title: "Logout",
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                ))
-          ],
-        ));
+              );
+            },
+            leading: const Icon(Icons.logout),
+            title: "Logout",
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+            ),
+          ),
+          // Spacer to push the version info to the bottom
+          const Spacer(),
+          // Version and app name
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              'Buzz Buddy\nVersion 1.0',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                color: kPrimaryColor,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
