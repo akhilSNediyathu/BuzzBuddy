@@ -57,6 +57,7 @@ const likeIcon = 'assets/images/likeicon.png';
 const welcomeText = 'assets/images/welcome!.png';
 const googleLogo = 'assets/images/google_logo.png';
 const imagePicker = 'assets/images/imagePicker.jpg';
+const darkSplashImg = 'assets/images/InShot_20240701_102310310.gif';
 //Text Styles
 
 const appBarTitleStyle = TextStyle(
