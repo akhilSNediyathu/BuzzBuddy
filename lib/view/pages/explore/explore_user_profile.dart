@@ -76,6 +76,7 @@ class _ScreenExploreUserProfileState extends State<ScreenExploreUserProfile> {
 
             return NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) {
+                print(widget.user);
                 return [
                   SliverToBoxAdapter(
                     child: ExploreUserProfileSession1(
@@ -83,8 +84,10 @@ class _ScreenExploreUserProfileState extends State<ScreenExploreUserProfile> {
                       media: media,
                       profileImage: widget.user.profilePic,
                       coverImage: widget.user.backGroundImage,
-                      userName: widget.user.name ?? 'guest user',
-                      bio: widget.user.bio ?? '...',
+                      userName: widget.user.userName,
+                      bio: widget.user.bio != null
+                          ? widget.user.bio.toString()
+                          : '',
                       onEditProfile: () {},
                     ),
                   ),

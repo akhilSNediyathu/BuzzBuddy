@@ -52,6 +52,7 @@ class ScreenFollowers extends StatelessWidget {
                             builder: (context) => ScreenExploreUserProfile(
                                 userId: model.followers[index].id,
                                 user: UserIdSearchModel(
+                                    bio: model.followers[index].bio ?? '',
                                     id: model.followers[index].id,
                                     userName: model.followers[index].userName,
                                     email: model.followers[index].userName,

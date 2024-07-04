@@ -83,6 +83,8 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                                       userId: state.suggessionModel.data![index].id
                                           .toString(),
                                       user: UserIdSearchModel(
+                                          bio:state
+                                              .suggessionModel.data![index].bio??'' ,
                                           id: state
                                               .suggessionModel.data![index].id
                                               .toString(),

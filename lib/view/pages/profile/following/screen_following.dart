@@ -73,6 +73,7 @@ class ScreenFollowing extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ScreenExploreUserProfile(
+                                    
                                   userId: state.model.following[index].id,
                                   user: UserIdSearchModel(
                                       id: state.model.following[index].id,
@@ -96,7 +97,7 @@ class ScreenFollowing extends StatelessWidget {
                                           .model.following[index].createdAt),
                                       updatedAt: DateTime.parse(state
                                           .model.following[index].updatedAt),
-                                      v: state.model.following[index].v)),
+                                      v: state.model.following[index].v, bio: state.model.following[index].bio??'')),
                             ));
                       },
                       buttonText: 'unfollow',
