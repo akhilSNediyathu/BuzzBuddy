@@ -26,7 +26,6 @@ class ScreenExploreUserProfile extends StatefulWidget {
 }
 
 class _ScreenExploreUserProfileState extends State<ScreenExploreUserProfile> {
-
   String posts = '';
   @override
   void initState() {
@@ -80,18 +79,17 @@ class _ScreenExploreUserProfileState extends State<ScreenExploreUserProfile> {
                 return [
                   SliverToBoxAdapter(
                     child: ExploreUserProfileSession1(
-                        user: widget.user,
+                      user: widget.user,
                       media: media,
                       profileImage: widget.user.profilePic,
                       coverImage: widget.user.backGroundImage,
-                      userName: widget.user.name.toString(),
-                      bio: widget.user.bio.toString(),
+                      userName: widget.user.name ?? 'guest user',
+                      bio: widget.user.bio ?? '...',
                       onEditProfile: () {},
                     ),
                   ),
                   SliverToBoxAdapter(
                     child: ExploreUserProfileSessions2(
-                     
                       onPostsTap: () {},
                       onFollowersTap: () {},
                       onFollowingTap: () {},
