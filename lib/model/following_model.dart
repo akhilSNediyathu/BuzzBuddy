@@ -80,7 +80,7 @@ class Follower {
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
       v: json['__v'],
-      phone: json['phone'],
+      phone: json['phone']??'',
       password: json['password'],
       bio: json['bio'],
       name: json['name'],

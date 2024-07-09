@@ -45,7 +45,7 @@ class UserModel {
         email: json['email'],
         password: json['password'],
         profilePic: json['profilePic'],
-        phone: json['phone'],
+        phone: json['phone'] ?? '',
         online: json['online'],
         blocked: json['blocked'],
         verified: json['verified'],

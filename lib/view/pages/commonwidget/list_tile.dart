@@ -18,7 +18,7 @@ class CustomListTile extends StatelessWidget {
     required this.profileImageUrl,
     required this.buttonText,
     required this.titleText,
-    this.subtitleText, 
+    this.subtitleText,
     required this.imageSize,
     required this.backgroundColor,
     required this.borderRadius,
@@ -52,7 +52,7 @@ class CustomListTile extends StatelessWidget {
               style: const TextStyle(fontSize: 13),
             )
           : null,
-      trailing: onUnfollow != null 
+      trailing: onUnfollow != null
           ? MaterialButton(
               minWidth: 80,
               height: 27,
@@ -70,7 +70,7 @@ class CustomListTile extends StatelessWidget {
                 ),
               ),
             )
-          : null, 
+          : null,
     );
   }
 }

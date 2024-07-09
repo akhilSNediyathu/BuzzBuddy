@@ -37,26 +37,31 @@ class UserIdSearchModel {
     this.name,
   });
 
-  factory UserIdSearchModel.fromJson(Map<String, dynamic> json) =>
-      UserIdSearchModel(
-        id: json["_id"],
-        userName: json["userName"],
-        email: json["email"],
-        password: json["password"],
-        profilePic: json["profilePic"],
-        phone: json["phone"],
-        online: json["online"],
-        blocked: json["blocked"],
-        verified: json["verified"],
-        role: json["role"],
-        isPrivate: json["isPrivate"],
-        backGroundImage: json["backGroundImage"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-        bio: json["bio"],
-        name: json["name"],
-      );
+  factory UserIdSearchModel.fromJson(Map<String, dynamic> json) {
+    return UserIdSearchModel(
+      id: json["_id"] ?? '',
+      userName: json["userName"] ?? '',
+      email: json["email"] ?? '',
+      password: json["password"],
+      profilePic: json["profilePic"] ?? '',
+      phone: json["phone"] ?? '',
+      online: json["online"] ?? false,
+      blocked: json["blocked"] ?? false,
+      verified: json["verified"] ?? false,
+      role: json["role"] ?? '',
+      isPrivate: json["isPrivate"] ?? false,
+      backGroundImage: json["backGroundImage"] ?? '',
+      createdAt: json["createdAt"] != null
+          ? DateTime.parse(json["createdAt"])
+          : DateTime.now(),
+      updatedAt: json["updatedAt"] != null
+          ? DateTime.parse(json["updatedAt"])
+          : DateTime.now(),
+      v: json["__v"] ?? 0,
+      bio: json["bio"] ?? '',
+      name: json["name"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "_id": id,

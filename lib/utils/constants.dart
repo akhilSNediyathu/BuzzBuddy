@@ -111,3 +111,17 @@ const userNamekey = 'userName';
 
 //userProfilepic key sharedpreference
 const userProfilePickey = 'userProfilePic';
+
+BoxShadow lightModeShadow = BoxShadow(
+  color: Colors.grey.withOpacity(0.3),
+  spreadRadius: 1,
+  blurRadius: 5,
+  offset: const Offset(0, 2),
+);
+
+BoxShadow darkModeShadow = BoxShadow(
+  color: Colors.black.withOpacity(0.3),
+  spreadRadius: 1,
+  blurRadius: 5,
+  offset: const Offset(0, 2),
+);

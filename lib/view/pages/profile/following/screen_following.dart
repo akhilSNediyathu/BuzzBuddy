@@ -66,14 +66,14 @@ class ScreenFollowing extends StatelessWidget {
               }
 
               return ListView.builder(
-                itemBuilder: (context, index) => Card(
+                itemBuilder: (context, index) => SizedBox(
+                  height: 68,
                   child: CustomListTile(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => ScreenExploreUserProfile(
-                                    
                                   userId: state.model.following[index].id,
                                   user: UserIdSearchModel(
                                       id: state.model.following[index].id,
@@ -97,7 +97,9 @@ class ScreenFollowing extends StatelessWidget {
                                           .model.following[index].createdAt),
                                       updatedAt: DateTime.parse(state
                                           .model.following[index].updatedAt),
-                                      v: state.model.following[index].v, bio: state.model.following[index].bio??'')),
+                                      v: state.model.following[index].v,
+                                      bio: state.model.following[index].bio ??
+                                          '')),
                             ));
                       },
                       buttonText: 'unfollow',
