@@ -6,7 +6,9 @@ import 'package:buzz_buddy/view/bloc/all_followers_posts_bloc/all_followers_post
 import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
+import 'package:buzz_buddy/view/pages/home/commonwidgets/load_more_loading_widget.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/mainwidget.dart';
+import 'package:buzz_buddy/view/pages/home/commonwidgets/post_list_builder.dart';
 import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggestion.dart';
 
 import 'package:flutter/material.dart';
@@ -28,6 +30,9 @@ class _ScreenHomeState extends State<ScreenHome> {
   TextEditingController commentControllers = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   final List<Comment> _comments = [];
+  final ScrollController _scrollController = ScrollController();
+  List<dynamic> _posts = [];
+  bool _isLoadingMore = false;
 
   @override
   void initState() {
@@ -37,10 +42,22 @@ class _ScreenHomeState extends State<ScreenHome> {
         .read<AllFollowersPostsBloc>()
         .add(AllFollowersPostsInitialFetchEvent());
     getToken();
+
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent &&
+        !_isLoadingMore) {
+      setState(() {
+        _isLoadingMore = true;
+      });
+      context.read<AllFollowersPostsBloc>().add(LoadMoreEvent());
+    }
   }
 
   Future<void> _onRefresh() async {
-    // Trigger a re-fetch of the posts
     context
         .read<AllFollowersPostsBloc>()
         .add(AllFollowersPostsInitialFetchEvent());
@@ -79,36 +96,24 @@ class _ScreenHomeState extends State<ScreenHome> {
         child: BlocBuilder<AllFollowersPostsBloc, AllFollowersPostsState>(
           builder: (context, state) {
             if (state is AllFollowersPostsSuccesfulState) {
-              dynamic post = state.post;
-              if (state.post.isNotEmpty) {
-                return ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: HomeWidgetMain(
-                        onCommentTap: () {
-                        
-                          context.read<GetCommentsBloc>().add(
-                              CommentsFetchEvent(
-                                  postId: state.post[index].id.toString()));
-                          commentBottomSheet(
-                              context, state.post[index], commentControllers,
-                              formkey: _formkey,
-                              comments: _comments,
-                              id: state.post[index].id.toString());
-                        },
-                        onSaveTap: () {},
-                        media: media,
-                        model: post[index],
-                        index: index,
-                      ),
-                    );
-                  },
-                  itemCount: post.length,
-                );
-              } else {
-                return noFeedAvailableMessage(context);
-              }
+              _posts = state.post;
+              _isLoadingMore = false;
+            } else if (state is FetchMoreSuccesState) {
+              _posts = [..._posts, ...state.post];
+              _isLoadingMore = false;
+            }
+
+            if (_posts.isNotEmpty) {
+              return buildPostList(
+                context: context,
+                media: media,
+                posts: _posts,
+                scrollController: _scrollController,
+                isLoadingMore: _isLoadingMore,
+                commentControllers: commentControllers,
+                formKey: _formkey,
+                comments: _comments,
+              );
             } else if (state is AllFollowersPostsLoadingState) {
               return ListView.builder(
                 itemCount: 10,
@@ -137,5 +142,13 @@ class _ScreenHomeState extends State<ScreenHome> {
         ),
       ),
     );
+  }
+
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
   }
 }

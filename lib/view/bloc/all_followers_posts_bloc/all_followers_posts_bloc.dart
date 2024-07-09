@@ -18,6 +18,7 @@ class AllFollowersPostsBloc
   int page = 1;
   ScrollController scrollController = ScrollController();
   bool isLoadingMore = false;
+  List<FollwersPostModel> allPosts = []; // Global list to store all posts
 
   AllFollowersPostsBloc() : super(AllFollowersPostsInitial()) {
     scrollController.addListener(() {
@@ -32,7 +33,7 @@ class AllFollowersPostsBloc
     on<LoadMoreEvent>(loadMoreEvent);
   }
 
-  FutureOr<void> allFollowersPostsInitialFetchEvent(
+  Future<void> allFollowersPostsInitialFetchEvent(
       AllFollowersPostsInitialFetchEvent event,
       Emitter<AllFollowersPostsState> emit) async {
     emit(AllFollowersPostsLoadingState());
@@ -52,7 +53,8 @@ class AllFollowersPostsBloc
             .map((json) => FollwersPostModel.fromJson(json))
             .toList();
 
-        emit(AllFollowersPostsSuccesfulState(post: posts));
+        allPosts = posts; // Store fetched posts in the global list
+        emit(AllFollowersPostsSuccesfulState(post: allPosts));
       } else {
         emit(AllFollowersPostsServerErrorState());
       }
@@ -62,12 +64,12 @@ class AllFollowersPostsBloc
     }
   }
 
-  FutureOr<void> loadMoreEvent(
+  Future<void> loadMoreEvent(
       LoadMoreEvent event, Emitter<AllFollowersPostsState> emit) async {
     if (isLoadingMore) return;
 
     isLoadingMore = true;
-    emit(AllFollowersPostsLoadingState());
+    emit(FetchMoreLoadingState()); // Emit loading more state
 
     try {
       page += 1;
@@ -80,17 +82,17 @@ class AllFollowersPostsBloc
         List<FollwersPostModel> newPosts = responseBody
             .map((json) => FollwersPostModel.fromJson(json))
             .toList();
-        emit(AllFollowersPostsSuccesfulState(post: newPosts));
+        
+        allPosts.addAll(newPosts); // Add new posts to the global list
+        emit(FetchMoreSuccesState(post: allPosts)); // Emit new success state
       } else {
-        emit(AllFollowersPostsServerErrorState());
+        emit(FetchMoreErrorState());
       }
     } catch (error) {
       log('Error loading more posts: $error');
-      emit(AllFollowersPostsServerErrorState());
+      emit(FetchMoreErrorState());
     }
 
     isLoadingMore = false;
   }
-
-  // Mock method to fetch followers' posts
 }
