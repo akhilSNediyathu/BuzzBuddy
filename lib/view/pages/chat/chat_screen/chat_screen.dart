@@ -1,6 +1,6 @@
 import 'package:buzz_buddy/model/all_messages_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
-import 'package:buzz_buddy/utils/socket/socket.dart';
+import 'package:buzz_buddy/services/socket/socket.dart';
 import 'package:buzz_buddy/view/bloc/add_message/add_message_bloc.dart';
 import 'package:buzz_buddy/view/bloc/conversation_bloc/conversation_bloc.dart';
 import 'package:buzz_buddy/view/bloc/fetch_all_conversations_bloc.dart/fetch_all_conversations_bloc.dart';

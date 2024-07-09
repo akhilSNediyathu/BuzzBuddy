@@ -1,6 +1,5 @@
 import 'package:buzz_buddy/utils/constants.dart';
 
-
 import 'package:buzz_buddy/view/bloc/like_unlike_bloc/like_unlike_post_bloc.dart';
 import 'package:buzz_buddy/view/pages/home/screen_home.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -54,8 +53,8 @@ class ExplorePageMainTile extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: media.height * 0.08,
-                  width: media.height * 0.08,
+                  height: media.height * 0.06,
+                  width: media.height * 0.06,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(profileImage),

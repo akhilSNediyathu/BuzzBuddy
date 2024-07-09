@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:buzz_buddy/controller/utils/api_urls.dart';
+import 'package:buzz_buddy/utils/api_urls.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

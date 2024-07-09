@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:core';
 
-import 'package:buzz_buddy/controller/utils/api_urls.dart';
+import 'package:buzz_buddy/utils/api_urls.dart';
 import 'package:buzz_buddy/model/user_model.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:flutter/foundation.dart';

@@ -53,17 +53,27 @@ class HomeWidgetMain extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              height: media.height * 0.06,
-              width: media.height * 0.06,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(model.userId.profilePic.toString()),
-                  fit: BoxFit.cover,
+            CachedNetworkImage(
+              imageUrl: model.userId.profilePic.toString(),
+              imageBuilder: (context, imageProvider) => Container(
+                height: media.height * 0.065,
+                width: media.height * 0.065,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+                  color: kwhiteColor,
+                  borderRadius: kradius100,
                 ),
-                color: kwhiteColor,
-                borderRadius: kradius100,
               ),
+              placeholder: (context, url) => const CircleAvatar(
+                child: Icon(
+                  Icons.person,
+                  color: grey,
+                ),
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             kwidth,
             Column(

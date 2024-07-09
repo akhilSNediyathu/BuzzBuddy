@@ -7,8 +7,10 @@ import 'package:buzz_buddy/view/pages/commonwidget/classwidget/textfield.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/custom_button.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/snackbars.dart';
 import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'dart:io';
 
 class ScreenEditProfile extends StatefulWidget {
@@ -87,7 +89,7 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
                               image: DecorationImage(
                                 image: coverImagePath.isNotEmpty
                                     ? FileImage(File(coverImagePath))
-                                    : NetworkImage(widget.cvImage)
+                                    : CachedNetworkImageProvider(widget.cvImage)
                                         as ImageProvider,
                                 fit: BoxFit.cover,
                               ),
@@ -117,7 +119,8 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
                                               image: profileImagePath.isNotEmpty
                                                   ? FileImage(
                                                       File(profileImagePath))
-                                                  : NetworkImage(widget.prImage)
+                                                  : CachedNetworkImageProvider(
+                                                          widget.prImage)
                                                       as ImageProvider,
                                               fit: BoxFit.cover,
                                             ),
@@ -196,7 +199,7 @@ class _ScreenEditProfileState extends State<ScreenEditProfile> {
                                       color: kPrimaryColor);
                                 }
                                 return customMaterialButton(
-                                    borderRadius: 20,
+                                  borderRadius: 20,
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       if (userDetailsState

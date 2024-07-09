@@ -99,7 +99,7 @@ class _ScreenProfileState extends State<ScreenProfile> {
                           userName: profileuserName,
                           bio: state.userModel.bio ?? '',
                           onEditProfile: () {
-                            Navigator.of(context).push(
+                            Navigator.of(context).push(  
                               MaterialPageRoute(
                                 builder: (ctx) => ScreenEditProfile(
                                   cvImage: coverImageUrl,

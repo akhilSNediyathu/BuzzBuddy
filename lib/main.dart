@@ -1,4 +1,4 @@
-import 'package:buzz_buddy/firebase_options.dart';
+import 'package:buzz_buddy/services/fire_base/firebase_options.dart';
 import 'package:buzz_buddy/utils/themes.dart';
 import 'package:buzz_buddy/view/bloc/add_message/add_message_bloc.dart';
 import 'package:buzz_buddy/view/bloc/add_post_bloc/add_post_bloc.dart';

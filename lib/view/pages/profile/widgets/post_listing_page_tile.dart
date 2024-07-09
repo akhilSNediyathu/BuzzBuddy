@@ -50,8 +50,8 @@ class MyPostListingPageTile extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: media.height * 0.08,
-                  width: media.height * 0.08,
+                  height: media.height * 0.065,
+                  width: media.height * 0.065,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(profileImage), fit: BoxFit.cover),
