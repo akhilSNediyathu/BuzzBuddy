@@ -112,7 +112,7 @@ class ScreenSettings extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Buzz Buddy\nVersion 1.0',
+              'Buzz Buddy\nVersion 1.0.4',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,

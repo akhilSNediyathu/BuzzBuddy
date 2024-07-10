@@ -49,7 +49,7 @@ Widget profileContainer(Size media, String profileImage, String coverImage) {
                   ),
                 ),
               ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),

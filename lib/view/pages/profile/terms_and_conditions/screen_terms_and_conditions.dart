@@ -25,7 +25,7 @@ class ScreenTermsAndConditions extends StatelessWidget {
             ),
             kheight16, // Add space between paragraphs
             Text(
-              'Last Updated: June 27, 2024',
+              'Last Updated: July 10, 2024',
               style: TextStyle(fontSize: fontSize),
             ),
             kheight16,

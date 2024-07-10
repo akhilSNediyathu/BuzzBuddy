@@ -3,11 +3,7 @@ import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/services/socket/socket.dart';
 import 'package:buzz_buddy/view/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
-import 'package:buzz_buddy/view/bloc/get_comments_bloc/get_comments_bloc.dart';
-import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/comment_bottomsheet.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
-import 'package:buzz_buddy/view/pages/home/commonwidgets/load_more_loading_widget.dart';
-import 'package:buzz_buddy/view/pages/home/commonwidgets/mainwidget.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/post_list_builder.dart';
 import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggestion.dart';
 

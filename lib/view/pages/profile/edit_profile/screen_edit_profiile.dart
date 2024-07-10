@@ -10,7 +10,6 @@ import 'package:buzz_buddy/view/pages/profile/widgets/round_material_button.dart
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 import 'dart:io';
 
 class ScreenEditProfile extends StatefulWidget {
