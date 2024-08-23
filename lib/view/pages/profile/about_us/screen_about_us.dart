@@ -134,49 +134,7 @@ class ScreenAboutUs extends StatelessWidget {
             Center(
               child: Image.asset(appBarLogo, width: media.width * 0.4),
             ),
-            // InkWell(
-            //   onTap: () {
-            //     // Handle email tap
-            //     final Uri emailUri = Uri(
-            //       scheme: 'mailto',
-            //       path: 'support@buzzbuddyapp.com',
-            //     );
-            //     launchUrl(emailUri);
-            //   },
-            //   child: const Text(
-            //     'support@buzzbuddyapp.com',
-            //     style: TextStyle(
-            //       fontSize: 16.0,
-            //       color: Colors.blue,
-            //       decoration: TextDecoration.underline,
-            //     ),
-            //   ),
-            // ),
-            // kheight,
-            // const Text(
-            //   'Follow us on ',
-            //   style: TextStyle(fontSize: 16.0),
-            // ),
-            // const Row(
-            //   children: [
-            //     SocialIcon(
-            //       icon: Icons.facebook,
-            //       url:
-            //           'https://facebook.com/yourpage', // Replace with your Facebook page URL
-            //     ),
-            //     SocialIcon(
-            //       icon: Icons.bluetooth_outlined,
-            //       url:
-            //           'https://twitter.com/yourprofile', // Replace with your Twitter profile URL
-            //     ),
-            //     SocialIcon(
-            //       icon: Icons.bluetooth_outlined,
-            //       url:
-            //           'https://instagram.com/yourprofile', // Replace with your Instagram profile URL
-            //     ),
-            //   ],
-            // ),
-            // kheight50,
+      
           ],
         ),
       ),

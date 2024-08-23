@@ -28,13 +28,13 @@ class ScreenLogin extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginSuccesState) {
             customSnackbar(context, 'welcome back', green);
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return ScreenMainScreen();
-              }),
-              (Route<dynamic> route) => false,
-            );
+                  Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                  return ScreenMainScreen();
+                  }),
+                  (Route<dynamic> route) => false,
+                  );
           } else if (state is LoginErrorState) {
             customSnackbar(context, state.error, red);
           }
