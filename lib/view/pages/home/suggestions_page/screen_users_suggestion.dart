@@ -1,5 +1,6 @@
 import 'package:buzz_buddy/model/explore_users_user_model.dart';
 import 'package:buzz_buddy/utils/constants.dart';
+import 'package:buzz_buddy/view/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
 import 'package:buzz_buddy/view/bloc/fetch_following_bloc/fetch_following_bloc.dart';
 import 'package:buzz_buddy/view/bloc/follow_unfollow_bloc/follow_unfollow_bloc.dart';
 import 'package:buzz_buddy/view/bloc/suggestions_bloc/fetch_user_suggestions_bloc.dart';
@@ -45,6 +46,9 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
             context
                 .read<FetchFollowingBloc>()
                 .add(OnFetchFollowingUsersEvent());
+            context
+                .read<AllFollowersPostsBloc>()
+                .add(AllFollowersPostsInitialFetchEvent());
           }
         },
         child:
@@ -83,10 +87,9 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                                       userId: state.suggessionModel.data![index].id
                                           .toString(),
                                       user: UserIdSearchModel(
-                                          bio:state
-                                              .suggessionModel.data![index].bio??'' ,
-                                          id: state
-                                              .suggessionModel.data![index].id
+                                          bio: state.suggessionModel.data![index].bio ??
+                                              '',
+                                          id: state.suggessionModel.data![index].id
                                               .toString(),
                                           userName: state.suggessionModel
                                               .data![index].userName
@@ -97,8 +100,7 @@ class _ScreenUsersSuggestionState extends State<ScreenUsersSuggestion> {
                                           profilePic: state.suggessionModel
                                               .data![index].profilePic
                                               .toString(),
-                                          online:
-                                              state.suggessionModel.data![index].online ?? true,
+                                          online: state.suggessionModel.data![index].online ?? true,
                                           blocked: state.suggessionModel.data![index].blocked ?? false,
                                           verified: state.suggessionModel.data![index].verified ?? false,
                                           role: state.suggessionModel.data![index].role.toString(),

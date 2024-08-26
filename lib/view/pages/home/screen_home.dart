@@ -4,9 +4,9 @@ import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/services/socket/socket.dart';
 import 'package:buzz_buddy/view/bloc/all_followers_posts_bloc/all_followers_posts_bloc.dart';
 import 'package:buzz_buddy/view/pages/commonwidget/funtionwidgets/shimmer_widgets.dart';
+import 'package:buzz_buddy/view/pages/home/commonwidgets/list_empty_widget.dart';
 import 'package:buzz_buddy/view/pages/home/commonwidgets/post_list_builder.dart';
 import 'package:buzz_buddy/view/pages/home/suggestions_page/screen_users_suggestion.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -94,6 +94,25 @@ class _ScreenHomeState extends State<ScreenHome> {
             if (state is AllFollowersPostsSuccesfulState) {
               _posts = state.post;
               _isLoadingMore = false;
+
+              if (_posts.isEmpty) {
+                return EmptyStateWidget(
+                  icon: Iconsax.note_1,
+                  primaryMessage: 'No Posts Yet!',
+                  secondaryMessage:
+                      'Follow some interesting people to see their posts here.',
+                  buttonText: 'Find People to Follow',
+                  onButtonPressed: () {
+                    
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ScreenUsersSuggestion(),
+                      ),
+                    );
+                  },
+                );
+              }
             } else if (state is FetchMoreSuccesState) {
               _posts = [..._posts, ...state.post];
               _isLoadingMore = false;
@@ -139,7 +158,6 @@ class _ScreenHomeState extends State<ScreenHome> {
       ),
     );
   }
-
 
   @override
   void dispose() {
