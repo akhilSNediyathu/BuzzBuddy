@@ -1,6 +1,6 @@
 class ApiEndpoints {
   //BaseUrl
-  static const String baseUrl = 'http://51.21.38.66/api';
+  static const String baseUrl = 'http://43.205.209.184/api';
   //static const String baseUrl = 'https://m0276vzs-7002.inc1.devtunnels.ms/api';
 
   //user Urls
