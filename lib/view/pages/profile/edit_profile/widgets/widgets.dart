@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:buzz_buddy/utils/constants.dart';
 import 'package:buzz_buddy/utils/functions.dart';
 import 'package:buzz_buddy/utils/validations.dart';
@@ -9,11 +8,11 @@ import 'package:flutter/material.dart';
 
 class EditProfileForm extends StatelessWidget {
   const EditProfileForm({
-    Key? key,
+    super.key,
     required this.formKey,
     required this.nameController,
     required this.bioController,
-  }) : super(key: key);
+  });
 
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
